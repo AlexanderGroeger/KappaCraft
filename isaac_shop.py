@@ -136,7 +136,7 @@ shopDeals = {
             "$": 500,
             "p": "29999886 205 29999865",
             "cmds": [
-                """give @s lingering_potion{Potion:"minecraft:water",CustomPotionEffects:[{Id:5,Duration:600},{Id:6,Amplifier:1},{Id:10,Amplifier:2,Duration:600},{Id:11,Amplifier:1,Duration:600},{Id:12,Duration:600},{Id:16,Duration:600},{Id:23}],display:{Name:"\"Save Me Juice\""}} 1""",
+                """give @s lingering_potion{Potion:"minecraft:water",CustomPotionEffects:[{Id:5,Duration:600},{Id:6,Amplifier:1},{Id:10,Amplifier:2,Duration:600},{Id:11,Amplifier:1,Duration:600},{Id:12,Duration:600},{Id:16,Duration:600},{Id:23}],display:{Name:"Save Me Juice"}} 1""",
             ]
         }
     },
