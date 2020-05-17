@@ -1,5 +1,8 @@
 import copy
-from shop import shopDeals
+from alex_shop import shopDeals as shopDeals
+from isaac_shop import shopDeals as specials
+
+shopDeals.update(specials)
 
 def AddBackslashes(cmd):
     result = ""
