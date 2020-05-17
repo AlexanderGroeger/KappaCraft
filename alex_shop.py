@@ -252,8 +252,8 @@ shopDeals = {
     },
     "flint": {
         "Name": ["Flint","Flint"],
-        "Buy": {"n": 4, "$": 1, "p": "29999882 193 29999853"},
-        "Sell": {"n": 8, "$": 1, "p": "29999882 192 29999853"},
+        "Buy": {"n": 8, "$": 1, "p": "29999882 193 29999853"},
+        "Sell": {"n": 4, "$": 1, "p": "29999882 192 29999853"},
     },
     "clay_ball": {
         "Name": ["Clay","Clay"],
@@ -261,7 +261,7 @@ shopDeals = {
         "Sell": {"n": 8, "$": 1, "p": "29999882 192 29999854"},
     },
     "glowstone_dust": {
-        "Name": ["Glowstone Powder","Glowstone Powder"],
+        "Name": ["Glowstone Dust","Glowstone Dust"],
         "Buy": {"n": 4, "$": 1, "p": "29999882 193 29999855"},
         "Sell": {"n": 8, "$": 1, "p": "29999882 192 29999855"},
     },

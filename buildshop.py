@@ -9,15 +9,28 @@ def AddBackslashes(cmd):
     nested = False
     quote = False
     bracket = False
+    noText = True
     for c in cmd:
         if c == "\"":
+            if (quote and noText) or ():
+                nested = not nested
+
             if not nested:
+                noText = True
                 quote = not quote
+            else:
+                if quote:
+                    noText = True
+
             result += "\\"*(2+4*int(nested))
         elif c == "[" and quote:
             nested = True
+            noText = False
         elif c == "]" and quote:
             nested = False
+            noText = False
+        elif c != "\\":
+            noText = False
         result+=c
     return result
 
