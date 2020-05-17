@@ -180,7 +180,7 @@ shopDeals = {
     },
     "enchanted_golden_apple": {
         "Name": ["Notch Apple","Notch Apples"],
-        "Buy": {"n": 1, "$": 250, "p": "29999888 192 29999859"},
+        "Buy": {"n": 1, "$": 300, "p": "29999888 192 29999859"},
     },
     "apple": {
         "Name": ["Apple","Apples"],
