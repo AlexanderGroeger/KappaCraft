@@ -66,7 +66,7 @@ shopDeals = {
             "$": 3000,
             "p": "29999890 193 29999861",
             "cmds": [
-                """give @s golden_leggings{display:{Name:"[{\"text\":\"Solid Gold\",\"italic\":false,\"bold\":true,\"color\":\"yellow\"}]",Lore:["[{\"text\":\"Not bugging you about it.\",\"italic\":false,\"color\":\"dark_purple\"}]"]},RepairCost:99999,Enchantments:[{id:unbreaking,lvl:4}],AttributeModifiers:[{AttributeName:generic.movementSpeed,Amount:.85,Operation:1,UUIDLeast:134673100,UUIDMost:99,Slot:legs,Name:generic.movementSpeed},{AttributeName:generic.armor,Amount:-.50,Operation:1,UUIDLeast:136740800,UUIDMost:99,Slot:legs,Name:generic.armor},{AttributeName:generic.attackSpeed,Amount:0.0,Operation:1,UUIDLeast:134673200,UUIDMost:99,Slot:legs,Name:generic.attackSpeed}]} 1""",
+                """give @s golden_leggings{display:{Name:"[{\"text\":\"Solid Gold\",\"italic\":false,\"bold\":true,\"color\":\"yellow\"}]",Lore:["[{\"text\":\"Not bugging you about it.\",\"italic\":false,\"color\":\"dark_purple\"}]"]},RepairCost:99999,Enchantments:[{id:unbreaking,lvl:4}],AttributeModifiers:[{AttributeName:generic.movementSpeed,Amount:.85,Operation:1,UUIDLeast:134673100,UUIDMost:99,Slot:legs,Name:generic.movementSpeed},{AttributeName:generic.armor,Amount:-6,Operation:0,UUIDLeast:136740800,UUIDMost:99,Slot:legs,Name:generic.armor},{AttributeName:generic.attackSpeed,Amount:0.01,Operation:1,UUIDLeast:134673200,UUIDMost:99,Slot:legs,Name:generic.attackSpeed}]} 1""",
             ]
         }
     },
