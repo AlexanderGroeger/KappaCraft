@@ -52,7 +52,7 @@ shopDeals = {
             "$": 5000,
             "p": "29999890 205 29999862",
             "cmds": [
-                """give @s diamond_boots{display:{Name:"[{\"text\":\"S\",\"italic\":false,\"bold\":true,\"color\":\"light_purple\"},{\"text\":\"P\",\"italic\":false,\"bold\":true,\"color\":\"dark_red\"},{\"text\":\"R\",\"italic\":false,\"bold\":true,\"color\":\"aqua\"},{\"text\":\"A\",\"italic\":false,\"bold\":true,\"color\":\"gold\"},{\"text\":\"Y \",\"italic\":false,\"bold\":true,\"color\":\"gray\"},{\"text\":\"O\",\"italic\":false,\"bold\":true,\"color\":\"green\"},{\"text\":\"N \",\"italic\":false,\"bold\":true,\"color\":\"light_purple\"},{\"text\":\"S\",\"italic\":false,\"bold\":true,\"color\":\"dark_aqua\"},{\"text\":\"H\",\"italic\":false,\"bold\":true,\"color\":\"gold\"},{\"text\":\"O\",\"italic\":false,\"bold\":true,\"color\":\"yellow\"},{\"text\":\"E\",\"italic\":false,\"bold\":true,\"color\":\"gray\"}]",Lore:["[{\"text\":\"Once on, always on.\",\"italic\":false}]","[{\"text\":\"Some of the strongest\",\"italic\":false}]","[{\"text\":\"stuff on earth.\",\"italic\":false}]","[{\"text\":\"Do not inhale product\",\"italic\":false}]"]},RepairCost:9999,Enchantments:[{id:"blast_protection",lvl:3},{id:"binding_curse",lvl:1},{id:"vanishing_curse",lvl:1},{id:"depth_strider",lvl:3},{id:"feather_falling",lvl:10},{id:"fire_protection",lvl:3},{id:"projectile_protection",lvl:3},{id:protection,lvl:7},{id:unbreaking,lvl:1}],AttributeModifiers:[{AttributeName:generic.armor,Amount:8,Operation:0,UUIDLeast:134682800,UUIDMost:99,Slot:feet,Name:generic.armor}]} 1""",
+                """give @s diamond_boots{display:{Name:"[{\"text\":\"S\",\"italic\":false,\"bold\":true,\"color\":\"light_purple\"},{\"text\":\"P\",\"italic\":false,\"bold\":true,\"color\":\"dark_red\"},{\"text\":\"R\",\"italic\":false,\"bold\":true,\"color\":\"aqua\"},{\"text\":\"A\",\"italic\":false,\"bold\":true,\"color\":\"gold\"},{\"text\":\"Y \",\"italic\":false,\"bold\":true,\"color\":\"gray\"},{\"text\":\"O\",\"italic\":false,\"bold\":true,\"color\":\"green\"},{\"text\":\"N \",\"italic\":false,\"bold\":true,\"color\":\"light_purple\"},{\"text\":\"S\",\"italic\":false,\"bold\":true,\"color\":\"dark_aqua\"},{\"text\":\"H\",\"italic\":false,\"bold\":true,\"color\":\"gold\"},{\"text\":\"O\",\"italic\":false,\"bold\":true,\"color\":\"yellow\"},{\"text\":\"E\",\"italic\":false,\"bold\":true,\"color\":\"gray\"}]",Lore:["[{\"text\":\"Once on, always on.\",\"italic\":false}]","[{\"text\":\"Some of the strongest\",\"italic\":false}]","[{\"text\":\"stuff on earth.\",\"italic\":false}]","[{\"text\":\"Do not inhale product\",\"italic\":false}]"]},RepairCost:9999,Enchantments:[{id:"blast_protection",lvl:3},{id:"binding_curse",lvl:1},{id:"vanishing_curse",lvl:1},{id:"depth_strider",lvl:3},{id:"feather_falling",lvl:10},{id:"fire_protection",lvl:3},{id:"projectile_protection",lvl:3},{id:protection,lvl:7},{id:unbreaking,lvl:1}],AttributeModifiers:[{AttributeName:generic.armor,Amount:2,Operation:0,UUIDLeast:134682800,UUIDMost:99,Slot:feet,Name:generic.armor}]} 1""",
             ]
         }
     },
@@ -144,6 +144,7 @@ shopDeals = {
         "TextLines": [
             {"text": "Buy", "color": "red"},
             {"text": "Gas", "color": "dark_green"},
+			{"text": "Crossbow"},
         ],
         "Custom": {
             "$": 6000,
