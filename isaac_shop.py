@@ -136,7 +136,20 @@ shopDeals = {
             "$": 500,
             "p": "29999886 205 29999865",
             "cmds": [
-                """give @s lingering_potion{Potion:"minecraft:water",CustomPotionEffects:[{Id:5,Duration:600},{Id:6,Amplifier:1},{Id:10,Amplifier:2,Duration:600},{Id:11,Amplifier:1,Duration:600},{Id:12,Duration:600},{Id:16,Duration:600},{Id:23}],display:{Name:"Save Me Juice"}} 1""",
+                """give @s lingering_potion{Potion:"minecraft:water",CustomPotionEffects:[{Id:5,Duration:600},{Id:6,Amplifier:1},{Id:10,Amplifier:2,Duration:600},{Id:11,Amplifier:1,Duration:600},{Id:12,Duration:600},{Id:16,Duration:600},{Id:23}],display:{Name:"\"Save Me Juice\""}}""",
+            ]
+        }
+    },
+	 "Gas": {
+        "TextLines": [
+            {"text": "Buy", "color": "red"},
+            {"text": "Gas", "color": "dark_green"},
+        ],
+        "Custom": {
+            "$": 6000,
+            "p": "29999884 205 29999865",
+            "cmds": [
+                """give @s crossbow{display:{Name:"[{\"text\":\"Gas\",\"italic\":false,\"bold\":true,\"color\":\"dark_green\"}]",Lore:["[{\"text\":\"Gross... Despite what some\",\"italic\":false,\"bold\":true,\"color\":\"dark_purple\"}]","[{\"text\":\"believe, \",\"italic\":false,\"bold\":true,\"color\":\"dark_purple\"},{\"text\":\"Gas \",\"italic\":false,\"bold\":true,\"color\":\"dark_green\"},{\"text\":\"does indeed use\",\"italic\":false,\"bold\":true,\"color\":\"dark_purple\"}]","[{\"text\":\"the power of farting to boost\",\"italic\":false,\"bold\":true,\"color\":\"dark_purple\"}]","[{\"text\":\"damage... along with the user.\",\"italic\":false,\"bold\":true,\"color\":\"dark_purple\"}]","[{\"text\":\"The smell reduces your health\",\"italic\":false,\"bold\":true,\"color\":\"dark_purple\"}]","[{\"text\":\"a bit though.\",\"italic\":false,\"bold\":true,\"color\":\"dark_purple\"}]"]},Enchantments:[{id:power,lvl:5},{id:punch,lvl:5},{id:piercing,lvl:10}],AttributeModifiers:[{AttributeName:generic.movementSpeed,Amount:1,Operation:2,UUIDLeast:137730400,UUIDMost:99,Slot:mainhand,Name:generic.movementSpeed},{AttributeName:generic.maxHealth,Amount:-4,Operation:0,UUIDLeast:137730500,UUIDMost:99,Slot:mainhand,Name:generic.maxHealth}]} 1""",
             ]
         }
     },
