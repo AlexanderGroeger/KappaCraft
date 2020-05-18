@@ -80,7 +80,7 @@ shopDeals = {
             "$": 2500,
             "p": "29999886 205 29999861",
             "cmds": [
-                """give @s flint_and_steel{display:{Name:"[{\"text\":\"Hot Sauce\",\"italic\":false,\"color\":\"dark_red\"}]",Lore:["[{\"text\":\"What did you expect? Whoever designed\",\"italic\":false,\"color\":\"gold\"}]","[{\"text\":\"this thing had a weird passion for heat.\",\"italic\":false,\"color\":\"gold\"}]","[{\"text\":\"The creator was never discovered,\",\"italic\":false,\"color\":\"gold\"}]","[{\"text\":\"all knowledge of\",\"italic\":false,\"color\":\"gold\"},{\"text\":\" \",\"italic\":false},{\"text\":\"Hot Sauce\\'s \",\"italic\":false,\"color\":\"dark_red\"},{\"text\":\"origins were\",\"italic\":false,\"color\":\"gold\"}]","[{\"text\":\"incinerated with what was presumably\",\"italic\":false,\"color\":\"gold\"}]","[{\"text\":\"the creator\\'s house.\",\"italic\":false,\"color\":\"gold\"}]"]},Enchantments:[{id:"fire_aspect",lvl:10},{id:sharpness,lvl:4},{id:unbreaking,lvl:10}],Damage:63,Unbreakable:1,HideFlags:4,AttributeModifiers:[{AttributeName:generic.attackSpeed,Amount:9001,Operation:0,UUIDLeast:134365100,UUIDMost:99,Slot:mainhand,Name:generic.attackSpeed},{AttributeName:generic.movementSpeed,Amount:0.25,Operation:1,UUIDLeast:134365200,UUIDMost:99,Slot:offhand,Name:generic.movementSpeed}]} 1""",
+                """give @s flint_and_steel{display:{Name:"[{\"text\":\"Hot Sauce\",\"italic\":false,\"color\":\"dark_red\"}]",Lore:["[{\"text\":\"What did you expect? Whoever designed\",\"italic\":false,\"color\":\"gold\"}]","[{\"text\":\"this thing had a weird passion for heat.\",\"italic\":false,\"color\":\"gold\"}]","[{\"text\":\"The creator was never discovered,\",\"italic\":false,\"color\":\"gold\"}]","[{\"text\":\"all knowledge of\",\"italic\":false,\"color\":\"gold\"},{\"text\":\" \",\"italic\":false},{\"text\":\"Hot Sauce\\'s \",\"italic\":false,\"color\":\"dark_red\"},{\"text\":\"origins were\",\"italic\":false,\"color\":\"gold\"}]","[{\"text\":\"incinerated with what was presumably\",\"italic\":false,\"color\":\"gold\"}]","[{\"text\":\"the creator\\'s house.\",\"italic\":false,\"color\":\"gold\"}]"]},RepairCost:99999,Enchantments:[{id:"fire_aspect",lvl:10},{id:sharpness,lvl:4},{id:unbreaking,lvl:10}],Damage:63,Unbreakable:1,HideFlags:4,AttributeModifiers:[{AttributeName:generic.attackSpeed,Amount:9001,Operation:0,UUIDLeast:134365100,UUIDMost:99,Slot:mainhand,Name:generic.attackSpeed},{AttributeName:generic.movementSpeed,Amount:0.25,Operation:1,UUIDLeast:134365200,UUIDMost:99,Slot:offhand,Name:generic.movementSpeed}]} 1""",
             ]
         }
     },
@@ -179,6 +179,20 @@ shopDeals = {
             "p": "29999884 205 29999863",
             "cmds": [
                 """give @s stone_pickaxe{display:{Name:"[{\"text\":\"Old Reliable\",\"italic\":false,\"bold\":true,\"color\":\"dark_gray\"}]",Lore:["[{\"text\":\"Some people would kill for a\",\"italic\":false,\"color\":\"dark_purple\",\"bold\":true}]","[{\"text\":\"pickaxe like this. Probably\",\"italic\":false,\"color\":\"dark_purple\",\"bold\":true}]","[{\"text\":\"something small like a carrot\",\"italic\":false,\"color\":\"dark_purple\",\"bold\":true}]","[{\"text\":\"though.\",\"italic\":false,\"color\":\"dark_purple\",\"bold\":true}]"]},RepairCost:99999,Enchantments:[{id:efficiency,lvl:6},{id:fortune,lvl:5},{id:unbreaking,lvl:5}],Unbreakable:1,HideFlags:4,AttributeModifiers:[{AttributeName:generic.movementSpeed,Amount:0.05,Operation:2,UUIDLeast:138124400,UUIDMost:99,Slot:mainhand,Name:generic.movementSpeed}]} 1""",
+            ]
+        }
+    },
+				 "Cataclysm": {
+        "TextLines": [
+            {"text": "Buy", "color": "red"},
+            {"text": "Cataclysm", "color": "yellow"},
+			{"text": "PRO WEAPON"},
+        ],
+        "Custom": {
+            "$": 5500,
+            "p": "29999884 205 29999862",
+            "cmds": [
+                """give @s shears{display:{Name:"[{\"text\":\"Cataclysm\",\"italic\":false,\"color\":\"yellow\",\"bold\":true}]",Lore:["[{\"text\":\"Okay look, this may not be\",\"italic\":false,\"color\":\"dark_purple\",\"bold\":true}]","[{\"text\":\"original, but come on.\",\"italic\":false,\"color\":\"dark_purple\",\"bold\":true}]"]},RepairCost:99999,Unbreakable:1,HideFlags:4,AttributeModifiers:[{AttributeName:generic.maxHealth,Amount:-0.85,Operation:1,UUIDLeast:138322600,UUIDMost:99,Slot:mainhand,Name:generic.maxHealth},{AttributeName:generic.movementSpeed,Amount:0.2,Operation:2,UUIDLeast:138322700,UUIDMost:99,Slot:mainhand,Name:generic.movementSpeed},{AttributeName:generic.attackDamage,Amount:40,Operation:0,UUIDLeast:138322800,UUIDMost:99,Slot:mainhand,Name:generic.attackDamage}]} 1""",
             ]
         }
     },
