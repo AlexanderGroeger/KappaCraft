@@ -176,7 +176,7 @@ shopDeals = {
         ],
         "Custom": {
             "$": 2500,
-            "p": "29999884 205 29999864",
+            "p": "29999884 205 29999863",
             "cmds": [
                 """give @s stone_pickaxe{display:{Name:"[{\"text\":\"Old Reliable\",\"italic\":false,\"bold\":true,\"color\":\"dark_gray\"}]",Lore:["[{\"text\":\"Some people would kill for a\",\"italic\":false,\"color\":\"dark_purple\",\"bold\":true}]","[{\"text\":\"pickaxe like this. Probably\",\"italic\":false,\"color\":\"dark_purple\",\"bold\":true}]","[{\"text\":\"something small like a carrot\",\"italic\":false,\"color\":\"dark_purple\",\"bold\":true}]","[{\"text\":\"though.\",\"italic\":false,\"color\":\"dark_purple\",\"bold\":true}]"]},RepairCost:99999,Enchantments:[{id:efficiency,lvl:6},{id:fortune,lvl:5},{id:unbreaking,lvl:5}],Unbreakable:1,HideFlags:4,AttributeModifiers:[{AttributeName:generic.movementSpeed,Amount:0.05,Operation:2,UUIDLeast:138124400,UUIDMost:99,Slot:mainhand,Name:generic.movementSpeed}]} 1""",
             ]
