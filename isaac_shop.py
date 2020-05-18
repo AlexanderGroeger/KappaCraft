@@ -196,4 +196,18 @@ shopDeals = {
             ]
         }
     },
+					 "Safety": {
+        "TextLines": [
+            {"text": "Buy", "color": "red"},
+            {"text": "Safety", "color": "dark_aqua"},
+			{"text": "Pickaxe"},
+        ],
+        "Custom": {
+            "$": 4000,
+            "p": "29999884 205 29999861",
+            "cmds": [
+                """give @s diamond_pickaxe{display:{Name:"[{\"text\":\"Safety\",\"italic\":false,\"bold\":true,\"color\":\"dark_blue\"}]",Lore:["[{\"text\":\"After years of dying and\",\"italic\":false,\"color\":\"dark_purple\",\"bold\":true}]","[{\"text\":\"respawning, a plumber finally\",\"italic\":false,\"color\":\"dark_purple\",\"bold\":true}]","[{\"text\":\"decided to reengineer the pickaxe.\",\"italic\":false,\"color\":\"dark_purple\",\"bold\":true}]","[{\"text\":\"This is the result of that.\",\"italic\":false,\"color\":\"dark_purple\",\"bold\":true}]"]},RepairCost:99999,Enchantments:[{id:unbreaking,lvl:5}],AttributeModifiers:[{AttributeName:generic.maxHealth,Amount:10,Operation:0,UUIDLeast:138514000,UUIDMost:99,Slot:mainhand,Name:generic.maxHealth},{AttributeName:generic.armor,Amount:10,Operation:0,UUIDLeast:138514100,UUIDMost:99,Slot:mainhand,Name:generic.armor},{AttributeName:generic.armorToughness,Amount:10,Operation:0,UUIDLeast:138514200,UUIDMost:99,Slot:mainhand,Name:generic.armorToughness},{AttributeName:generic.knockbackResistance,Amount:1,Operation:1,UUIDLeast:138514300,UUIDMost:99,Slot:mainhand,Name:generic.knockbackResistance},{AttributeName:generic.attackDamage,Amount:1,Operation:0,UUIDLeast:138514400,UUIDMost:99,Slot:mainhand,Name:generic.attackDamage}]} 1""",
+            ]
+        }
+    },
 }
