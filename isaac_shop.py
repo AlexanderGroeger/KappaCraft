@@ -52,7 +52,7 @@ shopDeals = {
             "$": 5000,
             "p": "29999890 205 29999862",
             "cmds": [
-                """give @s diamond_boots{display:{Name:"[{\"text\":\"S\",\"italic\":false,\"bold\":true,\"color\":\"light_purple\"},{\"text\":\"P\",\"italic\":false,\"bold\":true,\"color\":\"dark_red\"},{\"text\":\"R\",\"italic\":false,\"bold\":true,\"color\":\"aqua\"},{\"text\":\"A\",\"italic\":false,\"bold\":true,\"color\":\"gold\"},{\"text\":\"Y \",\"italic\":false,\"bold\":true,\"color\":\"gray\"},{\"text\":\"O\",\"italic\":false,\"bold\":true,\"color\":\"green\"},{\"text\":\"N \",\"italic\":false,\"bold\":true,\"color\":\"light_purple\"},{\"text\":\"S\",\"italic\":false,\"bold\":true,\"color\":\"dark_aqua\"},{\"text\":\"H\",\"italic\":false,\"bold\":true,\"color\":\"gold\"},{\"text\":\"O\",\"italic\":false,\"bold\":true,\"color\":\"yellow\"},{\"text\":\"E\",\"italic\":false,\"bold\":true,\"color\":\"gray\"}]",Lore:["[{\"text\":\"Once on, always on.\",\"italic\":false}]","[{\"text\":\"Some of the strongest\",\"italic\":false}]","[{\"text\":\"stuff on earth.\",\"italic\":false}]","[{\"text\":\"Do not inhale product\",\"italic\":false}]"]},RepairCost:9999,Enchantments:[{id:"blast_protection",lvl:3},{id:"binding_curse",lvl:1},{id:"vanishing_curse",lvl:1},{id:"depth_strider",lvl:3},{id:"feather_falling",lvl:10},{id:"fire_protection",lvl:3},{id:"projectile_protection",lvl:3},{id:protection,lvl:7},{id:unbreaking,lvl:1}],AttributeModifiers:[{AttributeName:generic.armor,Amount:2,Operation:0,UUIDLeast:134682800,UUIDMost:99,Slot:feet,Name:generic.armor}]} 1""",
+                """give @s diamond_boots{display:{Name:"[{\"text\":\"S\",\"italic\":false,\"bold\":true,\"color\":\"light_purple\"},{\"text\":\"P\",\"italic\":false,\"bold\":true,\"color\":\"dark_red\"},{\"text\":\"R\",\"italic\":false,\"bold\":true,\"color\":\"aqua\"},{\"text\":\"A\",\"italic\":false,\"bold\":true,\"color\":\"gold\"},{\"text\":\"Y \",\"italic\":false,\"bold\":true,\"color\":\"gray\"},{\"text\":\"O\",\"italic\":false,\"bold\":true,\"color\":\"green\"},{\"text\":\"N \",\"italic\":false,\"bold\":true,\"color\":\"light_purple\"},{\"text\":\"S\",\"italic\":false,\"bold\":true,\"color\":\"dark_aqua\"},{\"text\":\"H\",\"italic\":false,\"bold\":true,\"color\":\"gold\"},{\"text\":\"O\",\"italic\":false,\"bold\":true,\"color\":\"yellow\"},{\"text\":\"E\",\"italic\":false,\"bold\":true,\"color\":\"gray\"}]",Lore:["[{\"text\":\"Once on, always on.\",\"italic\":false}]","[{\"text\":\"Some of the strongest\",\"italic\":false}]","[{\"text\":\"stuff on earth.\",\"italic\":false}]","[{\"text\":\"Do not inhale product\",\"italic\":false}]"]},RepairCost:9999,Enchantments:[{id:"blast_protection",lvl:3},{id:"binding_curse",lvl:1},{id:"vanishing_curse",lvl:1},{id:"depth_strider",lvl:3},{id:"feather_falling",lvl:10},{id:"fire_protection",lvl:3},{id:"projectile_protection",lvl:3},{id:protection,lvl:7},{id:unbreaking,lvl:1}],AttributeModifiers:[{AttributeName:generic.armor,Amount:1,Operation:0,UUIDLeast:134682800,UUIDMost:99,Slot:feet,Name:generic.armor}]} 1""",
             ]
         }
     },
@@ -151,6 +151,20 @@ shopDeals = {
             "p": "29999884 205 29999865",
             "cmds": [
                 """give @s crossbow{display:{Name:"[{\"text\":\"Gas\",\"italic\":false,\"bold\":true,\"color\":\"dark_green\"}]",Lore:["[{\"text\":\"Gross... Despite what some\",\"italic\":false,\"bold\":true,\"color\":\"dark_purple\"}]","[{\"text\":\"believe, \",\"italic\":false,\"bold\":true,\"color\":\"dark_purple\"},{\"text\":\"Gas \",\"italic\":false,\"bold\":true,\"color\":\"dark_green\"},{\"text\":\"does indeed use\",\"italic\":false,\"bold\":true,\"color\":\"dark_purple\"}]","[{\"text\":\"the power of farting to boost\",\"italic\":false,\"bold\":true,\"color\":\"dark_purple\"}]","[{\"text\":\"damage... along with the user.\",\"italic\":false,\"bold\":true,\"color\":\"dark_purple\"}]","[{\"text\":\"The smell reduces your health\",\"italic\":false,\"bold\":true,\"color\":\"dark_purple\"}]","[{\"text\":\"a bit though.\",\"italic\":false,\"bold\":true,\"color\":\"dark_purple\"}]"]},Enchantments:[{id:power,lvl:5},{id:punch,lvl:5},{id:piercing,lvl:10}],AttributeModifiers:[{AttributeName:generic.movementSpeed,Amount:1,Operation:2,UUIDLeast:137730400,UUIDMost:99,Slot:mainhand,Name:generic.movementSpeed},{AttributeName:generic.maxHealth,Amount:-4,Operation:0,UUIDLeast:137730500,UUIDMost:99,Slot:mainhand,Name:generic.maxHealth}]} 1""",
+            ]
+        }
+    },
+		 "Chainsaw": {
+        "TextLines": [
+            {"text": "Buy", "color": "red"},
+            {"text": "Chainsaw", "color": "dark_red"},
+			{"text": "Sword"},
+        ],
+        "Custom": {
+            "$": 1000,
+            "p": "29999884 205 29999864",
+            "cmds": [
+                """give @s stone_sword{display:{Name:"[{\"text\":\"Chainsaw\",\"italic\":false,\"bold\":true,\"color\":\"dark_red\"}]",Lore:["[{\"text\":\"VRRRRR!\",\"italic\":false,\"bold\":true,\"color\":\"dark_purple\"}]","[{\"text\":\"Warning, somewhat fragile.\",\"italic\":false,\"bold\":true,\"color\":\"dark_purple\"}]"]},RepairCost:99999,Enchantments:[{id:"bane_of_arthropods",lvl:5},{id:smite,lvl:5},{id:sweeping,lvl:10}],AttributeModifiers:[{AttributeName:generic.attackSpeed,Amount:100,Operation:0,UUIDLeast:138550200,UUIDMost:99,Slot:mainhand,Name:generic.attackSpeed},{AttributeName:generic.movementSpeed,Amount:0.1,Operation:2,UUIDLeast:138550300,UUIDMost:99,Slot:mainhand,Name:generic.movementSpeed},{AttributeName:generic.attackDamage,Amount:6,Operation:0,UUIDLeast:138550400,UUIDMost:99,Slot:mainhand,Name:generic.attackDamage}]} 1""",
             ]
         }
     },
