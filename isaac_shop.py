@@ -224,18 +224,4 @@ shopDeals = {
             ]
         }
     },
-		 "Monkey": {
-        "TextLines": [
-            {"text": "Buy", "color": "red"},
-            {"text": "Monkey", "color": "gold"},
-			{"text": "Helmet"},
-        ],
-        "Custom": {
-            "$": 3000,
-            "p": "29999892 205 29999864",
-            "cmds": [
-                """give @s turtle_helmet{display:{Name:"[{\"text\":\"Monkey\",\"italic\":false,\"bold\":true,\"color\":\"gold\"}]",Lore:["[{\"text\":\"When you're doing that\",\"italic\":false,\"color\":\"dark_purple\",\"bold\":true}]","[{\"text\":\"monkey junk.\",\"italic\":false,\"color\":\"dark_purple\",\"bold\":true}]"]},RepairCost:99999,Enchantments:[{id:"aqua_affinity",lvl:1},{id:"blast_protection",lvl:10},{id:thorns,lvl:30}],AttributeModifiers:[{AttributeName:generic.movementSpeed,Amount:1,Operation:1,UUIDLeast:139382100,UUIDMost:99,Slot:head,Name:generic.movementSpeed},{AttributeName:generic.attackSpeed,Amount:0.15,Operation:2,UUIDLeast:139382200,UUIDMost:99,Slot:head,Name:generic.attackSpeed}]} 1""",
-            ]
-        }
-    },
 }
