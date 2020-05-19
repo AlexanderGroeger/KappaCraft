@@ -1,0 +1,10 @@
+setblock 29999876 212 29999869 minecraft:potted_white_tulip
+setblock 29999900 212 29999869 minecraft:potted_orange_tulip
+setblock 29999900 212 29999848 minecraft:potted_pink_tulip
+setblock 29999876 212 29999848 minecraft:potted_pink_tulip
+setblock 29999889 212 29999850 minecraft:flower_pot
+setblock 29999887 212 29999850 minecraft:flower_pot
+setblock 29999889 212 29999848 minecraft:flower_pot
+setblock 29999887 212 29999848 minecraft:flower_pot
+setblock 29999896 212 29999859 minecraft:air
+setblock 29999896 212 29999861 minecraft:air
