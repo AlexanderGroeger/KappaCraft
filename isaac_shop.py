@@ -210,20 +210,6 @@ shopDeals = {
             ]
         }
     },
-		 "Fire Tunic": {
-        "TextLines": [
-            {"text": "Buy", "color": "red"},
-            {"text": "Fire Tunic", "color": "red"},
-			{"text": "Chestplate"},
-        ],
-        "Custom": {
-            "$": 2000,
-            "p": "29999892 205 29999865",
-            "cmds": [
-                """give @s leather_chestplate{display:{Name:"[{\"text\":\"Fire Tunic\",\"italic\":false,\"bold\":true,\"color\":\"dark_red\"}]",Lore:["[{\"text\":\"Designed for a hero,\",\"italic\":false,\"color\":\"dark_purple\"}]","[{\"text\":\"this tunic offers incredible\",\"italic\":false,\"color\":\"dark_purple\"}]","[{\"text\":\"fire protection. This doesn't make\",\"italic\":false,\"color\":\"dark_purple\"}]","[{\"text\":\"any sense however, as the material\",\"italic\":false,\"color\":\"dark_purple\"}]","[{\"text\":\"is leather. Regardless, it proves to\",\"italic\":false,\"color\":\"dark_purple\"}]","[{\"text\":\"be incredibly strong and reliable.\",\"italic\":false,\"color\":\"dark_purple\"}]"],color:11546150},RepairCost:99999,Enchantments:[{id:"fire_protection",lvl:10},{id:protection,lvl:5},{id:unbreaking,lvl:4}],AttributeModifiers:[{AttributeName:generic.armor,Amount:7,Operation:0,UUIDLeast:136454100,UUIDMost:99,Slot:chest,Name:generic.armor},{AttributeName:generic.maxHealth,Amount:2,Operation:0,UUIDLeast:136454200,UUIDMost:99,Slot:chest,Name:generic.maxHealth},{AttributeName:generic.attackDamage,Amount:1,Operation:0,UUIDLeast:136454300,UUIDMost:99,Slot:chest,Name:generic.attackDamage}]} 1""",
-            ]
-        }
-    },
 		 "Monkey": {
         "TextLines": [
             {"text": "Buy", "color": "red"},
