@@ -154,7 +154,7 @@ shopDeals = {
             ]
         }
     },
-		 "Chainsaw": {
+	 "Chainsaw": {
         "TextLines": [
             {"text": "Buy", "color": "red"},
             {"text": "Chainsaw", "color": "dark_red"},
@@ -168,7 +168,7 @@ shopDeals = {
             ]
         }
     },
-			 "Old Reliable": {
+	 "Old Reliable": {
         "TextLines": [
             {"text": "Buy", "color": "red"},
             {"text": "Old Reliable", "color": "dark_gray"},
@@ -182,7 +182,7 @@ shopDeals = {
             ]
         }
     },
-				 "Cataclysm": {
+		 "Cataclysm": {
         "TextLines": [
             {"text": "Buy", "color": "red"},
             {"text": "Cataclysm", "color": "yellow"},
@@ -196,7 +196,7 @@ shopDeals = {
             ]
         }
     },
-					 "Safety": {
+		 "Safety": {
         "TextLines": [
             {"text": "Buy", "color": "red"},
             {"text": "Safety", "color": "dark_aqua"},
@@ -210,4 +210,33 @@ shopDeals = {
             ]
         }
     },
+		 "Fire Tunic": {
+        "TextLines": [
+            {"text": "Buy", "color": "red"},
+            {"text": "Fire Tunic", "color": "red"},
+			{"text": "Chestplate"},
+        ],
+        "Custom": {
+            "$": 2000,
+            "p": "29999892 205 29999865",
+            "cmds": [
+                """give @s leather_chestplate{display:{Name:"[{\"text\":\"Fire Tunic\",\"italic\":false,\"bold\":true,\"color\":\"dark_red\"}]",Lore:["[{\"text\":\"Designed for a hero,\",\"italic\":false,\"color\":\"dark_purple\"}]","[{\"text\":\"this tunic offers incredible\",\"italic\":false,\"color\":\"dark_purple\"}]","[{\"text\":\"fire protection. This doesn't make\",\"italic\":false,\"color\":\"dark_purple\"}]","[{\"text\":\"any sense however, as the material\",\"italic\":false,\"color\":\"dark_purple\"}]","[{\"text\":\"is leather. Regardless, it proves to\",\"italic\":false,\"color\":\"dark_purple\"}]","[{\"text\":\"be incredibly strong and reliable.\",\"italic\":false,\"color\":\"dark_purple\"}]"],color:11546150},RepairCost:99999,Enchantments:[{id:"fire_protection",lvl:10},{id:protection,lvl:5},{id:unbreaking,lvl:4}],AttributeModifiers:[{AttributeName:generic.armor,Amount:7,Operation:0,UUIDLeast:136454100,UUIDMost:99,Slot:chest,Name:generic.armor},{AttributeName:generic.maxHealth,Amount:2,Operation:0,UUIDLeast:136454200,UUIDMost:99,Slot:chest,Name:generic.maxHealth},{AttributeName:generic.attackDamage,Amount:1,Operation:0,UUIDLeast:136454300,UUIDMost:99,Slot:chest,Name:generic.attackDamage}]} 1""",
+            ]
+        }
+    },
+		 "Monkey": {
+        "TextLines": [
+            {"text": "Buy", "color": "red"},
+            {"text": "Monkey", "color": "gold"},
+			{"text": "Helmet"},
+        ],
+        "Custom": {
+            "$": 3000,
+            "p": "29999892 205 29999864",
+            "cmds": [
+                """give @s turtle_helmet{display:{Name:"[{\"text\":\"Monkey\",\"italic\":false,\"bold\":true,\"color\":\"gold\"}]",Lore:["[{\"text\":\"When you're doing that\",\"italic\":false,\"color\":\"dark_purple\",\"bold\":true}]","[{\"text\":\"monkey junk.\",\"italic\":false,\"color\":\"dark_purple\",\"bold\":true}]"]},RepairCost:99999,Enchantments:[{id:"aqua_affinity",lvl:1},{id:"blast_protection",lvl:10},{id:thorns,lvl:30}],AttributeModifiers:[{AttributeName:generic.movementSpeed,Amount:1,Operation:1,UUIDLeast:139382100,UUIDMost:99,Slot:head,Name:generic.movementSpeed},{AttributeName:generic.attackSpeed,Amount:0.15,Operation:2,UUIDLeast:139382200,UUIDMost:99,Slot:head,Name:generic.attackSpeed}]} 1""",
+            ]
+        }
+    },
+	
 }
