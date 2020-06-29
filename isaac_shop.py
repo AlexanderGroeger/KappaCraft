@@ -161,10 +161,11 @@ shopDeals = {
 			{"text": "Sword"},
         ],
         "Custom": {
-            "$": 1000,
+            "$": 1250,
             "p": "29999884 205 29999864",
             "cmds": [
-                """give @s stone_sword{display:{Name:"[{\"text\":\"Chainsaw\",\"italic\":false,\"bold\":true,\"color\":\"dark_red\"}]",Lore:["[{\"text\":\"VRRRRR!\",\"italic\":false,\"bold\":true,\"color\":\"dark_purple\"}]","[{\"text\":\"Warning, somewhat fragile.\",\"italic\":false,\"bold\":true,\"color\":\"dark_purple\"}]"]},RepairCost:99999,Enchantments:[{id:"bane_of_arthropods",lvl:5},{id:smite,lvl:5},{id:sweeping,lvl:10}],AttributeModifiers:[{AttributeName:generic.attackSpeed,Amount:100,Operation:0,UUIDLeast:138550200,UUIDMost:99,Slot:mainhand,Name:generic.attackSpeed},{AttributeName:generic.movementSpeed,Amount:0.1,Operation:2,UUIDLeast:138550300,UUIDMost:99,Slot:mainhand,Name:generic.movementSpeed},{AttributeName:generic.attackDamage,Amount:6,Operation:0,UUIDLeast:138550400,UUIDMost:99,Slot:mainhand,Name:generic.attackDamage}]} 1""",
+                # """give @s stone_sword{display:{Name:"[{\"text\":\"Chainsaw\",\"italic\":false,\"bold\":true,\"color\":\"dark_red\"}]",Lore:["[{\"text\":\"VRRRRR!\",\"italic\":false,\"bold\":true,\"color\":\"dark_purple\"}]","[{\"text\":\"Warning, somewhat fragile.\",\"italic\":false,\"bold\":true,\"color\":\"dark_purple\"}]"]},RepairCost:99999,Enchantments:[{id:"bane_of_arthropods",lvl:5},{id:smite,lvl:5},{id:sweeping,lvl:10}],AttributeModifiers:[{AttributeName:generic.attackSpeed,Amount:100,Operation:0,UUIDLeast:138550200,UUIDMost:99,Slot:mainhand,Name:generic.attackSpeed},{AttributeName:generic.movementSpeed,Amount:0.1,Operation:2,UUIDLeast:138550300,UUIDMost:99,Slot:mainhand,Name:generic.movementSpeed},{AttributeName:generic.attackDamage,Amount:6,Operation:0,UUIDLeast:138550400,UUIDMost:99,Slot:mainhand,Name:generic.attackDamage}]} 1""",
+                """give @s stone_sword{display:{Name:"[{\"text\":\"Chainsaw\",\"italic\":false,\"bold\":true,\"color\":\"dark_red\"}]",Lore:["[{\"text\":\"VRRRRR!\",\"italic\":false,\"bold\":true,\"color\":\"dark_purple\"}]","[{\"text\":\"Warning, somewhat fragile.\",\"italic\":false,\"bold\":true,\"color\":\"dark_purple\"}]"]},RepairCost:99999,Enchantments:[{id:"bane_of_arthropods",lvl:5},{id:smite,lvl:5},{id:sweeping,lvl:10}],AttributeModifiers:[{AttributeName:"generic.attack_speed",Name:"generic.attack_speed",Slot:"mainhand",Amount:999,Operation:0,UUID:[I;1003343630,1031316939,1029500780,1873972159]},{AttributeName:"generic.attack_damage",Name:"generic.attack_damage",Slot:"mainhand",Amount:5,Operation:0,UUID:[I;1003343630,1031316939,1029500780,1873972159]}]}"""
             ]
         }
     },
