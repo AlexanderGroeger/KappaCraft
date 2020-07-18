@@ -27,8 +27,12 @@ def AddBackslashes(cmd):
                     noText = True
 
             result += "\\"*(2+4*int(nested))
-        elif c == "\'" and len(display) == 0 and crlBrackets > 1:
-            result += "\\"
+        elif c == "\'":
+            if len(display) == 0 and crlBrackets > 1:
+                result += "\\"
+            elif quote:
+                result += "\\"*(2+2*int(nested))
+
         elif c == "[" and quote:
             bracket = True
             nested = True
