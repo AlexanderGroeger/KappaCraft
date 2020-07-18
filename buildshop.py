@@ -30,8 +30,8 @@ def AddBackslashes(cmd):
         elif c == "\'":
             if len(display) == 0 and crlBrackets > 1:
                 result += "\\"
-            elif quote:
-                result += "\\"*(2+2*int(nested))
+            if quote:
+                result += "\\"*4
 
         elif c == "[" and quote:
             bracket = True
