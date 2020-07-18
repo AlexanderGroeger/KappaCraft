@@ -9,10 +9,13 @@ def AddBackslashes(cmd):
     nested = False
     quote = False
     bracket = False
+    display = "display"
     crlBrackets = 0
     noText = True
     for c in cmd:
-        if c == "\"":
+        if len(display) > 0 and c == display[0]:
+            display = display[1:]
+        elif c == "\"":
             if (quote and noText and not bracket):
                 nested = not nested
 
@@ -24,7 +27,7 @@ def AddBackslashes(cmd):
                     noText = True
 
             result += "\\"*(2+4*int(nested))
-        elif c == "\'":
+        elif c == "\'" and len(display) == 0 and crlBrackets > 1:
             result += "\\\'"
         elif c == "[" and quote:
             bracket = True
