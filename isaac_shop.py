@@ -7,10 +7,10 @@ shopDeals = {
             {"text": "Bow"},
         ],
         "Custom": {
-            "$": 5000,
+            "$": 15000,
             "p": "29999890 205 29999865",
             "cmds": [
-                """give @s bow{display:{Name:"[{"text":"Spring","italic":false,"color":"dark_blue","bold":true}]",Lore:["[{"text":"A bow unlike any other.","italic":false,"color":"dark_purple"}]","[{"text":"Arrows shot from this bow come","italic":false,"color":"dark_purple"}]","[{"text":"from the heart, as a result you are","italic":false,"color":"dark_purple"}]","[{"text":"left more vulnerable while using this bow.","italic":false,"color":"dark_purple"},{"text":"","italic":false}]","[{"text":"Due to the nature of this bow, it cannot break.","italic":false,"color":"white"}]"]},RepairCost:999999,Enchantments:[{id:infinity,lvl:1},{id:power,lvl:10}],Unbreakable:1,HideFlags:6,AttributeModifiers:[{AttributeName:generic.armor,Amount:-8,Operation:0,UUIDLeast:133681900,UUIDMost:99,Name:generic.armor},{AttributeName:generic.armorToughness,Amount:-1,Operation:0,UUIDLeast:133682000,UUIDMost:99,Name:generic.armorToughness}]} 1""",
+                """give @s bow{display:{Name:'[{"text":"Spring","italic":false,"bold":true,"color":"aqua"}]',Lore:['[{"text":"A bow unlike any other.","italic":false}]','[{"text":"Arrows shot from this bow","italic":false}]','[{"text":"come from the heart. As such","italic":false}]','[{"text":"you are left more vulnerable","italic":false}]','[{"text":"while using it. Because of the","italic":false}]','[{"text":"nature of this bow, it cannot break.","italic":false}]']},Enchantments:[{id:infinity,lvl:1},{id:power,lvl:8}],Unbreakable:1,RepairCost:999999,AttributeModifiers:[{AttributeName:"generic.armor",Amount:-0.25,Operation:1,UUID:[I;-120618,8556,13419,-17112],Slot:mainhand,Name:"generic.armor"},{AttributeName:"generic.max_health",Amount:-0.25,Operation:1,UUID:[I;-120618,8556,13419,-17112],Slot:mainhand,Name:"generic.max_health"},{AttributeName:"generic.movement_speed",Amount:0.25,Operation:1,UUID:[I;-120618,8556,13419,-17112],Slot:mainhand,Name:"generic.movement_speed"},{AttributeName:"generic.armor",Amount:-0.75,Operation:1,UUID:[I;-120618,8556,13419,-17112],Slot:offhand,Name:"generic.armor"}]} 1""",
             ]
         }
     },
@@ -21,10 +21,10 @@ shopDeals = {
             {"text": "Shield"},
         ],
         "Custom": {
-            "$": 3500,
+            "$": 7500,
             "p": "29999890 205 29999864",
             "cmds": [
-                """give @s shield{display:{Name:"[{\"text\":\"Gardener\",\"italic\":false,\"bold\":true,\"color\":\"dark_green\"}]",Lore:["[{\"text\":\"Stronger than most metals,\",\"italic\":false,\"color\":\"dark_purple\"},{\"text\":\"\",\"italic\":false}]","[{\"text\":\"this shield will protect the user\",\"italic\":false,\"color\":\"dark_purple\"}]","[{\"text\":\"at all costs. Merely holding\",\"italic\":false,\"color\":\"dark_purple\"},{\"text\":\" \",\"italic\":false},{\"text\":\"Gardener\",\"italic\":false,\"color\":\"dark_green\"},{\"text\":\"\",\"italic\":false}]","[{\"text\":\"reduces incoming damage.\",\"italic\":false,\"color\":\"dark_purple\"},{\"text\":\"\",\"italic\":false}]","[{\"text\":\"This reduced damage comes\",\"italic\":false,\"color\":\"dark_purple\"}]","[{\"text\":\"at the cost of a bit of speed and\",\"italic\":false,\"color\":\"dark_purple\"}]","[{\"text\":\"XP, as this shield can only be\",\"italic\":false,\"color\":\"dark_purple\"}]","[{\"text\":\"repaired through mending.\",\"italic\":false,\"color\":\"dark_purple\"}]"]},RepairCost:999999,Enchantments:[{id:mending,lvl:1}],HideFlags:2,AttributeModifiers:[{AttributeName:generic.armorToughness,Amount:18,Operation:0,UUIDLeast:133724500,UUIDMost:99,Name:generic.armorToughness},{AttributeName:generic.armor,Amount:15,Operation:0,UUIDLeast:133724600,UUIDMost:99,Name:generic.armor},{AttributeName:generic.maxHealth,Amount:4,Operation:0,UUIDLeast:133724700,UUIDMost:99,Name:generic.maxHealth},{AttributeName:generic.movementSpeed,Amount:-0.35,Operation:1,UUIDLeast:134773200,UUIDMost:99,Name:generic.movementSpeed},{AttributeName:generic.knockbackResistance,Amount:1,Operation:0,UUIDLeast:133724800,UUIDMost:99,Name:generic.knockbackResistance}]}""",
+                """give @s shield{display:{Name:'[{"text":"Gardener","italic":false,"bold":true,"color":"dark_green"}]',Lore:['[{"text":"Made from a childlike creature,","italic":false}]','[{"text":"this shield provides incredible","italic":false}]','[{"text":"defense. Due to the nature of the","italic":false}]','[{"text":"shield it can only be repaired by","italic":false}]','[{"text":"experience. You move a bit slower","italic":false}]','[{"text":"as a trade off, something about","italic":false}]','[{"text":"roots and potatoes.","italic":false}]']},Enchantments:[{id:mending,lvl:1},{id:unbreaking,lvl:5}],RepairCost:999999,AttributeModifiers:[{AttributeName:"generic.armor",Amount:0.75,Operation:1,UUID:[I;-120618,19183,13521,-38366],Slot:offhand,Name:"generic.armor"},{AttributeName:"generic.armor_toughness",Amount:0.5,Operation:1,UUID:[I;-120618,19183,13521,-38366],Slot:offhand,Name:"generic.armor_toughness"},{AttributeName:"generic.movement_speed",Amount:-0.5,Operation:1,UUID:[I;-120618,19183,13521,-38366],Slot:offhand,Name:"generic.movement_speed"}]} 1,
             ]
         }
     },
@@ -35,10 +35,10 @@ shopDeals = {
             {"text": "Fishing Rod"},
         ],
         "Custom": {
-            "$": 1500,
+            "$": 5000,
             "p": "29999890 205 29999863",
             "cmds": [
-                """give @s fishing_rod{display:{Name:"[{\"text\":\"Skywars Champion\",\"italic\":false,\"color\":\"aqua\"}]",Lore:["[{\"text\":\"The classic, lemme win pls.\",\"italic\":false}]","[{\"text\":\"Tired of that zombie following you?\",\"italic\":false}]","[{\"text\":\"Boop gone.\",\"italic\":false}]","[{\"text\":\"A player giving you some trouble?\",\"italic\":false}]","[{\"text\":\"Well, you get the picture.\",\"italic\":false}]"]},RepairCost:99999,Enchantments:[{id:knockback,lvl:10},{id:lure,lvl:10},{id:unbreaking,lvl:4}],AttributeModifiers:[{AttributeName:generic.movementSpeed,Amount:0.25,Operation:1,UUIDLeast:134781000,UUIDMost:99,Slot:mainhand,Name:generic.movementSpeed},{AttributeName:generic.knockbackResistance,Amount:1,Operation:1,UUIDLeast:134781100,UUIDMost:99,Slot:mainhand,Name:generic.knockbackResistance}]} 1""",
+                """give @s fishing_rod{display:{Name:'[{"text":"Skywars Champ","italic":false,"bold":true,"color":"aqua"}]',Lore:['[{"text":"The classic, get-away-from-me stick.","italic":false}]','[{"text":"Tired of that zombie following you?","italic":false}]','[{"text":"Boop gone. A player giving you trouble?","italic":false}]','[{"text":"Well, you get the point.","italic":false}]']},Enchantments:[{id:knockback,lvl:10},{id:luck_of_the_sea,lvl:5},{id:lure,lvl:5},{id:unbreaking,lvl:8}],RepairCost:9999999,AttributeModifiers:[{AttributeName:"generic.movement_speed",Amount:0.25,Operation:1,UUID:[I;-120618,19579,135622,-39158],Slot:mainhand,Name:"generic.movement_speed"}]} 1""",
             ]
         }
     },
@@ -49,10 +49,10 @@ shopDeals = {
             {"text": "SHOES", "color": "white"},
         ],
         "Custom": {
-            "$": 5000,
+            "$": 10000,
             "p": "29999890 205 29999862",
             "cmds": [
-                """give @s diamond_boots{display:{Name:"[{\"text\":\"S\",\"italic\":false,\"bold\":true,\"color\":\"light_purple\"},{\"text\":\"P\",\"italic\":false,\"bold\":true,\"color\":\"dark_red\"},{\"text\":\"R\",\"italic\":false,\"bold\":true,\"color\":\"aqua\"},{\"text\":\"A\",\"italic\":false,\"bold\":true,\"color\":\"gold\"},{\"text\":\"Y \",\"italic\":false,\"bold\":true,\"color\":\"gray\"},{\"text\":\"O\",\"italic\":false,\"bold\":true,\"color\":\"green\"},{\"text\":\"N \",\"italic\":false,\"bold\":true,\"color\":\"light_purple\"},{\"text\":\"S\",\"italic\":false,\"bold\":true,\"color\":\"dark_aqua\"},{\"text\":\"H\",\"italic\":false,\"bold\":true,\"color\":\"gold\"},{\"text\":\"O\",\"italic\":false,\"bold\":true,\"color\":\"yellow\"},{\"text\":\"E\",\"italic\":false,\"bold\":true,\"color\":\"gray\"}]",Lore:["[{\"text\":\"Once on, always on.\",\"italic\":false}]","[{\"text\":\"Some of the strongest\",\"italic\":false}]","[{\"text\":\"stuff on earth.\",\"italic\":false}]","[{\"text\":\"Do not inhale product\",\"italic\":false}]"]},RepairCost:9999,Enchantments:[{id:"blast_protection",lvl:3},{id:"binding_curse",lvl:1},{id:"vanishing_curse",lvl:1},{id:"depth_strider",lvl:3},{id:"feather_falling",lvl:10},{id:"fire_protection",lvl:3},{id:"projectile_protection",lvl:3},{id:protection,lvl:7},{id:unbreaking,lvl:1}],AttributeModifiers:[{AttributeName:generic.armor,Amount:1,Operation:0,UUIDLeast:134682800,UUIDMost:99,Slot:feet,Name:generic.armor}]} 1""",
+                """/give @s diamond_boots{display:{Name:'[{"text":"S","italic":false,"bold":true,"color":"dark_green"},{"text":"p","color":"dark_blue"},{"text":"r","color":"light_purple"},{"text":"a","color":"dark_red"},{"text":"y","color":"aqua"},{"text":" ","color":"dark_blue"},{"text":"o","color":"yellow"},{"text":"n","color":"white"},{"text":" ","color":"dark_blue"},{"text":"s","color":"dark_purple"},{"text":"h","color":"gold"},{"text":"o","color":"red"},{"text":"e","color":"dark_blue"},{"text":"s","color":"green"}]',Lore:['[{"text":"Once on, always on.","italic":false}]','[{"text":"Do not inhale product, especially","italic":false}]','[{"text":"if you\'re in the food business.","italic":false}]']},Enchantments:[{id:blast_protection,lvl:4},{id:binding_curse,lvl:1},{id:vanishing_curse,lvl:1},{id:depth_strider,lvl:5},{id:feather_falling,lvl:10},{id:fire_protection,lvl:4},{id:frost_walker,lvl:3},{id:projectile_protection,lvl:4},{id:protection,lvl:5},{id:soul_speed,lvl:4},{id:thorns,lvl:3},{id:unbreaking,lvl:5}],RepairCost:999999,AttributeModifiers:[{AttributeName:"generic.knockback_resistance",Amount:0.25,Operation:1,UUID:[I;-120618,22770,1454,-45540],Slot:feet,Name:"generic.knockback_resistance"}]} 1""",
             ]
         }
     },
