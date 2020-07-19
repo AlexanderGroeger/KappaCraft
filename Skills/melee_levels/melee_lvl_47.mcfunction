@@ -1,0 +1,5 @@
+execute if entity @a[scores={meleedamage=684259..,mlevel=47}] run tellraw @a[scores={meleedamage=684259..,mlevel=47}] ["",{"text":"Melee Level Up!","bold":true,"color":"gold"},{"text":" Level 47","color":"dark_gray"},{"text":" -> ","color":"gray"},{"text":"Level 48 \n","bold":true,"color":"white"},{"text":"Attack Speed","bold":true,"color":"yellow"},{"text":" 0.18","color":"dark_gray"},{"text":" ->","color":"gray"},{"text":" 0.18","bold":true,"color":"white"}]
+execute at @a[scores={meleedamage=684259..,mlevel=47}] run tellraw @a[distance=.01..40] {"text":"","color":"gold","extra":[{"selector":"@a[scores={meleedamage=684259..,mlevel=47}]"},{"text":" is now Melee Level 48"}]}
+execute at @a[scores={meleedamage=684259..,mlevel=47}] run tellraw @a[] {"text":"Congratulate ","color":"gold","extra":[{"selector":"@a[scores={meleedamage=684259..,mlevel=47}]"},{"text":" for reaching the max Melee Level 48!"}]}
+execute if entity @a[scores={mlevel=48}] run attribute @a[scores={mlevel=48},limit=1] minecraft:generic.attack_speed base set 4.18
+execute if entity @a[scores={mlevel=48}] run attribute @a[scores={mlevel=48},limit=1] minecraft:generic.attack_damage base set 2.8
