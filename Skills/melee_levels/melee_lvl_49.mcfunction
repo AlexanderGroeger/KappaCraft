@@ -1,8 +1,9 @@
 execute if entity @a[scores={meleedamage=815061..,mlevel=49}] run tellraw @a[scores={meleedamage=815061..,mlevel=49}] ["",{"text":"Melee Level Up!","bold":true,"color":"gold"},{"text":" Level 49","color":"dark_gray"},{"text":" -> ","color":"gray"},{"text":"Level 50 \n","bold":true,"color":"white"},{"text":"Attack","bold":true,"color":"yellow"},{"text":" 2.5","color":"dark_gray"},{"text":" ->","color":"gray"},{"text":" 3.0","bold":true,"color":"white"}]
+execute if entity @a[scores={meleedamage=815061..,mlevel=49}] run tellraw @a[scores={meleedamage=815061..,mlevel=49}] ["",{"text":"Luck Level Up!","bold":true,"color":"blue"}]
 execute if entity @a[scores={meleedamage=815061..,mlevel=49}] run scoreboard players add @a[scores={meleedamage=815061..,mlevel=49}] llevel 1
 execute if entity @a[scores={meleedamage=815061..,mlevel=49}] run tellraw @a[scores={meleedamage=815061..,mlevel=49}] ["",{"text":"You got an extra heart!","bold":true,"color":"red"}]
 execute if entity @a[scores={meleedamage=815061..,mlevel=49}] run scoreboard players add @a[scores={meleedamage=815061..,mlevel=49}] hlevel 1
 execute if entity @a[scores={meleedamage=815061..,mlevel=49}] run execute at @a[scores={meleedamage=815061..,mlevel=49}] run playsound minecraft:entity.player.levelup master @a ~ ~ ~ 1 1.2
-execute at @a[scores={meleedamage=815061..,mlevel=49}] run tellraw @a[distance=.01..40] {"text":"","color":"gold","extra":[{"selector":"@a[scores={meleedamage=815061..,mlevel=49}]"},{"text":" is now Melee Level 50"}]}
+execute at @a[scores={meleedamage=815061..,mlevel=49}] run tellraw @a[] {"text":"Congratulate ","color":"gold","extra":[{"selector":"@a[scores={meleedamage=815061..,mlevel=49}]"},{"text":" for reaching the max Melee Level 50!"}]}
 execute if entity @a[scores={meleedamage=815061..,mlevel=49}] run scoreboard players set @a[scores={meleedamage=815061..,mlevel=49}] mlevel 50
-execute if entity @a[scores={mlevel=50}] run attribute @a[scores={mlevel=50},limit=1] minecraft:generic.attack_speed base set 4.20
+execute if entity @a[scores={mlevel=50}] run attribute @a[scores={mlevel=50},limit=1] minecraft:generic.attack_damage base set 3.0

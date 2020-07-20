@@ -32,7 +32,8 @@ sprint_cmds = [
 
 melee_cmds = [
     (executeIf+tellraw).format(_target = targetMeleeExpLvl)+"""["",{{"text":"Melee Level Up!","bold":true,"color":"gold"}},{{"text":" Level {_oldLvl}","color":"dark_gray"}},{{"text":" -> ","color":"gray"}},{{"text":"Level {_newLvl} \\n","bold":true,"color":"white"}},{{"text":"Attack Speed","bold":true,"color":"yellow"}},{{"text":" {_oldSpeed:.2f}","color":"dark_gray"}},{{"text":" ->","color":"gray"}},{{"text":" {_newSpeed:.2f}","bold":true,"color":"white"}}]""",
-    (executeIf+tellraw).format(_target = targetMeleeExpLvl)+"""["",{{"text":"Melee Level Up!","bold":true,"color":"gold"}},{{"text":" Level {_oldLvl}","color":"dark_gray"}},{{"text":" -> ","color":"gray"}},{{"text":"Level {_newLvl} \\n","bold":true,"color":"white"}},{{"text":"Attack","bold":true,"color":"yellow"}},{{"text":" {_oldAttack:.1f}","color":"dark_gray"}},{{"text":" ->","color":"gray"}},{{"text":" {_newAttack:.1f}","bold":true,"color":"white"}}]""",
+    (executeIf+tellraw).format(_target = targetMeleeExpLvl)+"""["",{{"text":"Melee Level Up!","bold":true,"color":"gold"}},{{"text":" Level {_oldLvl}","color":"dark_gray"}},{{"text":" -> ","color":"gray"}},{{"text":"Level {_newLvl} \\n","bold":true,"color":"white"}},{{"text":"Attack Damage","bold":true,"color":"yellow"}},{{"text":" {_oldAttack:.1f}","color":"dark_gray"}},{{"text":" ->","color":"gray"}},{{"text":" {_newAttack:.1f}","bold":true,"color":"white"}}]""",
+    (executeIf+tellraw).format(_target = targetSprintExpLvl)+"""["",{{"text":"Luck Level Up!","bold":true,"color":"blue"}}]""",
     (executeIf+scoreboard).format(_target = targetMeleeExpLvl, _score_mode = "add", _scoreboard = "llevel", _score_value = "1"),
     (executeIf+tellraw).format(_target = targetMeleeExpLvl)+"""["",{{"text":"You got an extra heart!","bold":true,"color":"red"}}]""",
     (executeIf+scoreboard).format(_target = targetMeleeExpLvl, _score_mode = "add", _scoreboard = "hlevel", _score_value = "1"),
@@ -42,7 +43,6 @@ melee_cmds = [
     (executeIf+scoreboard).format(_target = targetMeleeExpLvl, _score_mode = "set", _scoreboard = "mlevel", _score_value = "{_newLvl}"),
     (executeIf+attribute).format(_target = targetMeleeAfter, _attribute = "generic.attack_speed", _attribute_value = "{_newMCSpeed:.2f}"),
     (executeIf+attribute).format(_target = targetMeleeAfter, _attribute = "generic.attack_damage", _attribute_value = "{_newMCAttack:.1f}"),
-
 ]
 
 mode = sys.argv[1]
@@ -66,14 +66,14 @@ def Build():
     lines = []
 
     # Initial stats for level 0
-    lines.append((executeIf+attribute).format(_target = targetMeleeAfter.format(_newLvl = "0"), _attribute = "generic.attack_speed", _attribute_value = "-.2"))
+    lines.append((executeIf+attribute).format(_target = targetMeleeAfter.format(_newLvl = "0"), _attribute = "generic.attack_speed", _attribute_value = "3.8"))
     lines.append((executeIf+attribute).format(_target = targetMeleeAfter.format(_newLvl = "0"), _attribute = "generic.attack_damage", _attribute_value = "-2"))
 
     totalExp = 0
     for oldLvl in range(num_levels):
         exp = int(base_exp*(1+(exp_gain_percent/100.))**oldLvl)
         totalExp += exp
-        lines.append((executeIf.format(_target = targetMeleeExpLvl)+"function serverfunctions:melee_levels/melee_lvl_{_oldLvl}.mcfunction").format(_exp = totalExp, _oldLvl = oldLvl))
+        lines.append((executeIf.format(_target = targetMeleeExpLvl)+"function serverfunctions:melee_levels/melee_lvl_{_oldLvl}").format(_exp = totalExp, _oldLvl = oldLvl))
 
     f = open(funcName, 'w')
     f.write("\n".join(lines))

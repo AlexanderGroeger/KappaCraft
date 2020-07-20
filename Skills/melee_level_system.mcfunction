@@ -1,4 +1,4 @@
-execute if entity @a[scores={mlevel=0}] run attribute @a[scores={mlevel=0},limit=1] minecraft:generic.attack_speed base set -.2
+execute if entity @a[scores={mlevel=0}] run attribute @a[scores={mlevel=0},limit=1] minecraft:generic.attack_speed base set 3.8
 execute if entity @a[scores={mlevel=0}] run attribute @a[scores={mlevel=0},limit=1] minecraft:generic.attack_damage base set -2
 execute if entity @a[scores={meleedamage=1000..,mlevel=0}] run function serverfunctions:melee_levels/melee_lvl_0.mcfunction
 execute if entity @a[scores={meleedamage=2090..,mlevel=1}] run function serverfunctions:melee_levels/melee_lvl_1.mcfunction

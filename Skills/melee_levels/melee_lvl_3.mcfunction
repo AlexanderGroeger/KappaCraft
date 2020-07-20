@@ -1,5 +1,5 @@
 execute if entity @a[scores={meleedamage=4573..,mlevel=3}] run tellraw @a[scores={meleedamage=4573..,mlevel=3}] ["",{"text":"Melee Level Up!","bold":true,"color":"gold"},{"text":" Level 3","color":"dark_gray"},{"text":" -> ","color":"gray"},{"text":"Level 4 \n","bold":true,"color":"white"},{"text":"Attack Speed","bold":true,"color":"yellow"},{"text":" -0.18","color":"dark_gray"},{"text":" ->","color":"gray"},{"text":" -0.17","bold":true,"color":"white"}]
+execute if entity @a[scores={meleedamage=4573..,mlevel=3}] run execute at @a[scores={meleedamage=4573..,mlevel=3}] run playsound minecraft:entity.player.levelup master @a ~ ~ ~ 1 1.2
 execute at @a[scores={meleedamage=4573..,mlevel=3}] run tellraw @a[distance=.01..40] {"text":"","color":"gold","extra":[{"selector":"@a[scores={meleedamage=4573..,mlevel=3}]"},{"text":" is now Melee Level 4"}]}
-execute at @a[scores={meleedamage=4573..,mlevel=3}] run tellraw @a[] {"text":"Congratulate ","color":"gold","extra":[{"selector":"@a[scores={meleedamage=4573..,mlevel=3}]"},{"text":" for reaching the max Melee Level 4!"}]}
+execute if entity @a[scores={meleedamage=4573..,mlevel=3}] run scoreboard players set @a[scores={meleedamage=4573..,mlevel=3}] mlevel 4
 execute if entity @a[scores={mlevel=4}] run attribute @a[scores={mlevel=4},limit=1] minecraft:generic.attack_speed base set 3.83
-execute if entity @a[scores={mlevel=4}] run attribute @a[scores={mlevel=4},limit=1] minecraft:generic.attack_damage base set -1.6
