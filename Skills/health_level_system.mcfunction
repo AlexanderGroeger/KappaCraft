@@ -1,0 +1,10 @@
+execute if entity @a[scores={hlevel=0}] run attribute @a[scores={hlevel=0},limit=1] minecraft:generic.max_health base set 14
+execute if entity @a[scores={hlevel=1}] run attribute @a[scores={hlevel=1},limit=1] minecraft:generic.max_health base set 16
+execute if entity @a[scores={hlevel=2}] run attribute @a[scores={hlevel=2},limit=1] minecraft:generic.max_health base set 18
+execute if entity @a[scores={hlevel=3}] run attribute @a[scores={hlevel=3},limit=1] minecraft:generic.max_health base set 20
+execute if entity @a[scores={hlevel=4}] run attribute @a[scores={hlevel=4},limit=1] minecraft:generic.max_health base set 22
+execute if entity @a[scores={hlevel=5}] run attribute @a[scores={hlevel=5},limit=1] minecraft:generic.max_health base set 24
+execute if entity @a[scores={hlevel=6}] run attribute @a[scores={hlevel=6},limit=1] minecraft:generic.max_health base set 26
+execute if entity @a[scores={hlevel=7}] run attribute @a[scores={hlevel=7},limit=1] minecraft:generic.max_health base set 28
+execute if entity @a[scores={hlevel=8}] run attribute @a[scores={hlevel=8},limit=1] minecraft:generic.max_health base set 30
+execute if entity @a[scores={hlevel=9}] run attribute @a[scores={hlevel=9},limit=1] minecraft:generic.max_health base set 40
