@@ -160,4 +160,6 @@ def NBSToFunctions(songPath):
     print(notes[:10])
     OutputFunction(notes)
 
-NBSToFunctions("furret.nbs")
+import sys
+
+NBSToFunctions(sys.argv[1])
