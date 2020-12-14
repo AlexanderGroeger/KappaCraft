@@ -4,6 +4,9 @@ from shutil import rmtree
 from songs import songs
 
 def NBSToFunctions(songPath):
+    
+    if not songPath.endswith(".nbs"):
+        print("File is not an nbs file.")
 
     instruments = [
         "harp","bass","basedrum","snare",
