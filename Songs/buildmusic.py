@@ -1,12 +1,14 @@
 import os
+import sys
 from itertools import groupby
 from shutil import rmtree
 from songs import songs
 
 def NBSToFunctions(songPath):
-    
+
     if not songPath.endswith(".nbs"):
-        print("File is not an nbs file.")
+        sys.exit("File is not an nbs file.")
+        return
 
     instruments = [
         "harp","bass","basedrum","snare",
@@ -18,26 +20,42 @@ def NBSToFunctions(songPath):
     def KeyToPitch(key):
         return 2 ** ( (key - 45) / 12.)
 
-    def ReadNBSFile(songPath):
+    def ReadInt(bits):
+        bytes = int(bits/8)
+        return int.from_bytes(f.read(bytes), byteorder='little')
 
-        def ReadInt(bits):
-            bytes = int(bits/8)
-            return int.from_bytes(f.read(bytes), byteorder='little')
-            # return struct.unpack("I"*int(bytes/2), f.read(bytes))[0]
+    def ReadString():
+        strlen = ReadInt(32)
+        return "".join([chr(ReadInt(8)) for i in range(strlen)])
 
-        def ReadString():
-            strlen = ReadInt(32)
-            return "".join([chr(ReadInt(8)) for i in range(strlen)])
-
-        f = open(songPath,"rb")
+    def ReadNBSFile():
 
         songLength = ReadInt(16)
+
+        # if the first 2 bytes are zeros, then we're using the new format
+        newNBSFormat = (songLength == 0)
+
+        if newNBSFormat:
+            print("New NBS Format detected!")
+            nbsVersion = ReadInt(8)
+            print("nbsVersion",nbsVersion)
+            vanillaInstrumentCount = ReadInt(8)
+            print("vanillaInstrumentCount",vanillaInstrumentCount)
+            songLength = ReadInt(16)
+            print("songLength",songLength)
+
         songLayers = ReadInt(16)
+        print("songLayers",songLayers)
         songName = ReadString().replace(' ','_').lower()
+        print("songName",songName)
         songAuthor = ReadString()
+        print("songAuthor",songAuthor)
         songComposer = ReadString()
+        print("songComposer",songComposer)
         songDescription = ReadString()
+        print("songDescription",songDescription)
         songTempo = ReadInt(16)/100.
+        print("songTempo",songTempo)
 
         # Skip irrelevant info
         for i in range(3):
@@ -47,13 +65,11 @@ def NBSToFunctions(songPath):
 
         ReadString()
 
-        print(songLength)
-        print(songLayers)
-        print(songTempo)
-        print(songName)
-        print(songAuthor)
-        print(songComposer)
-        print(songDescription)
+        if newNBSFormat:
+            songLoop = ReadInt(8)
+            songMaxLoops = ReadInt(8)
+            songLoopStartTick = ReadInt(8)
+
 
         notes = []
         tick = -1
@@ -75,6 +91,13 @@ def NBSToFunctions(songPath):
                 layer += jumps
                 instrument = ReadInt(8)
                 key = ReadInt(8)
+
+                if newNBSFormat:
+                    volume = ReadInt(8)
+                    pan = ReadInt(8)
+                    key = ReadInt(8)
+                    pitch = ReadInt(16)
+
                 if instrument in range(16) and key in range(33,58):
                     notes.append((tick,layer,instrument,key))
 
@@ -156,12 +179,22 @@ def NBSToFunctions(songPath):
         func.write(repeatFunction.format(_musicId=musicId,_endTimer=songLength))
         func.close()
 
+    try:
+        f = open(songPath,"rb")
+        print("file loaded")
+    except:
+        sys.exit("Failed to open",songPath)
 
-    notes, songLength, songName, songTempo = ReadNBSFile(songPath)
-    print(notes[:10])
+    notes, songLength, songName, songTempo = ReadNBSFile()
+    if not songName in songs:
+        print("The song name for",songPath,"needs to be added to songs.py!")
+        exit(0)
+
+    # print(notes[:10])
     notes = [(pos,[note[1:] for note in noteList]) for (pos,noteList) in groupby(notes,key=lambda n: n[0])]
-    print(notes[:10])
+    # print(notes[:10])
     OutputFunction(notes)
+    print("Complete!")
 
 import sys
 
