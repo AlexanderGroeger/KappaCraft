@@ -18,7 +18,7 @@ def NBSToFunctions(songPath):
     ]
 
     def AdjustWithTempo(tick,tempo):
-        return tick / (20/(tempo/100))
+        return int(tick * (20/tempo))
 
     def KeyToPitch(key):
         return 2 ** ( (key - 45) / 12.)
