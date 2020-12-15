@@ -64,7 +64,7 @@ def NBSToFunctions(songPath):
             print(songPath,"has no NBS song name!")
             exit(0)
         if not songName in songs:
-            songs[songName] = len(songs.keys())
+            songs[songName] = max(songs.values())+1
 
         print("songName",songName)
         songAuthor = ReadString()
