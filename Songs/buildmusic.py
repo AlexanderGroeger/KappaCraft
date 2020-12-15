@@ -11,6 +11,17 @@ if os.path.isfile(os.path.join(os.path.dirname(os.path.abspath(__file__)),"songs
     with open('songs.json', 'r') as jf:
         songs = load(jf)
 
+def firstGap(ls):
+    if len(ls) == 0:
+        return "0"
+    elif len(ls) == 1:
+        return str(int(ls[0] == "0"))
+    ls.sort()
+    for i in range(1,len(ls)):
+        if int(ls[i]) - int(ls[i-1]) > 1:
+            return str(int(ls[i-1])+1)
+    return str(len(ls))
+
 def NBSToFunctions(songPath):
 
     if not songPath.endswith(".nbs"):
@@ -63,8 +74,14 @@ def NBSToFunctions(songPath):
         if len(songName) == "":
             print(songPath,"has no NBS song name!")
             exit(0)
-        if not songName in songs:
-            songs[songName] = max(songs.values())+1
+        emptySpaceInSongList = False
+        if not songName in songs.values():
+            musicId = firstGap(list(songs.keys()))
+            songs[musicId] = songName
+        else:
+            for id, name in songs.items():
+                if name == songName:
+                    musicId = id
 
         print("songName",songName)
         songAuthor = ReadString()
@@ -119,30 +136,6 @@ def NBSToFunctions(songPath):
 
                 if instrument in range(vanillaInstrumentCount) and key in range(33,58):
                     notes.append((tick,layer,instrument,key))
-        #
-        # else:
-        #
-        #     while True:
-        #
-        #         jumps = ReadInt(16)
-        #         if jumps == 0:
-        #             break
-        #
-        #         tick += jumps
-        #         layer = -1
-        #
-        #         while True:
-        #
-        #             jumps = ReadInt(16)
-        #             if jumps == 0:
-        #                 break
-        #
-        #             layer += jumps
-        #             instrument = ReadInt(8)
-        #             key = ReadInt(8)
-        #
-        #             if instrument in range(16) and key in range(33,58):
-        #                 notes.append((tick,layer,instrument,key))
 
         f.close()
         return notes, songLength, songName, songTempo
@@ -201,7 +194,6 @@ def NBSToFunctions(songPath):
 
         # quickSwapFunction = "execute at @a[scores={{MusicID={_musicId},position={_tickPos}}}] run function {_songName}:{_tickPos}\n"
 
-        musicId = songs[songName]
         # Generate function for playing the note and waiting
         func = open(songName+".mcfunction","w")
         func.write(timerAddFunction)
@@ -223,7 +215,7 @@ def NBSToFunctions(songPath):
         func.close()
 
         with open('songs.json', 'w') as jf:
-            dump(songs,jf)
+            dump(songs,jf,sort_keys = True)
 
     try:
         f = open(songPath,"rb")
@@ -231,9 +223,10 @@ def NBSToFunctions(songPath):
     except:
         sys.exit("Failed to open",songPath)
 
+    musicId = None
     notes, songLength, songName, songTempo = ReadNBSFile()
-
     notes = [(pos,[note[1:] for note in noteList]) for (pos,noteList) in groupby(notes,key=lambda n: n[0])]
+
     OutputFunction(notes)
     print("Complete!")
 
