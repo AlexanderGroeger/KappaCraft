@@ -17,6 +17,9 @@ def NBSToFunctions(songPath):
         "cow_bell","didgeridoo","bit","banjo","pling"
     ]
 
+    def AdjustWithTempo(tick,tempo):
+        return tick / (20/(tempo/100))
+
     def KeyToPitch(key):
         return 2 ** ( (key - 45) / 12.)
 
@@ -200,7 +203,7 @@ def NBSToFunctions(songPath):
                 layer, instrument, key = note
                 func.write(playFunction.format(_musicId=musicId,_tickTimer=round(tickPos*20./songTempo),_noteInstrument=instruments[instrument],_notePitch=KeyToPitch(key)))
 
-        func.write(repeatFunction.format(_musicId=musicId,_endTimer=songLength))
+        func.write(repeatFunction.format(_musicId=musicId,_endTimer=AdjustWithTempo(songLength,songTempo)))
         func.close()
 
     try:
