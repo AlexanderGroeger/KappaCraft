@@ -3,6 +3,7 @@ import sys
 from itertools import groupby
 from shutil import rmtree
 from songs import songs
+from math import ceil
 
 def NBSToFunctions(songPath):
 
@@ -18,7 +19,7 @@ def NBSToFunctions(songPath):
     ]
 
     def AdjustWithTempo(tick,tempo):
-        return int(tick * (20/tempo))
+        return ceil(tick * (20/tempo))
 
     def KeyToPitch(key):
         return 2 ** ( (key - 45) / 12.)
