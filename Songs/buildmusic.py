@@ -74,7 +74,8 @@ def NBSToFunctions(songPath):
         if len(songName) == "":
             print(songPath,"has no NBS song name!")
             exit(0)
-        emptySpaceInSongList = False
+
+        musicId = None
         if not songName in songs.values():
             musicId = firstGap(list(songs.keys()))
             songs[musicId] = songName
@@ -138,7 +139,7 @@ def NBSToFunctions(songPath):
                     notes.append((tick,layer,instrument,key))
 
         f.close()
-        return notes, songLength, songName, songTempo
+        return notes, songLength, songName, songTempo, musicId
 
     # def OutputFunction(noteList):
     #     # Clear out the directory for the song before writing function files to it.
@@ -187,8 +188,8 @@ def NBSToFunctions(songPath):
     #     func.close()
 
     def OutputFunction(noteList):
-
-        timerAddFunction = "execute at @a[scores={MusicID=1..}] run scoreboard players add @p timer 1\n"
+        print(musicId)
+        timerAddFunction = "execute at @a[scores={{MusicID={_musicId}}}] run scoreboard players add @p timer 1\n"
         playFunction = "execute at @a[scores={{MusicID={_musicId},timer={_tickTimer}}}] run playsound minecraft:block.note_block.{_noteInstrument} record @p ~ ~ ~ 1 {_notePitch}\n"
         repeatFunction = "execute at @a[scores={{MusicID={_musicId},timer={_endTimer}}}] run scoreboard players set @p timer 0\n"
 
@@ -196,7 +197,7 @@ def NBSToFunctions(songPath):
 
         # Generate function for playing the note and waiting
         func = open(songName+".mcfunction","w")
-        func.write(timerAddFunction)
+        func.write(timerAddFunction.format(_musicId = musicId))
         for notePos, (tickPos, notes) in enumerate(noteList):
             # Generate waits that occurred before this note
             # Note, will not run if the tickPos of the current note is exactly 1 more than the last
@@ -223,8 +224,7 @@ def NBSToFunctions(songPath):
     except:
         sys.exit("Failed to open",songPath)
 
-    musicId = None
-    notes, songLength, songName, songTempo = ReadNBSFile()
+    notes, songLength, songName, songTempo, musicId = ReadNBSFile()
     notes = [(pos,[note[1:] for note in noteList]) for (pos,noteList) in groupby(notes,key=lambda n: n[0])]
 
     OutputFunction(notes)
