@@ -2,7 +2,6 @@ import os
 import sys
 from itertools import groupby
 from shutil import rmtree
-# from songs import songs
 from json import load, dump
 from math import ceil
 
@@ -196,7 +195,7 @@ def NBSToFunctions(songPath):
         # quickSwapFunction = "execute at @a[scores={{MusicID={_musicId},position={_tickPos}}}] run function {_songName}:{_tickPos}\n"
 
         # Generate function for playing the note and waiting
-        func = open(songName+".mcfunction","w")
+        func = open(songName+"_"+musicId+".mcfunction","w")
         func.write(timerAddFunction.format(_musicId = musicId))
         for notePos, (tickPos, notes) in enumerate(noteList):
             # Generate waits that occurred before this note
