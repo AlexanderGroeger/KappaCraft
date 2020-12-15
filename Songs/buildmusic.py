@@ -2,8 +2,14 @@ import os
 import sys
 from itertools import groupby
 from shutil import rmtree
-from songs import songs
+# from songs import songs
+from json import load, dump
 from math import ceil
+
+songs = {}
+if os.path.isfile(os.path.join(os.path.dirname(os.path.abspath(__file__)),"songs.json")):
+    with open('songs.json', 'r') as jf:
+        songs = load(jf)
 
 def NBSToFunctions(songPath):
 
@@ -47,10 +53,19 @@ def NBSToFunctions(songPath):
             print("vanillaInstrumentCount",vanillaInstrumentCount)
             songLength = ReadInt(16)
             print("songLength",songLength)
+        else:
+            vanillaInstrumentCount = 16
 
         songLayers = ReadInt(16)
         print("songLayers",songLayers)
+
         songName = ReadString().replace(' ','_').lower()
+        if len(songName) == "":
+            print(songPath,"has no NBS song name!")
+            exit(0)
+        if not songName in songs:
+            songs[songName] = len(songs.keys())
+
         print("songName",songName)
         songAuthor = ReadString()
         print("songAuthor",songAuthor)
@@ -207,6 +222,9 @@ def NBSToFunctions(songPath):
         func.write(repeatFunction.format(_musicId=musicId,_endTimer=AdjustWithTempo(songLength,songTempo)))
         func.close()
 
+        with open('songs.json', 'w') as jf:
+            dump(songs,jf)
+
     try:
         f = open(songPath,"rb")
         print("file loaded")
@@ -214,13 +232,8 @@ def NBSToFunctions(songPath):
         sys.exit("Failed to open",songPath)
 
     notes, songLength, songName, songTempo = ReadNBSFile()
-    if not songName in songs:
-        print("The song name for",songPath,"needs to be added to songs.py!")
-        exit(0)
 
-    # print(notes[:10])
     notes = [(pos,[note[1:] for note in noteList]) for (pos,noteList) in groupby(notes,key=lambda n: n[0])]
-    # print(notes[:10])
     OutputFunction(notes)
     print("Complete!")
 
