@@ -68,12 +68,12 @@ def NBSToFunctions(songPath):
         if newNBSFormat:
             songLoop = ReadInt(8)
             songMaxLoops = ReadInt(8)
-            songLoopStartTick = ReadInt(8)
-
+            songLoopStartTick = ReadInt(16)
 
         notes = []
         tick = -1
         jumps = 0
+        layer = 0
 
         while True:
 
@@ -89,17 +89,41 @@ def NBSToFunctions(songPath):
                 if jumps == 0:
                     break
                 layer += jumps
+
                 instrument = ReadInt(8)
                 key = ReadInt(8)
 
                 if newNBSFormat:
                     volume = ReadInt(8)
                     pan = ReadInt(8)
-                    key = ReadInt(8)
                     pitch = ReadInt(16)
 
-                if instrument in range(16) and key in range(33,58):
+                if instrument in range(vanillaInstrumentCount) and key in range(33,58):
                     notes.append((tick,layer,instrument,key))
+        #
+        # else:
+        #
+        #     while True:
+        #
+        #         jumps = ReadInt(16)
+        #         if jumps == 0:
+        #             break
+        #
+        #         tick += jumps
+        #         layer = -1
+        #
+        #         while True:
+        #
+        #             jumps = ReadInt(16)
+        #             if jumps == 0:
+        #                 break
+        #
+        #             layer += jumps
+        #             instrument = ReadInt(8)
+        #             key = ReadInt(8)
+        #
+        #             if instrument in range(16) and key in range(33,58):
+        #                 notes.append((tick,layer,instrument,key))
 
         f.close()
         return notes, songLength, songName, songTempo
