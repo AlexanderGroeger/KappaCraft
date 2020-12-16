@@ -2,25 +2,24 @@ import os
 import sys
 from itertools import groupby
 from shutil import rmtree
-from json import load, dump
 from math import ceil
+from config import *
 import numpy as np
 
-songs = {}
-if os.path.isfile(os.path.join(os.path.dirname(os.path.abspath(__file__)),"songs.json")):
-    with open('songs.json', 'r') as jf:
-        songs = load(jf)
+if not os.path.isdir(outputSongTreePath):
+    print("Output song tree path in config.py is not specified or is missing in the file system!")
+    exit(0)
 
 def firstGap(ls):
     if len(ls) == 0:
-        return "0"
+        return 1
     elif len(ls) == 1:
-        return str(int(ls[0] == "0"))
+        return 1 + int(ls[0] == 1)
     ls.sort()
     for i in range(1,len(ls)):
         if int(ls[i]) - int(ls[i-1]) > 1:
-            return str(int(ls[i-1])+1)
-    return str(len(ls))
+            return int(ls[i-1])+1
+    return len(ls) + 1
 
 def NBSToFunctions(songPath):
 
@@ -63,9 +62,10 @@ def NBSToFunctions(songPath):
             vanillaInstrumentCount = ReadInt(8)
             print("vanillaInstrumentCount",vanillaInstrumentCount)
             songLength = ReadInt(16)
-            print("songLength",songLength)
         else:
+            print("Old NBS Format detected!")
             vanillaInstrumentCount = 16
+        print("songLength",songLength)
 
         songLayers = ReadInt(16)
         print("songLayers",songLayers)
@@ -76,13 +76,21 @@ def NBSToFunctions(songPath):
             exit(0)
 
         musicId = None
-        if not songName in songs.values():
-            musicId = firstGap(list(songs.keys()))
-            songs[musicId] = songName
-        else:
-            for id, name in songs.items():
-                if name == songName:
-                    musicId = id
+        songIds = []
+        for filename in os.listdir(outputSongPath):
+            if filename.endswith(".mcfunction"):
+                filename = filename.replace(".mcfunction","")
+                tokens = filename.split('_ID')
+                if len(tokens) == 2:
+                    name, id = tokens
+                    if name == songName:
+                        musicId = int(id)
+                        break
+                    else:
+                        songIds.append(int(id))
+
+        if musicId is None:
+            musicId = firstGap(songIds)
 
         print("songName",songName)
         songAuthor = ReadString()
@@ -146,15 +154,13 @@ def NBSToFunctions(songPath):
         timerAddFunction = "execute at @a[scores={{MusicID={_musicId}}}] run scoreboard players add @p timer 1\n"
         playFunction = "execute at @a[scores={{MusicID={_musicId},timer={_tickTimer}}}] run playsound minecraft:block.note_block.{_noteInstrument} record @p ~ ~ ~ 1 {_notePitch}\n"
         repeatFunction = "execute at @a[scores={{MusicID={_musicId},timer={_endTimer}}}] run scoreboard players set @p timer -1\n"
-        branchFunction = "execute at @a[scores={{MusicID={_musicId},timer={_startTick}..{_endTick}}}] run function mcfunctions:songs:trees:{_songName}:{_function}\n"
+        branchFunction = "execute at @a[scores={{MusicID={_musicId},timer={_startTick}..{_endTick}}}] run function "+functionBranchPrefix+":{_songName}:{_function}\n"
 
         def OutputFunctionTree():
 
-            if not os.path.isdir(os.path.join("trees",songName)):
-                os.mkdir(os.path.join("trees",songName))
-            else:
-                for file in os.listdir(os.path.join("trees",songName)):
-                    os.remove(os.path.join("trees",songName,file))
+            if os.path.isdir(os.path.join(outputSongTreePath,songName)):
+                rmtree(os.path.join(outputSongTreePath,songName))
+            os.mkdir(os.path.join(outputSongTreePath,songName))
 
             notesPerTick = {}
             ticks = [int(t) for t in np.unique([tickPos for (tickPos, notes) in noteList])]
@@ -162,14 +168,14 @@ def NBSToFunctions(songPath):
             for tick in ticks:
                 notesPerTick[tick] = [notes for (tickPos, notes) in noteList if tickPos == tick]
 
-            def writeLeaf(tick):
-                func = open(os.path.join("trees",songName,"tick_{}.mcfunction".format(tick)),"w")
-                for note in notesPerTick[tick]:
-                    layer, instrument, key = note[0]
-                    func.write(playFunction.format(_musicId=musicId,_tickTimer=AdjustWithTempo(tick,songTempo),_noteInstrument=instruments[instrument],_notePitch=KeyToPitch(key)))
-                if tick == songLength:
-                    func.write(repeatFunction.format(_musicId=musicId,_endTimer=AdjustWithTempo(songLength,songTempo)))
-                func.close()
+            with open(os.path.join(outputSongPath,"{}_ID{}.mcfunction".format(songName,musicId)),"w") as func:
+                func.write(branchFunction.format(
+                    _musicId = musicId,
+                    _startTick = ticks[0],
+                    _endTick = ticks[-1],
+                    _songName = songName,
+                    _function = "branch_{}-{}".format(AdjustWithTempo(ticks[0],songTempo),AdjustWithTempo(ticks[-1],songTempo)),)
+                )
 
             def writeBranch(start, end):
                 if start == end:
@@ -187,18 +193,7 @@ def NBSToFunctions(songPath):
                     highmid = lowmid + 1
                 highmidTick = ticks[highmid]
 
-                # lesserFunction = "branch_{}-{}".format(startTick,lowmidTick)
-                # greaterFunction = "branch_{}-{}".format(highmidTick,endTick)
-                #
-                # if lowmid == start:
-                #     # writeLeaf(startTick)
-                #     lesserFunction = "tick_{}".format(startTick)
-                #
-                # if highmid == end:
-                #     # writeLeaf(endTick)
-                #     greaterFunction = "tick_{}".format(endTick)
-
-                with open(os.path.join("trees",songName,"branch_{}-{}.mcfunction".format(AdjustWithTempo(startTick,songTempo),AdjustWithTempo(endTick,songTempo))),"w") as func:
+                with open(os.path.join(outputSongTreePath,songName,"branch_{}-{}.mcfunction".format(AdjustWithTempo(startTick,songTempo),AdjustWithTempo(endTick,songTempo))),"w") as func:
                     if start == 0 and end == numTicks - 1:
                         func.write(timerAddFunction.format(_musicId = musicId))
                     if lowmid == start:
@@ -239,8 +234,6 @@ def NBSToFunctions(songPath):
         OutputFunctionTree()
 
         print(musicId)
-        with open('songs.json', 'w') as jf:
-            dump(songs,jf,sort_keys = True)
 
     try:
         f = open(songPath,"rb")

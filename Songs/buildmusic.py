@@ -2,24 +2,23 @@ import os
 import sys
 from itertools import groupby
 from shutil import rmtree
-from json import load, dump
 from math import ceil
+from config import outputSongPath
 
-songs = {}
-if os.path.isfile(os.path.join(os.path.dirname(os.path.abspath(__file__)),"songs.json")):
-    with open('songs.json', 'r') as jf:
-        songs = load(jf)
+if not os.path.isdir(outputSongPath):
+    print("Output song tree path in config.py is not specified or is missing in the file system!")
+    exit(0)
 
 def firstGap(ls):
     if len(ls) == 0:
-        return "0"
+        return 1
     elif len(ls) == 1:
-        return str(int(ls[0] == "0"))
+        return 1 + int(ls[0] == 1)
     ls.sort()
     for i in range(1,len(ls)):
         if int(ls[i]) - int(ls[i-1]) > 1:
-            return str(int(ls[i-1])+1)
-    return str(len(ls))
+            return int(ls[i-1])+1
+    return len(ls) + 1
 
 def NBSToFunctions(songPath):
 
@@ -62,9 +61,9 @@ def NBSToFunctions(songPath):
             vanillaInstrumentCount = ReadInt(8)
             print("vanillaInstrumentCount",vanillaInstrumentCount)
             songLength = ReadInt(16)
-            print("songLength",songLength)
         else:
             vanillaInstrumentCount = 16
+        print("songLength",songLength)
 
         songLayers = ReadInt(16)
         print("songLayers",songLayers)
@@ -75,13 +74,21 @@ def NBSToFunctions(songPath):
             exit(0)
 
         musicId = None
-        if not songName in songs.values():
-            musicId = firstGap(list(songs.keys()))
-            songs[musicId] = songName
-        else:
-            for id, name in songs.items():
-                if name == songName:
-                    musicId = id
+        songIds = []
+        for filename in os.listdir(outputSongPath):
+            if filename.endswith(".mcfunction"):
+                filename = filename.replace(".mcfunction","")
+                tokens = filename.split('_ID')
+                if len(tokens) == 2:
+                    name, id = tokens
+                    if name == songName:
+                        musicId = int(id)
+                        break
+                    else:
+                        songIds.append(int(id))
+
+        if musicId is None:
+            musicId = firstGap(songIds)
 
         print("songName",songName)
         songAuthor = ReadString()
@@ -140,82 +147,19 @@ def NBSToFunctions(songPath):
         f.close()
         return notes, songLength, songName, songTempo, musicId
 
-    # def OutputFunction(noteList):
-    #     # Clear out the directory for the song before writing function files to it.
-    #     if os.path.isdir(songName):
-    #         rmtree(songName)
-    #     os.mkdir(songName)
-    #
-    #     waitFunction = ("execute at @a[scores={{MusicID={_musicId},tickposition={_tickPos}}}] run scoreboard players set @p[scores={{MusicID={_musicId},tickposition={_tickPos},timer={_nextTickTimer}}}] tickposition {_nextTickPos}\n"
-    #                     +"execute at @a[scores={{MusicID={_musicId},tickposition={_tickPos},timer=..{_tickTimer}}}] run function {_songName}:{_tickPos}\n"
-    #                     +"execute at @a[scores={{MusicID={_musicId},tickposition={_nextTickPos}}}] run function {_songName}:{_nextTickPos}\n")
-    #
-    #     noteFunction = "execute at @a[scores={{MusicID={_musicId},tickposition={_tickPos}}}] run scoreboard players set @p[scores={{MusicID={_musicId},tickposition={_tickPos}}}] position {_tickPos}\n"
-    #
-    #     playFunction = "execute at @a[scores={{MusicID={_musicId},tickposition={_tickPos}}}] run playsound minecraft:block.note_block.{_noteInstrument} master @p ~ ~ ~ 1 {_notePitch}\n"
-    #
-    #     quickSwapFunction = "execute at @a[scores={{MusicID={_musicId},position={_tickPos}}}] run function {_songName}:{_tickPos}\n"
-    #
-    #     musicId = songs[songName]
-    #     lastTickPos = 0
-    #     for notePos, (tickPos, notes) in enumerate(noteList):
-    #         # Generate waits that occurred before this note
-    #         # Note, will not run if the tickPos of the current note is exactly 1 more than the last
-    #         # for newTickPos in range(lastTickPos+1,tickPos):
-    #         # if lastTickPos>0:
-    #         #     func = open(songName+"/"+str(lastTickPos+1)+".mcfunction","w")
-    #         #     func.write(waitFunction.format(_musicId = musicId,_tickPos=lastTickPos+1,_nextTickPos=tickPos,_songName=songName,_tickTimer=tickPos-lastTickPos))
-    #         #     func.close()
-    #
-    #         # Generate function for playing the note and waiting
-    #         func = open(songName+"/"+str(notePos)+".mcfunction","w")
-    #         func.write(noteFunction.format(_musicId = musicId,_tickPos=notePos))
-    #         for note in notes:
-    #             layer, instrument, key = note
-    #             func.write(playFunction.format(_musicId = musicId,_tickPos=notePos,_noteInstrument=instruments[instrument],_notePitch=KeyToPitch(key)))
-    #         func.write(waitFunction.format(_musicId = musicId,_tickPos=notePos,_nextTickPos=notePos+1,_songName=songName,_tickTimer=tickPos-lastTickPos,_nextTickTimer=tickPos-lastTickPos+1))
-    #         func.close()
-    #
-    #         lastTickPos = tickPos
-    #
-    #     # Generate the tempo shift function
-    #     if os.path.isfile(songName+"_tempo_shift.mcfunction"):
-    #         os.remove(songName+"_tempo_shift.mcfunction")
-    #     func = open(songName+"_tempo_shift.mcfunction","w")
-    #     for tickPos in range(songLength):
-    #         func.write(quickSwapFunction.format(_musicId = musicId,_tickPos=tickPos,_songName=songName+"Speed1"))
-    #     func.close()
-
     def OutputFunction(noteList):
-        print(musicId)
         timerAddFunction = "execute at @a[scores={{MusicID={_musicId}}}] run scoreboard players add @p timer 1\n"
         playFunction = "execute at @a[scores={{MusicID={_musicId},timer={_tickTimer}}}] run playsound minecraft:block.note_block.{_noteInstrument} record @p ~ ~ ~ 1 {_notePitch}\n"
         repeatFunction = "execute at @a[scores={{MusicID={_musicId},timer={_endTimer}}}] run scoreboard players set @p timer -1\n"
 
-        # quickSwapFunction = "execute at @a[scores={{MusicID={_musicId},position={_tickPos}}}] run function {_songName}:{_tickPos}\n"
-
         # Generate function for playing the note and waiting
-        func = open(songName+"_"+musicId+".mcfunction","w")
-        func.write(timerAddFunction.format(_musicId = musicId))
-        for notePos, (tickPos, notes) in enumerate(noteList):
-            # Generate waits that occurred before this note
-            # Note, will not run if the tickPos of the current note is exactly 1 more than the last
-            # for newTickPos in range(lastTickPos+1,tickPos):
-            # if lastTickPos>0:
-            #     func = open(songName+"/"+str(lastTickPos+1)+".mcfunction","w")
-            #     func.write(waitFunction.format(_musicId = musicId,_tickPos=lastTickPos+1,_nextTickPos=tickPos,_songName=songName,_tickTimer=tickPos-lastTickPos))
-            #     func.close()
-
-
-            for note in notes:
-                layer, instrument, key = note
-                func.write(playFunction.format(_musicId=musicId,_tickTimer=round(tickPos*20./songTempo),_noteInstrument=instruments[instrument],_notePitch=KeyToPitch(key)))
-
-        func.write(repeatFunction.format(_musicId=musicId,_endTimer=AdjustWithTempo(songLength,songTempo)))
-        func.close()
-
-        with open('songs.json', 'w') as jf:
-            dump(songs,jf,sort_keys = True)
+        with open(os.path.join(outputSongPath,"{}_ID{}.mcfunction".format(songName,musicId)),"w") as func:
+            func.write(timerAddFunction.format(_musicId = musicId))
+            for notePos, (tickPos, notes) in enumerate(noteList):
+                for note in notes:
+                    layer, instrument, key = note
+                    func.write(playFunction.format(_musicId=musicId,_tickTimer=AdjustWithTempo(tickPos,songTempo),_noteInstrument=instruments[instrument],_notePitch=KeyToPitch(key)))
+            func.write(repeatFunction.format(_musicId=musicId,_endTimer=ceil(songLength*20./songTempo)))
 
     try:
         f = open(songPath,"rb")
@@ -227,6 +171,7 @@ def NBSToFunctions(songPath):
     notes = [(pos,[note[1:] for note in noteList]) for (pos,noteList) in groupby(notes,key=lambda n: n[0])]
 
     OutputFunction(notes)
+    print(musicId)
     print("Complete!")
 
 import sys
