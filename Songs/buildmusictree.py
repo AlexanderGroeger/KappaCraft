@@ -169,6 +169,7 @@ def NBSToFunctions(songPath):
                 notesPerTick[tick] = [notes for (tickPos, notes) in noteList if tickPos == tick]
 
             with open(os.path.join(outputSongPath,"{}_id{}.mcfunction".format(songName,musicId)),"w") as func:
+                func.write(timerAddFunction.format(_musicId = musicId))
                 func.write(branchFunction.format(
                     _musicId = musicId,
                     _startTick = AdjustWithTempo(ticks[0],songTempo),
@@ -176,6 +177,8 @@ def NBSToFunctions(songPath):
                     _songName = songName,
                     _function = "branch_{}-{}".format(AdjustWithTempo(ticks[0],songTempo),AdjustWithTempo(ticks[-1],songTempo)),)
                 )
+                func.write(repeatFunction.format(_musicId=musicId,_endTimer=ceil(songLength*20./songTempo)))
+
 
             def writeBranch(start, end):
                 if start == end:
@@ -193,35 +196,38 @@ def NBSToFunctions(songPath):
                     highmid = lowmid + 1
                 highmidTick = ticks[highmid]
 
-                with open(os.path.join(outputSongTreePath,songName,"branch_{}-{}.mcfunction".format(AdjustWithTempo(startTick,songTempo),AdjustWithTempo(endTick,songTempo))),"w") as func:
-                    if start == 0 and end == numTicks - 1:
-                        func.write(timerAddFunction.format(_musicId = musicId))
+                adjustedStartTick = AdjustWithTempo(startTick,songTempo)
+                adjustedEndTick = AdjustWithTempo(endTick,songTempo)
+                adjustedLowmidTick = AdjustWithTempo(lowmidTick,songTempo)
+                adjustedHighmidTick = AdjustWithTempo(highmidTick,songTempo)
+
+                with open(os.path.join(outputSongTreePath,songName,"branch_{}-{}.mcfunction".format(adjustedStartTick,adjustedEndTick)),"w") as func:
                     if lowmid == start:
                         for note in notesPerTick[startTick]:
                             layer, instrument, key = note[0]
-                            func.write(playFunction.format(_musicId=musicId,_tickTimer=AdjustWithTempo(lowmidTick,songTempo),_noteInstrument=instruments[instrument],_notePitch=KeyToPitch(key)))
+                            func.write(playFunction.format(_musicId=musicId,_tickTimer=adjustedLowmidTick,_noteInstrument=instruments[instrument],_notePitch=KeyToPitch(key)))
                     else:
                         func.write(branchFunction.format(
                             _musicId= musicId,
-                            _startTick = AdjustWithTempo(startTick,songTempo),
-                            _endTick = AdjustWithTempo(lowmidTick,songTempo),
+                            _startTick = adjustedStartTick,
+                            _endTick = adjustedLowmidTick,
                             _songName = songName,
-                            _function = "branch_{}-{}".format(AdjustWithTempo(startTick,songTempo),AdjustWithTempo(startTick,lowmidTick)),)
+                            _function = "branch_{}-{}".format(adjustedStartTick,adjustedLowmidTick),)
                         )
                     if highmid == end:
                         for note in notesPerTick[endTick]:
                             layer, instrument, key = note[0]
-                            func.write(playFunction.format(_musicId=musicId,_tickTimer=AdjustWithTempo(highmidTick,songTempo),_noteInstrument=instruments[instrument],_notePitch=KeyToPitch(key)))
+                            func.write(playFunction.format(_musicId=musicId,_tickTimer=adjustedHighmidTick,_noteInstrument=instruments[instrument],_notePitch=KeyToPitch(key)))
                     else:
                         func.write(branchFunction.format(
                             _musicId = musicId,
-                            _startTick = AdjustWithTempo(highmidTick,songTempo),
-                            _endTick = AdjustWithTempo(endTick,songTempo),
+                            _startTick = adjustedHighmidTick,
+                            _endTick = adjustedEndTick,
                             _songName = songName,
-                            _function = "branch_{}-{}".format(AdjustWithTempo(highmidTick,songTempo),AdjustWithTempo(endTick,songTempo)),)
+                            _function = "branch_{}-{}".format(adjustedHighmidTick,adjustedEndTick),)
                         )
-                    if endTick == songLength and startTick == ticks[-2]:
-                        func.write(repeatFunction.format(_musicId=musicId,_endTimer=ceil(songLength*20./songTempo)))
+                    # if endTick == songLength and startTick == ticks[-2]:
+                    #     func.write(repeatFunction.format(_musicId=musicId,_endTimer=ceil(songLength*20./songTempo)))
 
                 if lowmid != start:
                     writeBranch(start,lowmid)
