@@ -78,14 +78,23 @@ def NBSToFunctions(songPath):
         for filename in os.listdir(outputSongPath):
             if filename.endswith(".mcfunction"):
                 filename = filename.replace(".mcfunction","")
-                tokens = filename.split('_id')
-                if len(tokens) == 2:
-                    id, name = tokens
-                    if name == songName:
-                        musicId = int(id)
-                        break
-                    else:
-                        songIds.append(int(id))
+
+                try:
+                    splitIndex = filename.index('_')
+                except:
+                    continue
+
+                try:
+                    id = int(filename[:splitIndex])
+                except:
+                    continue
+                name = filename[splitIndex+1:]
+
+                if name == songName:
+                    musicId = int(id)
+                    break
+                else:
+                    songIds.append(int(id))
 
         if musicId is None:
             musicId = firstGap(songIds)
@@ -153,7 +162,7 @@ def NBSToFunctions(songPath):
         repeatFunction = "execute at @a[scores={{MusicID={_musicId},timer={_endTimer}..}}] run scoreboard players set @p timer -1\n"
 
         # Generate function for playing the note and waiting
-        with open(os.path.join(outputSongPath,"id{}_{}.mcfunction".format(musicId,songName)),"w") as func:
+        with open(os.path.join(outputSongPath,"{}_{}.mcfunction".format(musicId,songName)),"w") as func:
             func.write(timerAddFunction.format(_musicId = musicId))
             for notePos, (tickPos, notes) in enumerate(noteList):
                 for note in notes:

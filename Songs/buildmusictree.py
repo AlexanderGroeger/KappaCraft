@@ -80,14 +80,23 @@ def NBSToFunctions(songPath):
         for filename in os.listdir(outputSongPath):
             if filename.endswith(".mcfunction"):
                 filename = filename.replace(".mcfunction","")
-                tokens = filename.split('_id')
-                if len(tokens) == 2:
-                    id, name = tokens
-                    if name == songName:
-                        musicId = int(id)
-                        break
-                    else:
-                        songIds.append(int(id))
+                
+                try:
+                    splitIndex = filename.index('_')
+                except:
+                    continue
+
+                try:
+                    id = int(filename[:splitIndex])
+                except:
+                    continue
+                name = filename[splitIndex+1:]
+
+                if name == songName:
+                    musicId = int(id)
+                    break
+                else:
+                    songIds.append(int(id))
 
         if musicId is None:
             musicId = firstGap(songIds)
@@ -168,7 +177,7 @@ def NBSToFunctions(songPath):
             for tick in ticks:
                 notesPerTick[tick] = [notes for (tickPos, notes) in noteList if tickPos == tick]
 
-            with open(os.path.join(outputSongPath,"id{}_{}.mcfunction".format(musicId,songName)),"w") as func:
+            with open(os.path.join(outputSongPath,"{}_{}.mcfunction".format(musicId,songName)),"w") as func:
                 func.write(timerAddFunction.format(_musicId = musicId))
                 func.write(branchFunction.format(
                     _musicId = musicId,
