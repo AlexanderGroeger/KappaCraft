@@ -171,8 +171,8 @@ def NBSToFunctions(songPath):
             with open(os.path.join(outputSongPath,"{}_id{}.mcfunction".format(songName,musicId)),"w") as func:
                 func.write(branchFunction.format(
                     _musicId = musicId,
-                    _startTick = ticks[0],
-                    _endTick = ticks[-1],
+                    _startTick = AdjustWithTempo(ticks[0],songTempo),
+                    _endTick = AdjustWithTempo(ticks[-1],songTempo),
                     _songName = songName,
                     _function = "branch_{}-{}".format(AdjustWithTempo(ticks[0],songTempo),AdjustWithTempo(ticks[-1],songTempo)),)
                 )
@@ -203,8 +203,8 @@ def NBSToFunctions(songPath):
                     else:
                         func.write(branchFunction.format(
                             _musicId= musicId,
-                            _startTick = startTick,
-                            _endTick = lowmidTick,
+                            _startTick = AdjustWithTempo(startTick,songTempo),
+                            _endTick = AdjustWithTempo(lowmidTick,songTempo),
                             _songName = songName,
                             _function = "branch_{}-{}".format(AdjustWithTempo(startTick,songTempo),AdjustWithTempo(startTick,lowmidTick)),)
                         )
@@ -215,8 +215,8 @@ def NBSToFunctions(songPath):
                     else:
                         func.write(branchFunction.format(
                             _musicId = musicId,
-                            _startTick = highmidTick,
-                            _endTick = endTick,
+                            _startTick = AdjustWithTempo(highmidTick,songTempo),
+                            _endTick = AdjustWithTempo(endTick,songTempo),
                             _songName = songName,
                             _function = "branch_{}-{}".format(AdjustWithTempo(highmidTick,songTempo),AdjustWithTempo(endTick,songTempo)),)
                         )
