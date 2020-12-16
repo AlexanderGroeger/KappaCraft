@@ -216,9 +216,10 @@ def NBSToFunctions(songPath):
                             _function = "branch_{}-{}".format(adjustedStartTick,adjustedLowmidTick),)
                         )
                     if highmid == end:
-                        for note in notesPerTick[endTick]:
-                            layer, instrument, key = note[0]
-                            func.write(playFunction.format(_musicId=musicId,_tickTimer=adjustedHighmidTick,_noteInstrument=instruments[instrument],_notePitch=KeyToPitch(key)))
+                        for ns in notesPerTick[endTick]:
+                            for note in ns:
+                                layer, instrument, key = note
+                                func.write(playFunction.format(_musicId=musicId,_tickTimer=adjustedHighmidTick,_noteInstrument=instruments[instrument],_notePitch=KeyToPitch(key)))
                     else:
                         func.write(branchFunction.format(
                             _musicId = musicId,
