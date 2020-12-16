@@ -80,7 +80,7 @@ def NBSToFunctions(songPath):
         for filename in os.listdir(outputSongPath):
             if filename.endswith(".mcfunction"):
                 filename = filename.replace(".mcfunction","")
-                tokens = filename.split('_ID')
+                tokens = filename.split('_id')
                 if len(tokens) == 2:
                     name, id = tokens
                     if name == songName:
@@ -168,7 +168,7 @@ def NBSToFunctions(songPath):
             for tick in ticks:
                 notesPerTick[tick] = [notes for (tickPos, notes) in noteList if tickPos == tick]
 
-            with open(os.path.join(outputSongPath,"{}_ID{}.mcfunction".format(songName,musicId)),"w") as func:
+            with open(os.path.join(outputSongPath,"{}_id{}.mcfunction".format(songName,musicId)),"w") as func:
                 func.write(branchFunction.format(
                     _musicId = musicId,
                     _startTick = ticks[0],
