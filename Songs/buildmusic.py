@@ -80,7 +80,7 @@ def NBSToFunctions(songPath):
                 filename = filename.replace(".mcfunction","")
                 tokens = filename.split('_id')
                 if len(tokens) == 2:
-                    name, id = tokens
+                    id, name = tokens
                     if name == songName:
                         musicId = int(id)
                         break
@@ -150,10 +150,10 @@ def NBSToFunctions(songPath):
     def OutputFunction(noteList):
         timerAddFunction = "execute at @a[scores={{MusicID={_musicId}}}] run scoreboard players add @p timer 1\n"
         playFunction = "execute at @a[scores={{MusicID={_musicId},timer={_tickTimer}}}] run playsound minecraft:block.note_block.{_noteInstrument} record @p ~ ~ ~ 1 {_notePitch}\n"
-        repeatFunction = "execute at @a[scores={{MusicID={_musicId},timer={_endTimer}}}] run scoreboard players set @p timer -1\n"
+        repeatFunction = "execute at @a[scores={{MusicID={_musicId},timer={_endTimer..}}}] run scoreboard players set @p timer -1\n"
 
         # Generate function for playing the note and waiting
-        with open(os.path.join(outputSongPath,"{}_id{}.mcfunction".format(songName,musicId)),"w") as func:
+        with open(os.path.join(outputSongPath,"id{}_{}.mcfunction".format(musicId,songName)),"w") as func:
             func.write(timerAddFunction.format(_musicId = musicId))
             for notePos, (tickPos, notes) in enumerate(noteList):
                 for note in notes:

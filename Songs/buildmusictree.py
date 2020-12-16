@@ -82,7 +82,7 @@ def NBSToFunctions(songPath):
                 filename = filename.replace(".mcfunction","")
                 tokens = filename.split('_id')
                 if len(tokens) == 2:
-                    name, id = tokens
+                    id, name = tokens
                     if name == songName:
                         musicId = int(id)
                         break
@@ -153,7 +153,7 @@ def NBSToFunctions(songPath):
 
         timerAddFunction = "execute at @a[scores={{MusicID={_musicId}}}] run scoreboard players add @p timer 1\n"
         playFunction = "execute at @a[scores={{MusicID={_musicId},timer={_tickTimer}}}] run playsound minecraft:block.note_block.{_noteInstrument} record @p ~ ~ ~ 1 {_notePitch}\n"
-        repeatFunction = "execute at @a[scores={{MusicID={_musicId},timer={_endTimer}}}] run scoreboard players set @p timer -1\n"
+        repeatFunction = "execute at @a[scores={{MusicID={_musicId},timer={_endTimer..}}}] run scoreboard players set @p timer -1\n"
         branchFunction = "execute at @a[scores={{MusicID={_musicId},timer={_startTick}..{_endTick}}}] run function "+functionBranchPrefix+"/{_songName}/{_function}\n"
 
         def OutputFunctionTree():
@@ -168,7 +168,7 @@ def NBSToFunctions(songPath):
             for tick in ticks:
                 notesPerTick[tick] = [notes for (tickPos, notes) in noteList if tickPos == tick]
 
-            with open(os.path.join(outputSongPath,"{}_id{}.mcfunction".format(songName,musicId)),"w") as func:
+            with open(os.path.join(outputSongPath,"id{}_{}.mcfunction".format(musicId,songName)),"w") as func:
                 func.write(timerAddFunction.format(_musicId = musicId))
                 func.write(branchFunction.format(
                     _musicId = musicId,
