@@ -78,7 +78,7 @@ def NBSToFunctions(songPath):
         for filename in os.listdir(outputSongPath):
             if filename.endswith(".mcfunction"):
                 filename = filename.replace(".mcfunction","")
-                tokens = filename.split('_ID')
+                tokens = filename.split('_id')
                 if len(tokens) == 2:
                     name, id = tokens
                     if name == songName:
@@ -153,13 +153,12 @@ def NBSToFunctions(songPath):
         repeatFunction = "execute at @a[scores={{MusicID={_musicId},timer={_endTimer}}}] run scoreboard players set @p timer -1\n"
 
         # Generate function for playing the note and waiting
-        with open(os.path.join(outputSongPath,"{}_ID{}.mcfunction".format(songName,musicId)),"w") as func:
+        with open(os.path.join(outputSongPath,"{}_id{}.mcfunction".format(songName,musicId)),"w") as func:
             func.write(timerAddFunction.format(_musicId = musicId))
             for notePos, (tickPos, notes) in enumerate(noteList):
-                for ns in notes:
-                    for note in ns:
-                        layer, instrument, key = note
-                        func.write(playFunction.format(_musicId=musicId,_tickTimer=AdjustWithTempo(tickPos,songTempo),_noteInstrument=instruments[instrument],_notePitch=KeyToPitch(key)))
+                for notes in notes:
+                    layer, instrument, key = note
+                    func.write(playFunction.format(_musicId=musicId,_tickTimer=AdjustWithTempo(tickPos,songTempo),_noteInstrument=instruments[instrument],_notePitch=KeyToPitch(key)))
             func.write(repeatFunction.format(_musicId=musicId,_endTimer=ceil(songLength*20./songTempo)))
 
     try:
