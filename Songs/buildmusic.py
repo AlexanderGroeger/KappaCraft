@@ -156,7 +156,7 @@ def NBSToFunctions(songPath):
         with open(os.path.join(outputSongPath,"{}_id{}.mcfunction".format(songName,musicId)),"w") as func:
             func.write(timerAddFunction.format(_musicId = musicId))
             for notePos, (tickPos, notes) in enumerate(noteList):
-                for notes in notes:
+                for note in notes:
                     layer, instrument, key = note
                     func.write(playFunction.format(_musicId=musicId,_tickTimer=AdjustWithTempo(tickPos,songTempo),_noteInstrument=instruments[instrument],_notePitch=KeyToPitch(key)))
             func.write(repeatFunction.format(_musicId=musicId,_endTimer=ceil(songLength*20./songTempo)))
