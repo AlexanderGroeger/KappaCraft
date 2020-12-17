@@ -80,7 +80,7 @@ def NBSToFunctions(songPath):
         for filename in os.listdir(outputSongPath):
             if filename.endswith(".mcfunction"):
                 filename = filename.replace(".mcfunction","")
-                
+
                 try:
                     splitIndex = filename.index('_')
                 except:
@@ -161,7 +161,7 @@ def NBSToFunctions(songPath):
     def OutputFunction(noteList):
 
         timerAddFunction = "execute at @a[scores={{MusicID={_musicId}}}] run scoreboard players add @p timer 1\n"
-        playFunction = "execute at @a[scores={{MusicID={_musicId},timer={_tickTimer}}}] run playsound minecraft:block.note_block.{_noteInstrument} record @p ~ ~ ~ 1 {_notePitch}\n"
+        playFunction = "execute at @a[scores={{MusicID={_musicId},timer={_tickTimer}}}] run playsound minecraft:block.note_block.{_noteInstrument} record @p ~ ~ ~ 1 {_notePitch:.4f}\n"
         repeatFunction = "execute at @a[scores={{MusicID={_musicId},timer={_endTimer}..}}] run scoreboard players set @p timer -1\n"
         branchFunction = "execute at @a[scores={{MusicID={_musicId},timer={_startTick}..{_endTick}}}] run function "+functionBranchPrefix+"/{_songName}/{_function}\n"
 
