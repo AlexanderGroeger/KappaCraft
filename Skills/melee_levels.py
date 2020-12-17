@@ -1,5 +1,9 @@
 import sys
 
+class SafeDict(dict):
+    def __missing__(self, key):
+        return '{' + key + '}'
+
 executeIf = "execute if entity @a[{_target}] run "
 executeAt = "execute at @a[{_target}] run "
 tellraw = "tellraw @a[{_target}] "
@@ -7,21 +11,65 @@ attribute = "attribute @a[{_target},limit=1] minecraft:{_attribute} base set {_a
 scoreboard = "scoreboard players {_score_mode} @a[{_target}] {_scoreboard} {_score_value}"
 playsound = "playsound minecraft:{_sound} master @a ~ ~ ~ 1 {_pitch}"
 targetNearby = "distance=.01..40"
+targetExpOldLvl = "scores={{{_scoreExp}={_exp}..,{_levelName}={_oldLvl}}}"
+targetOldLvl = "scores={{{_levelName}={_oldLvl}}}"
+targetNewLvl = "scores={{{_levelName}={_newLvl}}}"
 
 targetMeleeExpLvl = "scores={{meleedamage={_exp}..,mlevel={_oldLvl}}}"
 targetMeleeLvl = "scores={{mlevel={_oldLvl}}}"
 targetMeleeAfter = "scores={{mlevel={_newLvl}}}"
 
-targetSprintExpLvl = "scores={{meleedamage={_exp}..,mlevel={_oldLvl}}}"
-targetSprintLvl = "scores={{mlevel={_oldLvl}}}"
-targetSprintAfter = "scores={{mlevel={_newLvl}}}"
+targetSprintExpLvl = "scores={{sprint={_exp}..,slevel={_oldLvl}}}"
+targetSprintLvl = "scores={{slevel={_oldLvl}}}"
+targetSprintAfter = "scores={{slevel={_newLvl}}}"
+
+heartCmds = [
+    executeIf+tellraw+"""["",{{"text":"You got an extra heart!","bold":true,"color":"red"}}]""",
+    executeIf+scoreboard.format_map(SafeDict(_score_mode = "add", _scoreboard = "hlevel", _score_value = "1")),
+]
+
+luckCmds = [
+    executeIf+tellraw+"""["",{{"text":"Luck Level Up!","bold":true,"color":"blue"}}]""",
+    executeIf+scoreboard.format_map(SafeDict(_score_mode = "add", _scoreboard = "llevel", _score_value = "1")),
+]
+
+soundCmds = [
+    executeIf+executeAt+playsound.format_map(SafeDict(_sound = "entity.player.levelup", _pitch = "1.2")),
+]
+
+sprintAttributeCmds = [
+    executeIf+attribute.format_map(SafeDict(_attribute = "minecraft:generic.movement_speed", _attribute_value = "{_newMCSpeed:.4f}")),
+]
+
+meleeAttributeCmds = [
+    executeIf+attribute.format_map(SafeDict(_attribute = "generic.attack_speed", _attribute_value = "{_newMCSpeed:.2f}")),
+    executeIf+attribute.format_map(SafeDict(_attribute = "generic.attack_damage", _attribute_value = "{_newMCAttack:.1f}")),
+]
+
+levelCmds = [
+    executeAt + tellraw.format(_target = targetNearby) + """{{"text":"","color":"gold","extra":[{{"selector":"@a[{_target}]"}},{{"text":" is now {_levelTypeName} Level {_newLvl}"}}]}}""",
+    executeAt + tellraw.format(_target = "") + """{{"text":"Congratulate ","color":"gold","extra":[{{"selector":"@a[{_target}]"}},{{"text":" for reaching the max {_levelTypeName} Level {_newLvl}!"}}]}}""",
+    executeIf + scoreboard,
+]
+
+meleeInitialCmds = [
+    executeIf+attribute.format_map(SafeDict(_attribute = "generic.attack_speed", _attribute_value = "3.8")),
+    executeIf+attribute.format_map(SafeDict(_attribute = "generic.attack_damage", _attribute_value = "-2")),
+]
+
+awardTextCmds = {
+    "Walk Speed": """,{{"text":"\\nWalk Speed","bold":true,"color":"yellow"}},{{"text":" {_oldSpeed:.1f}%","color":"dark_gray"}},{{"text":" -> ","color":"gray"}},{{"text":"{_newSpeed:.1f}%","bold":true,"color":"white"}}""",
+    "Attack Damage": """,{{"text":"Attack Damage","bold":true,"color":"yellow"}},{{"text":" {_oldAttack:.1f}","color":"dark_gray"}},{{"text":" ->","color":"gray"}},{{"text":" {_newAttack:.1f}","bold":true,"color":"white"}}]""",
+    "Attack Speed": """,{{"text":"Attack Speed","bold":true,"color":"yellow"}},{{"text":" {_oldSpeed:.2f}","color":"dark_gray"}},{{"text":" ->","color":"gray"}},{{"text":" {_newSpeed:.2f}","bold":true,"color":"white"}}]""",
+}
+
+notificationCmd = (executeIf+tellraw+"""["",{{"text":"{_levelTypeName} Level Up!","bold":true,"color":"gold"}},{{"text":" Level {_oldLvl}","color":"dark_gray"}},{{"text":" -> ","color":"gray"}},{{"text":"Level {_newLvl}","bold":true,"color":"white"}}{_awardText}]""")
 
 sprint_cmds = [
     (executeIf+tellraw).format(_target = targetSprintExpLvl)+"""["",{{"text":"Sprinting Level Up!","bold":true,"color":"gold"}},{{"text":" Level {_oldLvl}","color":"dark_gray"}},{{"text":" -> ","color":"gray"}},{{"text":"Level {_newLvl}","bold":true,"color":"white"}},{{"text":"\\nWalk Speed","bold":true,"color":"yellow"}},{{"text":" {_oldSpeed:.1f}%","color":"dark_gray"}},{{"text":" -> ","color":"gray"}},{{"text":"{_newSpeed:.1f}%","bold":true,"color":"white"}}]""",
     (executeIf+tellraw).format(_target = targetSprintExpLvl)+"""["",{{"text":"Melee Level Up!","bold":true,"color":"gold"}},{{"text":" Level {_oldLvl}","color":"dark_gray"}},{{"text":" -> ","color":"gray"}},{{"text":"Level {_newLvl} \\n","bold":true,"color":"white"}},{{"text":"Attack","bold":true,"color":"yellow"}},{{"text":" {_oldAttack:.1f}","color":"dark_gray"}},{{"text":" ->","color":"gray"}},{{"text":" {_newAttack:.1f}","bold":true,"color":"white"}}]""",
     (executeIf+tellraw).format(_target = targetSprintExpLvl)+"""["",{{"text":"Luck Level Up!","bold":true,"color":"blue"}}]""",
     (executeIf+scoreboard).format(_target = targetSprintExpLvl, _score_mode = "add", _scoreboard = "llevel", _score_value = "1"),
-    (executeIf+tellraw).format(_target = targetSprintExpLvl)+"""["",{{"text":"You got an extra heart!","bold":true,"color":"red"}}]""",
     (executeIf+scoreboard).format(_target = targetSprintExpLvl, _score_mode = "add", _scoreboard = "hlevel", _score_value = "1"),
     (executeIf+executeAt+playsound).format(_target = targetSprintExpLvl, _sound = "entity.player.levelup", _pitch = "1.2"),
     (executeAt).format(_target = targetSprintExpLvl) + tellraw.format(_target = targetNearby) + """{{"text":"","color":"gold","extra":[{{"selector":"@a["""+targetSprintExpLvl+"""]"}},{{"text":" is now Sprinting Level {_newLvl}"}}]}}""",
@@ -45,6 +93,18 @@ melee_cmds = [
     (executeIf+attribute).format(_target = targetMeleeAfter, _attribute = "generic.attack_damage", _attribute_value = "{_newMCAttack:.1f}"),
 ]
 
+def GetMeleeCommands(exp,oldLvl):
+    newLvl = oldLvl + 1
+    lines = []
+
+    if newLvl % 5:
+        awardType = "Attack Speed"
+    else:
+        awardType = "Attack Damage"
+
+    lines.append(notificationCmd.format(_target = targetExpOldLvl.format(_scoreExp = "meleedamage", _levelName = "mlevel"), _oldLvl = oldLvl , _awardText = awardTextCmds[awardType]))
+    # .format(_target = targetSprintExpLvl, _score_mode = "set", _scoreboard = "slevel", _score_value = "{_newLvl}")
+
 mode = sys.argv[1]
 print(mode)
 funcName = "melee_level_system.mcfunction"
@@ -60,6 +120,8 @@ max_attack_speed_boost = .4
 max_attack_boost = 5
 base_exp = 1000
 exp_gain_percent = 9
+
+
 
 def Build():
 
