@@ -26,6 +26,8 @@ def NBSToFunctions(songPath):
         sys.exit("File is not an nbs file.")
         return
 
+    songName = os.path.basename(songPath).replace(".nbs", "")
+
     instruments = [
         "harp","bass","basedrum","snare",
         "hat","guitar","flute","bell",
@@ -68,10 +70,8 @@ def NBSToFunctions(songPath):
         songLayers = ReadInt(16)
         print("songLayers",songLayers)
 
-        songName = ReadString().replace(' ','_').lower()
-        if len(songName) == "":
-            print(songPath,"has no NBS song name!")
-            exit(0)
+        # songName
+        _ = ReadString()
 
         musicId = None
         songIds = []
