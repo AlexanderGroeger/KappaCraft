@@ -1,4 +1,5 @@
 import sys
+import os
 import json
 
 class SafeDict(dict):
@@ -32,11 +33,6 @@ luckScoreboardCmd = executeIf + Format(scoreboard, score_mode = "add", scoreboar
 
 soundLevelUpCmd = executeIf + executeAt + Format(playsound, sound = "entity.player.levelup", pitch = "1.2")
 
-sprintSpeedAttributeCmd = executeIf + Format(attribute, attribute = "minecraft:generic.movement_speed", attribute_value = "___newMCSpeed")
-
-meleeAttackSpeedAttributeCmd = executeIf + Format(attribute, attribute = "generic.attack_speed", attrivalue = "___newMCSpeed")
-meleeAttackDamageAttributeCmd = executeIf + Format(attribute, attribute = "generic.attack_damage", attrivalue = "___newMCAttack")
-
 levelNotificationCmd = executeIf + tellraw + """["",{"text":"___levelTypeName Level Up!","bold":true,"color":"gold"},{"text":" Level ___oldLvl","color":"dark_gray"},{"text":" -> ","color":"gray"},{"text":"Level ___newLvl","bold":true,"color":"white"}"""
 levelAnnouncementCmd = executeAt + Format(tellraw, target = targetNearby) + """{"text":"","color":"gold","extra":[{"selector":"@a[___target]"},{"text":" is now ___levelTypeName Level ___newLvl"}]}"""
 levelMaxAnnouncementCmd = executeAt + Format(tellraw, target = "") + """{"text":"Congratulate ","color":"gold","extra":[{"selector":"@a[___target]"},{"text":" for reaching the max ___levelTypeName Level ___newLvl!"}]}"""
@@ -66,35 +62,124 @@ awardTextCmds = {
 #     (executeIf+scoreboard).format(_target = targetSprintExpLvl, _score_mode = "set", _scoreboard = "slevel", _score_value = "{_newLvl}"),
 #     (executeIf+attribute).format(_target = targetSprintAfter, _attribute = "minecraft:generic.movement_speed", _attribute_value = "{_newMCSpeed:.4f}"),
 # ]
-#
-# melee_cmds = [
-#     (executeIf+tellraw).format(_target = targetMeleeExpLvl)+"""["",{{"text":"Melee Level Up!","bold":true,"color":"gold"}},{{"text":" Level {_oldLvl}","color":"dark_gray"}},{{"text":" -> ","color":"gray"}},{{"text":"Level {_newLvl} \\n","bold":true,"color":"white"}},{{"text":"Attack Speed","bold":true,"color":"yellow"}},{{"text":" {_oldSpeed:.2f}","color":"dark_gray"}},{{"text":" ->","color":"gray"}},{{"text":" {_newSpeed:.2f}","bold":true,"color":"white"}}]""",
-#     (executeIf+tellraw).format(_target = targetMeleeExpLvl)+"""["",{{"text":"Melee Level Up!","bold":true,"color":"gold"}},{{"text":" Level {_oldLvl}","color":"dark_gray"}},{{"text":" -> ","color":"gray"}},{{"text":"Level {_newLvl} \\n","bold":true,"color":"white"}},{{"text":"Attack Damage","bold":true,"color":"yellow"}},{{"text":" {_oldAttack:.1f}","color":"dark_gray"}},{{"text":" ->","color":"gray"}},{{"text":" {_newAttack:.1f}","bold":true,"color":"white"}}]""",
-#     (executeIf+tellraw).format(_target = targetMeleeExpLvl)+"""["",{{"text":"Luck Level Up!","bold":true,"color":"blue"}}]""",
-#     (executeIf+scoreboard).format(_target = targetMeleeExpLvl, _score_mode = "add", _scoreboard = "llevel", _score_value = "1"),
-#     (executeIf+tellraw).format(_target = targetMeleeExpLvl)+"""["",{{"text":"You got an extra heart!","bold":true,"color":"red"}}]""",
-#     (executeIf+scoreboard).format(_target = targetMeleeExpLvl, _score_mode = "add", _scoreboard = "hlevel", _score_value = "1"),
-#     (executeIf+executeAt+playsound).format(_target = targetMeleeExpLvl, _sound = "entity.player.levelup", _pitch = "1.2"),
-#     (executeAt + tellraw.format(_target = targetNearby)).format(_target = targetMeleeExpLvl)  + """{{"text":"","color":"gold","extra":[{{"selector":"@a["""+targetMeleeExpLvl+"""]"}},{{"text":" is now Melee Level {_newLvl}"}}]}}""",
-#     (executeAt).format(_target = targetMeleeExpLvl) + tellraw.format(_target = "") + """{{"text":"Congratulate ","color":"gold","extra":[{{"selector":"@a["""+targetMeleeExpLvl+"""]"}},{{"text":" for reaching the max Melee Level {_newLvl}!"}}]}}""",
-#     (executeIf+scoreboard).format(_target = targetMeleeExpLvl, _score_mode = "set", _scoreboard = "mlevel", _score_value = "{_newLvl}"),
-#     (executeIf+attribute).format(_target = targetMeleeAfter, _attribute = "generic.attack_speed", _attribute_value = "{_newMCSpeed:.2f}"),
-#     (executeIf+attribute).format(_target = targetMeleeAfter, _attribute = "generic.attack_damage", _attribute_value = "{_newMCAttack:.1f}"),
-# ]
 
 def WriteSprintFunctions():
-    pass
+
+    sprintSpeedAttributeCmd = executeIf + Format(attribute, attribute = "minecraft:generic.movement_speed", attrivalue = "___newMCSpeed")
+
+    levelName = "slevel"
+    expName = "sprint"
+    num_levels = 50
+    max_sprint_boost_percent = 25
+    base_exp = 20000
+    exp_gain_percent = 12
+
+    lines = []
+    totalExp = 0
+
+    # Generate root of tree
+    for oldLvl in range(num_levels+1):
+        newLvl = oldLvl + 1
+        oldSpeed = (oldLvl)/num_levels*max_sprint_boost_percent
+        newSpeed = (newLvl)/num_levels*max_sprint_boost_percent
+        oldMCSpeed = round(.1000 + oldSpeed/1000, 4)
+        newMCSpeed = round(.1000 + newSpeed/1000, 4)
+
+        lines.append(
+            Format(
+                sprintSpeedAttributeCmd,
+                target = Format(targetOldLvl, levelName = "mlevel", newLvl = oldLvl),
+                newMCSpeed = "{:.4f}".format(oldMCSpeed),
+                oldLvl = oldLvl,
+            )
+        )
+
+        if oldLvl < num_levels:
+            exp = int(base_exp*(1+(exp_gain_percent/100.))**oldLvl)
+            totalExp += exp
+            lines.append(
+                Format(
+                    branchCmd,
+                    target = targetExpOldLvl,
+                    mode = mode,
+                    scoreExp = expName,
+                    levelName = levelName,
+                    exp = totalExp,
+                    oldLvl = oldLvl,
+                )
+            )
+
+
+    with open(mode+"_level_system.mcfunction", 'w') as f:
+        f.write("\n".join(lines))
+
+
+    # Generate Tree Branches
+    totalExp = 0
+    for oldLvl in range(num_levels):
+
+        exp = int(base_exp*(1+(exp_gain_percent/100.))**oldLvl)
+        totalExp += exp
+        newLvl = oldLvl + 1
+
+        awardType = "Walk Speed"
+
+        oldSpeed = round((oldLvl)/num_levels*max_sprint_boost_percent,4)
+        newSpeed = round((newLvl)/num_levels*max_sprint_boost_percent,4)
+        newMCSpeed = round(.1000 + newSpeed/1000,4)
+
+        targetLvlTransition = Format(
+            targetExpOldLvl,
+            scoreExp = expName,
+            exp = totalExp,
+            levelName = levelName,
+            oldLvl = oldLvl,
+        )
+
+        lines = []
+
+        # Determine which lines go where
+        lines.append(levelNotificationCmd+awardTextCmds[awardType])
+        if newLvl % 5 == 0:
+            lines.append(luckNotificationCmd)
+            lines.append(luckScoreboardCmd)
+        if newLvl == num_levels:
+            lines.append(heartNotificationCmd)
+            lines.append(heartScoreboardCmd)
+        lines.append(levelAnnouncementCmd)
+        if newLvl == num_levels:
+            lines.append(levelMaxAnnouncementCmd)
+        lines.append(soundLevelUpCmd)
+        lines.append(Format(levelScoreboardCmd, score_mode = "set", scoreboard = "slevel", score_value = newLvl))
+
+
+        for i, line in enumerate(lines):
+            lines[i] = Format(
+                line,
+                target = targetLvlTransition,
+                oldLvl = oldLvl,
+                newLvl = newLvl,
+                levelName = levelName,
+                levelTypeName = "Sprint",
+                scoreExp = expName,
+                exp = totalExp,
+                oldSpeed = "{:.4f}".format(oldSpeed),
+                newSpeed = "{:.4f}".format(newSpeed),
+                newMCSpeed = "{:.4f}".format(newMCSpeed),
+                awardText = awardTextCmds[awardType]
+            )
+
+        folder = mode+"_levels"
+        if not os.path.isdir(folder):
+            os.mkdir(folder)
+        with open(os.path.join(folder,mode+"_lvl_{}.mcfunction".format(oldLvl)), 'w') as f:
+            f.write("\n".join(lines))
 
 def WriteMeleeFunctions():
 
-    funcName = mode+"_level_system.mcfunction"
+    meleeAttackSpeedAttributeCmd = executeIf + Format(attribute, attribute = "generic.attack_speed", attrivalue = "___newMCSpeed")
+    meleeAttackDamageAttributeCmd = executeIf + Format(attribute, attribute = "generic.attack_damage", attrivalue = "___newMCAttack")
 
-    atkSpdIndex = [0,10]
-    atkDmgIndex = [1,11]
-    luckIndex = [2,3]
-    heartIndex = [4,5]
-    maxLvlIndex = [8]
-    newLvlIndex = [7]
 
     num_levels = 50
     max_attack_speed_boost = .4
@@ -104,14 +189,18 @@ def WriteMeleeFunctions():
 
     lines = []
     totalExp = 0
+
+    # Generate root of tree
     for oldLvl in range(num_levels+1):
         newLvl = oldLvl + 1
         oldSpeed = (oldLvl)/num_levels*max_attack_speed_boost - .2
         newSpeed = (newLvl)/num_levels*max_attack_speed_boost - .2
 
-        oldAttack = (newLvl-5)/num_levels*max_attack_boost - 2
-        newAttack = (newLvl)/num_levels*max_attack_boost - 2
+        oldAttack = round((newLvl-5)/num_levels*max_attack_boost - 2, 3)
+        newAttack = round((newLvl)/num_levels*max_attack_boost - 2, 1)
 
+        oldMCSpeed = 4 + oldSpeed
+        oldMCAttack = oldAttack
         newMCSpeed = 4 + newSpeed
         newMCAttack = newAttack
 
@@ -119,7 +208,7 @@ def WriteMeleeFunctions():
             Format(
                 meleeAttackSpeedAttributeCmd,
                 target = Format(targetOldLvl, levelName = "mlevel", newLvl = oldLvl),
-                newMCSpeed = "{:.3f}".format(round(newMCSpeed,3)),
+                newMCSpeed = "{:.3f}".format(oldMCSpeed),
                 oldLvl = oldLvl,
             )
         )
@@ -128,7 +217,7 @@ def WriteMeleeFunctions():
             Format(
                 meleeAttackDamageAttributeCmd,
                 target = Format(targetOldLvl, levelName = "mlevel", oldLvl = oldLvl),
-                newMCAttack = "{:.1f}".format(round(newMCAttack,1)),
+                newMCAttack = "{:.1f}".format(oldMCAttack),
                 oldLvl = oldLvl,
             )
         )
@@ -149,9 +238,11 @@ def WriteMeleeFunctions():
             )
 
 
-    with open(funcName, 'w') as f:
+    with open(mode+"_level_system.mcfunction", 'w') as f:
         f.write("\n".join(lines))
 
+
+    # Generate Tree Branches
     totalExp = 0
     for oldLvl in range(num_levels):
 
@@ -173,7 +264,6 @@ def WriteMeleeFunctions():
         newMCSpeed = 4 + newSpeed
         newMCAttack = newAttack
 
-        lines = []
         targetLvlTransition = Format(
             targetExpOldLvl,
             scoreExp = "meleedamage",
@@ -181,6 +271,10 @@ def WriteMeleeFunctions():
             levelName = "mlevel",
             oldLvl = oldLvl,
         )
+
+        lines = []
+
+        # Determine which lines go where
         lines.append(levelNotificationCmd+awardTextCmds[awardType])
         if newLvl == num_levels or newLvl == int(num_levels/2):
             lines.append(luckNotificationCmd)
@@ -214,24 +308,10 @@ def WriteMeleeFunctions():
                 awardText = awardTextCmds[awardType]
             )
 
-        # for i, cmd in enumerate(melee_cmds):
-        #     if (i in maxLvlIndex+heartIndex) and newLvl != num_levels:
-        #         continue
-        #     if i in newLvlIndex and newLvl == num_levels:
-        #         continue
-        #     if (newLvl % 5 == 0):
-        #         if newLvl != num_levels and i in atkSpdIndex:
-        #             continue
-        #     elif i in atkDmgIndex:
-        #         continue
-        #     if i in atkSpdIndex and newLvl == num_levels:
-        #         continue
-        #     if i in luckIndex and not (newLvl == int(num_levels/2) or newLvl == num_levels):
-        #         continue
-        #     # print(cmd)
-        #     lines.append(cmd.format(_oldLvl = oldLvl, _newLvl = newLvl, _exp = totalExp, _oldSpeed = oldSpeed, _newSpeed = newSpeed, _newMCSpeed = newMCSpeed, _oldAttack = oldAttack, _newAttack = newAttack, _newMCAttack = newMCAttack))
-
-        with open("melee_levels/melee_lvl_{_oldLvl}.mcfunction".format(_oldLvl = oldLvl), 'w') as f:
+        folder = mode+"_levels"
+        if not os.path.isdir(folder):
+            os.mkdir(folder)
+        with open(os.path.join(folder,mode+"_lvl_{}.mcfunction".format(oldLvl)), 'w') as f:
             f.write("\n".join(lines))
 
 
