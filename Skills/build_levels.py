@@ -48,9 +48,9 @@ meleeInitialCmds = [
 ]
 
 awardTextCmds = {
-    "Walk Speed": """,{"text":"\\nWalk Speed","bold":true,"color":"yellow"},{"text":" ___oldSpeed%","color":"dark_gray"},{"text":" -> ","color":"gray"},{"text":"___newSpeed%","bold":true,"color":"white"}]""",
-    "Attack Damage": """,{"text":"\\nAttack Damage","bold":true,"color":"yellow"},{"text":" ___oldAttack","color":"dark_gray"},{"text":" ->","color":"gray"},{"text":"___newAttack","bold":true,"color":"white"}]""",
-    "Attack Speed": """,{"text":"\\nAttack Speed","bold":true,"color":"yellow"},{"text":" ___oldSpeed","color":"dark_gray"},{"text":" ->","color":"gray"},{"text":"___newSpeed","bold":true,"color":"white"}]""",
+    "Walk Speed": """,{"text":"\\nWalk Speed","bold":true,"color":"yellow"},{"text":" ___oldSpeed%","color":"gray"},{"text":" -> ","color":"gray"},{"text":"___newSpeed%","bold":true,"color":"white"}]""",
+    "Attack Damage": """,{"text":"\\nAttack Damage","bold":true,"color":"yellow"},{"text":" ___oldAttack","color":"gray"},{"text":" -> ","color":"gray"},{"text":"___newAttack","bold":true,"color":"white"}]""",
+    "Attack Speed": """,{"text":"\\nAttack Speed","bold":true,"color":"yellow"},{"text":" ___oldSpeed","color":"gray"},{"text":" -> ","color":"gray"},{"text":"___newSpeed","bold":true,"color":"white"}]""",
 }
 
 
@@ -119,7 +119,7 @@ def WriteMeleeFunctions():
             Format(
                 meleeAttackSpeedAttributeCmd,
                 target = Format(targetOldLvl, levelName = "mlevel", newLvl = oldLvl),
-                newMCSpeed = round(newMCSpeed,3),
+                newMCSpeed = "{:.3f}".format(round(newMCSpeed,3)),
                 oldLvl = oldLvl,
             )
         )
@@ -128,7 +128,7 @@ def WriteMeleeFunctions():
             Format(
                 meleeAttackDamageAttributeCmd,
                 target = Format(targetOldLvl, levelName = "mlevel", oldLvl = oldLvl),
-                newMCAttack = round(newMCAttack,1),
+                newMCAttack = "{:.1f}".format(round(newMCAttack,1)),
                 oldLvl = oldLvl,
             )
         )
@@ -205,12 +205,12 @@ def WriteMeleeFunctions():
                 levelTypeName = "Melee",
                 scoreExp = "meleedamage",
                 exp = totalExp,
-                oldSpeed = oldSpeed,
-                newSpeed = newSpeed,
-                newMCSpeed = newMCSpeed,
-                oldAttack = oldAttack,
-                newAttack = newAttack,
-                newMCAttack = newMCAttack,
+                oldSpeed = "{:.3f}".format(oldSpeed),
+                newSpeed = "{:.3f}".format(newSpeed),
+                newMCSpeed = "{:.3f}".format(newMCSpeed),
+                oldAttack = "{:.1f}".format(oldAttack),
+                newAttack = "{:.1f}".format(newAttack),
+                newMCAttack = "{:.1f}".format(newMCAttack),
                 awardText = awardTextCmds[awardType]
             )
 
