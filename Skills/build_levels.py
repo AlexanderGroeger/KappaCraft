@@ -49,8 +49,8 @@ meleeInitialCmds = [
 
 awardTextCmds = {
     "Walk Speed": """,{"text":"\\nWalk Speed","bold":true,"color":"yellow"},{"text":" ___oldSpeed%","color":"dark_gray"},{"text":" -> ","color":"gray"},{"text":"___newSpeed%","bold":true,"color":"white"}]""",
-    "Attack Damage": """,{"text":"Attack Damage","bold":true,"color":"yellow"},{"text":" ___oldAttack","color":"dark_gray"},{"text":" ->","color":"gray"},{"text":"___newAttack","bold":true,"color":"white"}]""",
-    "Attack Speed": """,{"text":"Attack Speed","bold":true,"color":"yellow"},{"text":" ___oldSpeed","color":"dark_gray"},{"text":" ->","color":"gray"},{"text":"___newSpeed","bold":true,"color":"white"}]""",
+    "Attack Damage": """,{"text":"\\nAttack Damage","bold":true,"color":"yellow"},{"text":" ___oldAttack","color":"dark_gray"},{"text":" ->","color":"gray"},{"text":"___newAttack","bold":true,"color":"white"}]""",
+    "Attack Speed": """,{"text":"\\nAttack Speed","bold":true,"color":"yellow"},{"text":" ___oldSpeed","color":"dark_gray"},{"text":" ->","color":"gray"},{"text":"___newSpeed","bold":true,"color":"white"}]""",
 }
 
 
