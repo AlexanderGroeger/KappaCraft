@@ -1,0 +1,36 @@
+{
+    "type": "minecraft:crafting_shapeless",
+    "ingredients": [
+        {
+            "item": "minecraft:pufferfish"
+        },
+        {
+            "item": "minecraft:prismarine_shard"
+        },
+        {
+            "item": "minecraft:prismarine_crystals"
+        },
+        {
+            "item": "minecraft:sea_lantern"
+        },
+        {
+            "item": "minecraft:dragon_egg"
+        },
+        {
+            "item": "minecraft:prismarine_bricks"
+        },
+        {
+            "item": "minecraft:dark_prismarine"
+        },
+        {
+            "item": "minecraft:wet_sponge"
+        },
+        {
+            "item": "minecraft:prismarine"
+        }
+    ],
+    "result": {
+        "item": "minecraft:elder_guardian_spawn_egg",
+        "count": 1
+    }
+}
