@@ -1,5 +1,0 @@
-execute if entity @a[scores={meleedamage=626842..,mlevel=46}] run tellraw @a[scores={meleedamage=626842..,mlevel=46}] ["",{"text":"Melee Level Up!","bold":true,"color":"gold"},{"text":" Level 46","color":"dark_gray"},{"text":" -> ","color":"gray"},{"text":"Level 47 \n","bold":true,"color":"white"},{"text":"Attack Speed","bold":true,"color":"yellow"},{"text":" 0.17","color":"dark_gray"},{"text":" ->","color":"gray"},{"text":" 0.18","bold":true,"color":"white"}]
-execute if entity @a[scores={meleedamage=626842..,mlevel=46}] run execute at @a[scores={meleedamage=626842..,mlevel=46}] run playsound minecraft:entity.player.levelup master @a ~ ~ ~ 1 1.2
-execute at @a[scores={meleedamage=626842..,mlevel=46}] run tellraw @a[distance=.01..40] {"text":"","color":"gold","extra":[{"selector":"@a[scores={meleedamage=626842..,mlevel=46}]"},{"text":" is now Melee Level 47"}]}
-execute if entity @a[scores={meleedamage=626842..,mlevel=46}] run scoreboard players set @a[scores={meleedamage=626842..,mlevel=46}] mlevel 47
-execute if entity @a[scores={mlevel=47}] run attribute @a[scores={mlevel=47},limit=1] minecraft:generic.attack_speed base set 4.18
