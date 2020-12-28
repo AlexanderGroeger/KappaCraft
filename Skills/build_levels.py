@@ -110,9 +110,9 @@ def WriteSprintFunctions():
             )
 
 
-    line.append("scoreboard players set @a moved 0")
-    line.append("scoreboard players set @a died 0")
-    
+    lines.append("scoreboard players set @a moved 0")
+    lines.append("scoreboard players set @a died 0")
+
     with open(mode+"_level_system.mcfunction", 'w') as f:
         f.write("\n".join(lines))
 
@@ -241,8 +241,8 @@ def WriteMeleeFunctions():
             )
 
 
-    line.append("scoreboard players set @a didmeleedamage 0")
-    line.append("scoreboard players set @a died 0")
+    lines.append("scoreboard players set @a didmeleedamage 0")
+    lines.append("scoreboard players set @a died 0")
 
     with open(mode+"_level_system.mcfunction", 'w') as f:
         f.write("\n".join(lines))
