@@ -163,7 +163,7 @@ def NBSToFunctions(songPath):
         timerAddFunction = "execute at @a[scores={{MusicID={_musicId}}}] run scoreboard players add @p timer 1\n"
         playFunction = "execute at @a[scores={{MusicID={_musicId},timer={_tickTimer}}}] run playsound minecraft:block.note_block.{_noteInstrument} record @p ~ ~ ~ 1 {_notePitch:.4f}\n"
         repeatFunction = "execute at @a[scores={{MusicID={_musicId},timer={_endTimer}..}}] run scoreboard players set @p timer -1\n"
-        branchFunction = "execute at @a[scores={{MusicID={_musicId},timer={_startTick}..{_endTick}}}] run function "+functionBranchPrefix+"/{_songName}/{_function}\n"
+        branchFunction = "execute at @a[scores={{MusicID={_musicId},timer={_startTick}..{_endTick}}},limit=1] run function "+functionBranchPrefix+"/{_songName}/{_function}\n"
 
         def OutputFunctionTree():
 
