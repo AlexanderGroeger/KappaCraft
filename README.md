@@ -31,7 +31,7 @@ A note block studio file (new or old format)
   
 **Output**
 
-An mcfunction with the naming scheme "<MusicID of song>_<name of note block studio file>". 
+An mcfunction with the naming scheme "MusicID_NameOfNoteBlockStudioSongFile". 
   
 **Usage**
 
