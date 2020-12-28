@@ -16,20 +16,25 @@ The songs module generates mcfunctions from note block studio files that can be 
 Here's a quick overview of the files you'll be using.
 
 **In-game Setup**
+
 Create scoreboards *timer* and *MusicID* initialized to 0.
 
 ### *buildsong.py*
 
 **Info**
+
 This is an inefficient solution for playing songs with many notes.
 
 **Input**
+
 A note block studio file (new or old format) 
   
 **Output**
+
 An mcfunction with the naming scheme "<MusicID of song>_<name of note block studio file>". 
   
 **Usage**
+
 To generate the mcfunction in the current directory, run *python buildsong.py YourNoteBlockStudioFile.nbs*. Then place the mcfunction in the datapack's song folder and call the */reload* command to update the datapack. Next create a command-block in-game with the command *function datapack:songs/MusicID_NameOfSong*. Finally set the command block to repeat without needing redstone. That's it. You should be hearing the song you have made.
 
 
