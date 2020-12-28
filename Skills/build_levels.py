@@ -23,7 +23,7 @@ targetExpOldLvl = "scores={___scoreExp=___exp..,___levelName=___oldLvl}"
 targetOldLvl = "scores={___levelName=___oldLvl}"
 targetNewLvl = "scores={___levelName=___newLvl}"
 
-branchCmd = executeIf + "function serverfunctions:___mode_levels/___mode_lvl____oldLvl"
+branchCmd = executeIf + "function serverfunctions:___system_levels/___system_lvl____oldLvl"
 
 heartNotificationCmd = executeIf + tellraw + """["",{"text":"You got an extra heart!","bold":true,"color":"red"}]"""
 heartScoreboardCmd = executeIf + Format(scoreboard, score_mode = "add", scoreboard = "hlevel", score_value = "1")
@@ -48,20 +48,6 @@ awardTextCmds = {
     "Attack Damage": """,{"text":"\\nAttack Damage","bold":true,"color":"yellow"},{"text":" ___oldAttack","color":"gray"},{"text":" -> ","color":"gray"},{"text":"___newAttack","bold":true,"color":"white"}]""",
     "Attack Speed": """,{"text":"\\nAttack Speed","bold":true,"color":"yellow"},{"text":" ___oldSpeed","color":"gray"},{"text":" -> ","color":"gray"},{"text":"___newSpeed","bold":true,"color":"white"}]""",
 }
-
-
-# sprint_cmds = [
-#     (executeIf+tellraw).format(_target = targetSprintExpLvl)+"""["",{{"text":"Sprinting Level Up!","bold":true,"color":"gold"}},{{"text":" Level {_oldLvl}","color":"dark_gray"}},{{"text":" -> ","color":"gray"}},{{"text":"Level {_newLvl}","bold":true,"color":"white"}},{{"text":"\\nWalk Speed","bold":true,"color":"yellow"}},{{"text":" {_oldSpeed:.1f}%","color":"dark_gray"}},{{"text":" -> ","color":"gray"}},{{"text":"{_newSpeed:.1f}%","bold":true,"color":"white"}}]""",
-#     (executeIf+tellraw).format(_target = targetSprintExpLvl)+"""["",{{"text":"Melee Level Up!","bold":true,"color":"gold"}},{{"text":" Level {_oldLvl}","color":"dark_gray"}},{{"text":" -> ","color":"gray"}},{{"text":"Level {_newLvl} \\n","bold":true,"color":"white"}},{{"text":"Attack","bold":true,"color":"yellow"}},{{"text":" {_oldAttack:.1f}","color":"dark_gray"}},{{"text":" ->","color":"gray"}},{{"text":" {_newAttack:.1f}","bold":true,"color":"white"}}]""",
-#     (executeIf+tellraw).format(_target = targetSprintExpLvl)+"""["",{{"text":"Luck Level Up!","bold":true,"color":"blue"}}]""",
-#     (executeIf+scoreboard).format(_target = targetSprintExpLvl, _score_mode = "add", _scoreboard = "llevel", _score_value = "1"),
-#     (executeIf+scoreboard).format(_target = targetSprintExpLvl, _score_mode = "add", _scoreboard = "hlevel", _score_value = "1"),
-#     (executeIf+executeAt+playsound).format(_target = targetSprintExpLvl, _sound = "entity.player.levelup", _pitch = "1.2"),
-#     (executeAt).format(_target = targetSprintExpLvl) + tellraw.format(_target = targetNearby) + """{{"text":"","color":"gold","extra":[{{"selector":"@a["""+targetSprintExpLvl+"""]"}},{{"text":" is now Sprinting Level {_newLvl}"}}]}}""",
-#     (executeAt).format(_target = targetSprintExpLvl) + tellraw.format(_target = "") + """{{"text":"Congratulate ","color":"gold","extra":[{{"selector":"@a["""+targetSprintExpLvl+"""]"}},{{"text":" for reaching the max Sprinting Level {_newLvl}!"}}]}}""",
-#     (executeIf+scoreboard).format(_target = targetSprintExpLvl, _score_mode = "set", _scoreboard = "slevel", _score_value = "{_newLvl}"),
-#     (executeIf+attribute).format(_target = targetSprintAfter, _attribute = "minecraft:generic.movement_speed", _attribute_value = "{_newMCSpeed:.4f}"),
-# ]
 
 def WriteSprintFunctions():
 
@@ -101,7 +87,7 @@ def WriteSprintFunctions():
                 Format(
                     branchCmd,
                     target = targetExpOldLvl,
-                    mode = mode,
+                    system = "sprint",
                     scoreExp = expName,
                     levelName = levelName,
                     exp = totalExp,
@@ -113,7 +99,7 @@ def WriteSprintFunctions():
     lines.append("scoreboard players set @a moved 0")
     lines.append("scoreboard players set @a died 0")
 
-    with open(mode+"_level_system.mcfunction", 'w') as f:
+    with open("sprint_level_system.mcfunction", 'w') as f:
         f.write("\n".join(lines))
 
 
@@ -172,10 +158,10 @@ def WriteSprintFunctions():
                 awardText = awardTextCmds[awardType]
             )
 
-        folder = mode+"_levels"
+        folder = "sprint_levels"
         if not os.path.isdir(folder):
             os.mkdir(folder)
-        with open(os.path.join(folder,mode+"_lvl_{}.mcfunction".format(oldLvl)), 'w') as f:
+        with open(os.path.join(folder,"sprint_lvl_{}.mcfunction".format(oldLvl)), 'w') as f:
             f.write("\n".join(lines))
 
 def WriteMeleeFunctions():
@@ -232,7 +218,7 @@ def WriteMeleeFunctions():
                 Format(
                     branchCmd,
                     target = targetExpOldLvl,
-                    mode = mode,
+                    system = "melee",
                     scoreExp = "meleedamage",
                     levelName = "mlevel",
                     exp = totalExp,
@@ -244,7 +230,7 @@ def WriteMeleeFunctions():
     lines.append("scoreboard players set @a didmeleedamage 0")
     lines.append("scoreboard players set @a died 0")
 
-    with open(mode+"_level_system.mcfunction", 'w') as f:
+    with open("melee_level_system.mcfunction", 'w') as f:
         f.write("\n".join(lines))
 
 
@@ -314,32 +300,32 @@ def WriteMeleeFunctions():
                 awardText = awardTextCmds[awardType]
             )
 
-        folder = mode+"_levels"
+        folder = "melee_levels"
         if not os.path.isdir(folder):
             os.mkdir(folder)
-        with open(os.path.join(folder,mode+"_lvl_{}.mcfunction".format(oldLvl)), 'w') as f:
+        with open(os.path.join(folder,"melee_lvl_{}.mcfunction".format(oldLvl)), 'w') as f:
             f.write("\n".join(lines))
 
 
-def Build(mode):
+def Build(system):
 
-    if mode == "melee":
+    if system == "melee":
         WriteMeleeFunctions()
-    elif mode == "sprint":
+    elif system == "sprint":
         WriteSprintFunctions()
 
 
 systems = ["melee", "sprint"]
 try:
-    mode = sys.argv[1]
-    if not (mode == "all" or mode in systems):
+    system = sys.argv[1]
+    if not (system == "all" or system in systems):
         raise Exception
 except:
     print("Please specify a system to create.\nPick from {}, all.".format(", ".join(systems)))
     exit(0)
 
-if mode == "all":
+if system == "all":
     for system in systems:
         Build(system)
 else:
-    Build(mode)
+    Build(system)
