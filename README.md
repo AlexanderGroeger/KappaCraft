@@ -35,7 +35,12 @@ An mcfunction with the naming scheme "MusicID_NameOfNoteBlockStudioSongFile".
   
 **Usage**
 
-To generate the mcfunction in the current directory, run *python buildsong.py YourNoteBlockStudioFile.nbs*. Then place the mcfunction in the datapack's song folder and call the */reload* command to update the datapack. Next create a command-block in-game with the command *function datapack:songs/MusicID_NameOfSong*. Finally set the command block to repeat without needing redstone. That's it. You should be hearing the song you have made.
+1. To generate the mcfunction in the current directory, run *python buildsong.py YourNoteBlockStudioFile.nbs*. 
+2. Place the mcfunction in the datapack's song folder.
+3. Call the */reload* command to update the datapack. 
+4. Create a command-block in-game with the command *function datapack:songs/MusicID_NameOfSong*. 
+5. Set the command block to repeat without needing redstone. 
+That's it. You should be hearing the song you have made.
 
 
 ### **buildsongtree.py**
