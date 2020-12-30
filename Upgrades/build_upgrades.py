@@ -13,10 +13,16 @@ for name, item in items.items():
 
         notEnoughLevels = levelsNeeded - 1
 
-        requiredEnchantments = ",".join([
-            Format(enchantmentTemplate, enchantment = enchantment, level = level)
-            for enchantment, level in data.items() if enchantment != "cost" and enchantment != "attributes"
-        ])
+        # requiredEnchantments = ",".join([
+        #     Format(enchantmentTemplate, enchantment = enchantment, level = level)
+        #     for enchantment, level in data.items() if enchantment != "cost" and enchantment != "attributes"
+        # ])
+
+        dataIter = iter(data)
+        next(dataIter)
+        enchantment = next(dataIter)
+        level = data[enchantment]
+        requiredEnchantments = Format(enchantmentTemplate, enchantment = enchantment, level = level)
 
         nextData = item[i+1]
 
