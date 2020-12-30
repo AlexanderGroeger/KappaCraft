@@ -13,7 +13,7 @@ items = {
         {"cost": 25, "sharpness": 40},
         {"cost": 40, "sharpness": 65},
         {"cost": 50, "sharpness": 100},
-        {"cost": -1, "sharpness": 250},
+        {"sharpness": 250},
     ),
 
     "diamond_helmet": (
@@ -24,7 +24,7 @@ items = {
         {"cost": 25, "protection": 5},
         {"cost": 40, "protection": 6, "blast_protection": 1, "projectile_protection": 1, "fire_protection": 1},
         {"cost": 50, "protection": 7, "blast_protection": 2, "projectile_protection": 2, "fire_protection": 2},
-        {"cost": -1, "protection": 10, "blast_protection": 3, "projectile_protection": 3, "fire_protection": 3},
+        {"protection": 10, "blast_protection": 3, "projectile_protection": 3, "fire_protection": 3},
     ),
 
     "netherite_sword": (
@@ -40,7 +40,7 @@ items = {
         {"cost": 25, "sharpness": 80},
         {"cost": 40, "sharpness": 130},
         {"cost": 50, "sharpness": 200},
-        {"cost": -1, "sharpness": 500},
+        {"sharpness": 500},
     ),
 
 }
