@@ -29,7 +29,7 @@ for item, data in items.items():
 
         lines.append(Format(end, scoreboard = "upgrading"))
         
-    lines.append(Format(end, scoreboard = "upgrade"))
+    # lines.append(Format(end, scoreboard = "upgrade"))
 
     with open(item+".mcfunction",'w') as f:
         f.write("\n".join(lines))
