@@ -1,22 +1,42 @@
 from cmds import *
 from items import items
 
-for item, data in items.items():
-    enchantment = data["enchantment"]
-    levels = data["levels"]
-    cost = data["cost"]
+for name, item in items.items():
 
     lines = []
-    for i in range(len(levels)-1):
-        lines.append(Format(main,item = item,enchantment = enchantment, oldLvl = levels[i], levelsNeeded = cost[i]))
-        lines.append(Format(upgrade,item = item,enchantment = enchantment, newLvl = levels[i+1]))
-        lines.append(clear)
-        if cost[i] > 0:
-            lines.append(Format(removeLevels,levelsNeeded = cost[i]))
+
+    for i in range(len(item)-1):
+        data = item[i]
+        levelsNeeded = data["cost"]
+        if levelsNeeded == -1:
+            continue
+
+        notEnoughLevels = levelsNeeded - 1
+
+        requiredEnchantments = ",".join([
+            Format(enchantmentTemplate, enchantment = enchantment, level = level)
+            for enchantment, level in data.items() if enchantment != "cost"
+        ])
+
+        nextData = item[i+1]
+
+        enchantments = ",".join([
+            Format(enchantmentTemplate, enchantment = enchantment, level = level)
+            for enchantment, level in nextData.items() if enchantment != "cost"
+        ])
+
+        lines.append(Format(main, item = name, enchantments = requiredEnchantments))
+        lines.append(Format(upgrade, item = name, enchantments = enchantments, levelsNeeded = levelsNeeded))
+        lines.append(Format(clear,levelsNeeded = levelsNeeded))
+
+        if levelsNeeded > 0:
+            lines.append(Format(failSound, notEnoughLevels = notEnoughLevels))
+            lines.append(Format(failMsg, levelsNeeded = levelsNeeded, notEnoughLevels = notEnoughLevels))
+            lines.append(Format(removeLevels, levelsNeeded = levelsNeeded))
 
         lines.append(Format(end, scoreboard = "upgrading"))
 
     # lines.append(Format(end, scoreboard = "upgrade"))
 
-    with open(item+".mcfunction",'w') as f:
+    with open(name+".mcfunction",'w') as f:
         f.write("\n".join(lines))
