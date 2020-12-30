@@ -27,7 +27,7 @@ def NBSToFunctions(songPath):
         sys.exit("File is not an nbs file.")
         return
 
-    songName = os.path.basename(songPath).replace(".nbs", "")
+    songName = os.path.basename(songPath).replace(".nbs", "").replace(" ","_").lower()
 
     instruments = [
         "harp","bass","basedrum","snare",
@@ -163,7 +163,7 @@ def NBSToFunctions(songPath):
         timerAddFunction = "execute at @a[scores={{MusicID={_musicId}}}] run scoreboard players add @p timer 1\n"
         playFunction = "execute at @a[scores={{MusicID={_musicId},timer={_tickTimer}}}] run playsound minecraft:block.note_block.{_noteInstrument} record @p ~ ~ ~ 1 {_notePitch:.4f}\n"
         repeatFunction = "execute at @a[scores={{MusicID={_musicId},timer={_endTimer}..}}] run scoreboard players set @p timer -1\n"
-        branchFunction = "execute at @a[scores={{MusicID={_musicId},timer={_startTick}..{_endTick}}},limit=1] run function "+functionBranchPrefix+"/{_songName}/{_function}\n"
+        branchFunction = "execute at @a[scores={{MusicID={_musicId},timer={_startTick}..{_endTick}}},limit=1] run function "+namespace+":trees/{_songName}/{_function}\n"
 
         def OutputFunctionTree():
 
