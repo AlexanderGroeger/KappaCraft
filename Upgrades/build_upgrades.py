@@ -22,7 +22,7 @@ for name, item in items.items():
 
         enchantments = ",".join([
             Format(enchantmentTemplate, enchantment = enchantment, level = level)
-            for enchantment, level in nextData.items() if enchantment != "cost"
+            for enchantment, level in nextData.items()
         ])
 
         lines.append(Format(main, item = name, enchantments = requiredEnchantments))
