@@ -1,18 +1,5 @@
 from cmds import *
-
-items = {
-    "diamond_sword": {
-        "enchantment": "sharpness",
-        "levels": [1,2,3,4,5,7,10,15,25,40,65,100,250],
-        "cost":   [0,0,0,0,1,2, 2, 2,10,30,40, 50, 0],
-    },
-    "netherite_sword": {
-        "enchantment": "sharpness",
-        "levels": [1,2,3,4,5,8,12,20,40,80,130,200,500],
-        "cost":   [0,0,0,0,1,2, 2, 2,10,30,40, 50, 0],
-    },
-}
-
+from items import items
 
 for item, data in items.items():
     enchantment = data["enchantment"]
@@ -28,7 +15,7 @@ for item, data in items.items():
             lines.append(Format(removeLevels,levelsNeeded = cost[i]))
 
         lines.append(Format(end, scoreboard = "upgrading"))
-        
+
     # lines.append(Format(end, scoreboard = "upgrade"))
 
     with open(item+".mcfunction",'w') as f:
