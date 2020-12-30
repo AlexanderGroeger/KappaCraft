@@ -26,7 +26,7 @@ def NBSToFunctions(songPath):
         sys.exit("File is not an nbs file.")
         return
 
-    songName = os.path.basename(songPath).replace(".nbs", "")
+    songName = os.path.basename(songPath).replace(".nbs", "").replace(" ","_").replace("'","").lower()
 
     instruments = [
         "harp","bass","basedrum","snare",
