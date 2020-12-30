@@ -27,7 +27,8 @@ for item, data in items.items():
         if cost[i] > 0:
             lines.append(Format(removeLevels,levelsNeeded = cost[i]))
 
-    lines.append(Format(end, scoreboard = "upgrading"))
+        lines.append(Format(end, scoreboard = "upgrading"))
+        
     lines.append(Format(end, scoreboard = "upgrade"))
 
     with open(item+".mcfunction",'w') as f:
