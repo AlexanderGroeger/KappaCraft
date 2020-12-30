@@ -22,7 +22,7 @@ for name, item in items.items():
         next(dataIter)
         enchantment = next(dataIter)
         level = data[enchantment]
-        requiredEnchantments = Format(enchantmentTemplate, enchantment = enchantment, level = level)
+        requiredEnchantments = "Enchantments:[{}]".format(Format(enchantmentTemplate, enchantment = enchantment, level = level))
 
         nextData = item[i+1]
 
