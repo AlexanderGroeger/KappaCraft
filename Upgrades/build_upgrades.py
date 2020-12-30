@@ -15,18 +15,23 @@ for name, item in items.items():
 
         requiredEnchantments = ",".join([
             Format(enchantmentTemplate, enchantment = enchantment, level = level)
-            for enchantment, level in data.items() if enchantment != "cost"
+            for enchantment, level in data.items() if enchantment != "cost" and enchantment != "attributes"
         ])
 
         nextData = item[i+1]
 
-        enchantments = ",".join([
+        enchantments = "Enchantments:[{}]".format(",".join([
             Format(enchantmentTemplate, enchantment = enchantment, level = level)
-            for enchantment, level in nextData.items()
-        ])
+            for enchantment, level in nextData.items() if enchantment != "attributes"
+        ]))
+
+        try:
+            attributes = nextData["attributes"]
+        except:
+            attributes = ""
 
         lines.append(Format(main, item = name, enchantments = requiredEnchantments))
-        lines.append(Format(upgrade, item = name, enchantments = enchantments, levelsNeeded = levelsNeeded))
+        lines.append(Format(upgrade, item = name, enchantments = enchantments, attributes = attributes, levelsNeeded = levelsNeeded))
         lines.append(Format(clear,levelsNeeded = levelsNeeded))
 
         if levelsNeeded > 0:

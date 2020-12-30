@@ -24,7 +24,10 @@ items = {
         {"cost": 25, "protection": 5},
         {"cost": 40, "protection": 6, "blast_protection": 1, "projectile_protection": 1, "fire_protection": 1},
         {"cost": 50, "protection": 7, "blast_protection": 2, "projectile_protection": 2, "fire_protection": 2},
-        {"protection": 10, "blast_protection": 3, "projectile_protection": 3, "fire_protection": 3},
+        {
+            "protection": 10, "blast_protection": 3, "projectile_protection": 3, "fire_protection": 3,
+            "attributes": """,AttributeModifiers:[{AttributeName:"generic.max_health",Amount:2,Operation:0,UUID:[I;-1201130,31815,173936,-63630],Slot:head,Name:"generic.max_health"},{AttributeName:"generic.attack_damage",Amount:0.1,Operation:1,UUID:[I;-1201130,31815,173936,-63630],Slot:head,Name:"generic.attack_damage"},{AttributeName:"generic.movement_speed",Amount:0.1,Operation:1,UUID:[I;-1201130,31815,173936,-63630],Slot:head,Name:"generic.movement_speed"}]"""
+        },
     ),
 
     "netherite_sword": (
