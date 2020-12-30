@@ -21,10 +21,10 @@ items = {
         {"cost": 3, "protection": 2},
         {"cost": 4, "protection": 3},
         {"cost": 10, "protection": 4},
-        {"cost": 20, "protection": 5},
-        {"cost": 30, "protection": 6, "blast_protection": 1, "projectile_protection": 1, "fire_protection": 1},
-        {"cost": 40, "protection": 7, "blast_protection": 2, "projectile_protection": 2, "fire_protection": 2},
-        {"cost": 50, "protection": 10, "blast_protection": 3, "projectile_protection": 3, "fire_protection": 3},
+        {"cost": 25, "protection": 5},
+        {"cost": 40, "protection": 6, "blast_protection": 1, "projectile_protection": 1, "fire_protection": 1},
+        {"cost": 50, "protection": 7, "blast_protection": 2, "projectile_protection": 2, "fire_protection": 2},
+        {"cost": -1, "protection": 10, "blast_protection": 3, "projectile_protection": 3, "fire_protection": 3},
     ),
 
     "netherite_sword": (
