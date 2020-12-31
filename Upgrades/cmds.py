@@ -10,8 +10,8 @@ def Format(s,**kwargs):
 
 
 enchantmentTemplate = """{id:"minecraft:___enchantment",lvl:___levels}"""
-main = """execute at @p[nbt={SelectedItem:{id:"minecraft:___item",tag:{___enchantments}}},nbt={Inventory:[{Slot:-106b,id:"minecraft:___item",tag:{___enchantments}}]},scores={upgrade=1..}] run scoreboard players set @p upgrading 1"""
-upgrade = """replaceitem entity @p[scores={upgrading=1..,xpLevel=___levelsNeeded..}] weapon.mainhand minecraft:___item{___enchantments___attributes}"""
+main = """execute at @p[nbt={SelectedItem:{id:"minecraft:___item",tag:{___enchantment}}},nbt={Inventory:[{Slot:-106b,id:"minecraft:___item",tag:{___enchantment}}]},scores={upgrade=1..}] run scoreboard players set @p upgrading 1"""
+upgrade = """replaceitem entity @p[scores={upgrading=1..,xpLevel=___levelsNeeded..}] weapon.mainhand minecraft:___item{___tags}"""
 clear = "replaceitem entity @p[scores={upgrading=1..,xpLevel=___levelsNeeded..}] weapon.offhand minecraft:air"
 removeLevels = "xp add @p[scores={upgrading=1..,xpLevel=___levelsNeeded..}] -___levelsNeeded levels"
 failSound = "playsound minecraft:entity.villager.no master @p[scores={upgrading=1..,xpLevel=..___notEnoughLevels}] ~ ~ ~ 2"

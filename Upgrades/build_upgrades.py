@@ -21,22 +21,40 @@ for name, item in items.items():
         enchantments = data["enchantments"]
         enchantment = next(iter(enchantments))
         level = enchantments[enchantment]
-        requiredEnchantments = "Enchantments:[{}]".format(Format(enchantmentTemplate, enchantment = enchantment, level = level))
+        requiredEnchantment = "Enchantments:[{}]".format(Format(enchantmentTemplate, enchantment = enchantment, level = level))
 
         nextData = item[i+1]
 
-        enchantments = "Enchantments:[{}]".format(",".join([
-            Format(enchantmentTemplate, enchantment = enchantment, level = level)
-            for enchantment, level in nextData["enchantments"].items()
-        ]))
+        tags = []
+
+        try:
+            enchantments = "Enchantments:[{}]".format(",".join([
+                Format(enchantmentTemplate, enchantment = enchantment, level = level)
+                for enchantment, level in nextData["enchantments"].items()
+            ]))
+            tags.append(enchantments)
+        except:
+            pass
 
         try:
             attributes = nextData["attributes"]
+            tags.append(attributes)
         except:
             attributes = ""
 
-        lines.append(Format(main, item = name, enchantments = requiredEnchantments))
-        lines.append(Format(upgrade, item = name, enchantments = enchantments, attributes = attributes, levelsNeeded = levelsNeeded))
+        if "unbreakable" in nextData:
+            tags.append("Unbreakable: 1")
+
+        try:
+            display = nextData["display"]
+            tags.append(display)
+        except:
+            pass
+
+        tags = ",".join(tags)
+
+        lines.append(Format(main, item = name, enchantment = requiredEnchantment))
+        lines.append(Format(upgrade, item = name, tags = tags, levelsNeeded = levelsNeeded))
         lines.append(Format(clear,levelsNeeded = levelsNeeded))
 
         if levelsNeeded > 0:
