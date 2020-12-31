@@ -18,17 +18,16 @@ for name, item in items.items():
         #     for enchantment, level in data.items() if enchantment != "cost" and enchantment != "attributes"
         # ])
 
-        dataIter = iter(data)
-        next(dataIter)
-        enchantment = next(dataIter)
-        level = data[enchantment]
+        enchantments = data["enchantments"]
+        enchantment = next(iter(enchantments))
+        level = enchantments[enchantment]
         requiredEnchantments = "Enchantments:[{}]".format(Format(enchantmentTemplate, enchantment = enchantment, level = level))
 
         nextData = item[i+1]
 
         enchantments = "Enchantments:[{}]".format(",".join([
             Format(enchantmentTemplate, enchantment = enchantment, level = level)
-            for enchantment, level in nextData.items() if enchantment != "attributes"
+            for enchantment, level in nextData["enchantments"].items()
         ]))
 
         try:
