@@ -8,5 +8,5 @@ def Format(s,**kwargs):
         s = s.replace("___"+key+"___",str(value))
     return s
 
-clear = """execute at @a[nbt=!{Inventory:[{id:"minecraft:shulker_box",Slot:___slotNum___b}]},scores={died=1}] run replaceitem entity @a[nbt=!{Inventory:[{Slot:___slotNum___b,tag:{Keep:1b}}]},scores={died=1,keep_inventory=0}] ___slotName___ air"""
+clear = """execute at @a[nbt=!{Inventory:[{id:"minecraft:shulker_box",Slot:___slotNum___b}]},scores={died=1}] run replaceitem entity @a[nbt=!{Inventory:[{Slot:___slotNum___b,tag:{Keep:1b}}]},scores={died=1,keepinventory=0}] ___slotName___ air"""
 vanishClear = """replaceitem entity @a[nbt={Inventory:[{Slot:___slotNum___b,tag:{Enchantments:[{id:"minecraft:vanishing_curse",lvl:1s}]}}]}] ___slotName___ air"""
