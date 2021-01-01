@@ -43,7 +43,10 @@ for name, item in items.items():
             attributes = ""
 
         if "unbreakable" in nextData:
-            tags.append("Unbreakable: 1")
+            tags.append("Unbreakable:1")
+
+        if "keep" in nextData:
+            tags.append("Keep:1b")
 
         try:
             display = nextData["display"]
