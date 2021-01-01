@@ -9,6 +9,6 @@ def Format(s,**kwargs):
     return s
 
 colors = ["white","orange","magenta","light_blue","yellow","lime","pink","gray","light_gray","cyan","purple","blue","brown","green","red","black"]
-shulker = """nbt=!{Inventory:[{id:"minecraft:___color___shulker_box",Slot:___slotNum___b}]},scores={died=1}"""
+shulker = """nbt=!{Inventory:[{id:"minecraft:___color___shulker_box",Slot:___slotNum___b}]}"""
 clear = """replaceitem entity @a[nbt=!{Inventory:[{Slot:___slotNum___b,tag:{Keep:1b}}]},___shulkerTargeting___,scores={died=1,keepinventory=0}] ___slotName___ air"""
 vanishClear = """replaceitem entity @a[nbt={Inventory:[{Slot:___slotNum___b,tag:{Enchantments:[{id:"minecraft:vanishing_curse",lvl:1s}]}}]}] ___slotName___ air"""
