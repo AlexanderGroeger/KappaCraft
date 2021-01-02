@@ -15,37 +15,51 @@ def WriteMeleeFunctions():
 
     # Generate root of tree
     for oldLvl in range(num_levels+1):
+
         newLvl = oldLvl + 1
-        oldSpeed = (oldLvl)/num_levels*max_attack_speed_boost - .2
-        newSpeed = (newLvl)/num_levels*max_attack_speed_boost - .2
 
-        oldAttack = round((newLvl-5)/num_levels*max_attack_boost - 2, 3)
-        newAttack = round((newLvl)/num_levels*max_attack_boost - 2, 1)
-
-        oldMCSpeed = 4 + oldSpeed
+        oldAttack = round(int(oldLvl/5)*5/num_levels*max_attack_boost - 2, 3)
+        newAttack = round(int(newLvl/5)*5/num_levels*max_attack_boost - 2, 1)
         oldMCAttack = oldAttack
-        newMCSpeed = 4 + newSpeed
         newMCAttack = newAttack
 
-        lines.append(
-            Format(
-                meleeAttackSpeedAttributeCmd,
-                target = Format(targetOldLvl, levelName = "mlevel", newLvl = oldLvl),
-                newMCSpeed = "{:.3f}".format(oldMCSpeed),
-                oldLvl = oldLvl,
-            )
-        )
+        oldSpeed = (oldLvl)/num_levels*max_attack_speed_boost - .2
+        newSpeed = (newLvl)/num_levels*max_attack_speed_boost - .2
+        oldMCSpeed = 4 + oldSpeed
+        newMCSpeed = 4 + newSpeed
 
-        lines.append(
-            Format(
-                meleeAttackDamageAttributeCmd,
-                target = Format(targetOldLvl, levelName = "mlevel", oldLvl = oldLvl),
-                newMCAttack = "{:.1f}".format(oldMCAttack),
-                oldLvl = oldLvl,
+        if newLvl % 5 == 0:
+            lines.append(
+                Format(
+                    meleeAttackDamageAttributeCmd,
+                    target = Format(targetOldLvl, levelName = "mlevel", oldLvl = "{}..{}".format(newLvl-5,oldLvl)),
+                    newMCAttack = "{:.1f}".format(oldMCAttack),
+                    oldLvl = oldLvl,
+                )
             )
-        )
+        else:
+            lines.append(
+                Format(
+                    meleeAttackSpeedAttributeCmd,
+                    target = Format(targetOldLvl, levelName = "mlevel", newLvl = oldLvl),
+                    newMCSpeed = "{:.3f}".format(oldMCSpeed),
+                    oldLvl = oldLvl,
+                )
+            )
+
+        if oldLvl == num_levels:
+            lines.append(
+                Format(
+                    meleeAttackDamageAttributeCmd,
+                    target = Format(targetOldLvl, levelName = "mlevel", oldLvl = oldLvl),
+                    newMCAttack = "{:.1f}".format(oldMCAttack),
+                    oldLvl = oldLvl,
+                )
+            )
+
 
         if oldLvl < num_levels:
+
             exp = int(base_exp*(1+(exp_gain_percent/100.))**oldLvl)
             totalExp += exp
             lines.append(
@@ -59,6 +73,8 @@ def WriteMeleeFunctions():
                     oldLvl = oldLvl,
                 )
             )
+
+
 
 
     lines.append(resetDamage)
