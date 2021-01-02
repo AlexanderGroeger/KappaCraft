@@ -9,7 +9,6 @@ def WriteLuckFunctions():
         newMCLuck = round(newLvl/4,2)
         lines.append(Format(luckAttributeCmd, levelName = levelName, newLvl = newLvl, attrivalue = "{:.2f}".format(newMCLuck)))
 
-    lines.append(resetDied)
     with open("luck_level_system.mcfunction", 'w') as f:
         f.write("\n".join(lines))
 

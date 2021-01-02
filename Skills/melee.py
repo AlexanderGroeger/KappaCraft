@@ -62,7 +62,6 @@ def WriteMeleeFunctions():
 
 
     lines.append(resetDamage)
-    lines.append(resetDied)
 
     with open("melee_level_system.mcfunction", 'w') as f:
         f.write("\n".join(lines))

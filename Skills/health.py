@@ -8,8 +8,7 @@ def WriteHealthFunctions():
     for newLvl in range(numLevels+1):
         newMCHealth = 14+2*newLvl
         lines.append(Format(maxHealthAttributeCmd, levelName = levelName, newLvl = newLvl, attrivalue = newMCHealth))
-
-    lines.append(resetDied)
+        
     with open("health_level_system.mcfunction", 'w') as f:
         f.write("\n".join(lines))
 

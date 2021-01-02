@@ -40,6 +40,5 @@ awardTextCmds = {
     "Attack Speed": """,{"text":"\\nAttack Speed","bold":true,"color":"yellow"},{"text":" ___oldSpeed","color":"gray"},{"text":" -> ","color":"gray"},{"text":"___newSpeed","bold":true,"color":"white"}]""",
 }
 
-resetDied = "scoreboard players set @a died 0"
 resetMoved = "scoreboard players set @a moved 0"
 resetDamage = "scoreboard players set @a didmeleedamage 0"

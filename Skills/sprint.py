@@ -47,7 +47,6 @@ def WriteSprintFunctions():
 
 
     lines.append(resetMoved)
-    lines.append(resetDied)
 
     with open("sprint_level_system.mcfunction", 'w') as f:
         f.write("\n".join(lines))
