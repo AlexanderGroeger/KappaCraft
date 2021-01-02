@@ -2,8 +2,8 @@ import os
 from cmds import *
 
 def WriteMeleeFunctions():
-    meleeAttackSpeedAttributeCmd = executeIf + Format(attribute, attribute = "generic.attack_speed", attrivalue = "___newMCSpeed")
-    meleeAttackDamageAttributeCmd = executeIf + Format(attribute, attribute = "generic.attack_damage", attrivalue = "___newMCAttack")
+    meleeAttackSpeedAttributeCmd = Format(attribute, attribute = "generic.attack_speed", attrivalue = "___newMCSpeed")
+    meleeAttackDamageAttributeCmd = Format(attribute, attribute = "generic.attack_damage", attrivalue = "___newMCAttack")
     num_levels = 50
     max_attack_speed_boost = .4
     max_attack_boost = 5
@@ -61,8 +61,8 @@ def WriteMeleeFunctions():
             )
 
 
-    lines.append("scoreboard players set @a didmeleedamage 0")
-    lines.append("scoreboard players set @a died 0")
+    lines.append(resetDamage)
+    lines.append(resetDied)
 
     with open("melee_level_system.mcfunction", 'w') as f:
         f.write("\n".join(lines))

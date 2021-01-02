@@ -1,7 +1,7 @@
 from cmds import *
 
 def WriteHealthFunctions():
-    maxHealthAttributeCmd = Format(executeIf + attribute, target = targetNewLvl, attribute = "generic.max_health")
+    maxHealthAttributeCmd = Format(attribute, target = targetNewLvl, attribute = "generic.max_health")
     levelName = "hlevel"
     numLevels = 13
     lines = []
@@ -9,7 +9,7 @@ def WriteHealthFunctions():
         newMCHealth = 14+2*newLvl
         lines.append(Format(maxHealthAttributeCmd, levelName = levelName, newLvl = newLvl, attrivalue = newMCHealth))
 
-    lines.append("scoreboard players set @a died 0")
+    lines.append(resetDied)
     with open("health_level_system.mcfunction", 'w') as f:
         f.write("\n".join(lines))
 

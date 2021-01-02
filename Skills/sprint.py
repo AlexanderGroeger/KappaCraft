@@ -2,7 +2,7 @@ import os
 from cmds import *
 
 def WriteSprintFunctions():
-    sprintSpeedAttributeCmd = executeIf + Format(attribute, attribute = "minecraft:generic.movement_speed", attrivalue = "___newMCSpeed")
+    sprintSpeedAttributeCmd = Format(attribute, attribute = "minecraft:generic.movement_speed", attrivalue = "___newMCSpeed")
     levelName = "slevel"
     expName = "sprint"
     num_levels = 50
@@ -46,8 +46,8 @@ def WriteSprintFunctions():
             )
 
 
-    lines.append("scoreboard players set @a moved 0")
-    lines.append("scoreboard players set @a died 0")
+    lines.append(resetMoved)
+    lines.append(resetDied)
 
     with open("sprint_level_system.mcfunction", 'w') as f:
         f.write("\n".join(lines))

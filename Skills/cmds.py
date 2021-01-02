@@ -11,7 +11,7 @@ def Format(s,**kwargs):
 executeIf = "execute if entity @a[___target] run "
 executeAt = "execute at @a[___target] run "
 tellraw = "tellraw @a[___target] "
-attribute = "attribute @a[___target,limit=1] minecraft:___attribute base set ___attrivalue"
+attribute = "attribute @p[___target] minecraft:___attribute base set ___attrivalue"
 scoreboard = "scoreboard players ___score_mode @a[___target] ___scoreboard ___score_value"
 playsound = "playsound minecraft:___sound master @a ~ ~ ~ 1 ___pitch"
 targetNearby = "distance=.01..40"
@@ -39,3 +39,7 @@ awardTextCmds = {
     "Attack Damage": """,{"text":"\\nAttack Damage","bold":true,"color":"yellow"},{"text":" ___oldAttack","color":"gray"},{"text":" -> ","color":"gray"},{"text":"___newAttack","bold":true,"color":"white"}]""",
     "Attack Speed": """,{"text":"\\nAttack Speed","bold":true,"color":"yellow"},{"text":" ___oldSpeed","color":"gray"},{"text":" -> ","color":"gray"},{"text":"___newSpeed","bold":true,"color":"white"}]""",
 }
+
+resetDied = "scoreboard players set @a died 0"
+resetMoved = "scoreboard players set @a moved 0"
+resetDamage = "scoreboard players set @a didmeleedamage 0"
