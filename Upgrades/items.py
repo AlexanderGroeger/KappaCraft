@@ -7,7 +7,7 @@ items = {
         {"cost": 0, "enchantments": {"sharpness": 4}},
         {"cost": 1, "enchantments": {"sharpness": 5}},
         {"cost": 2, "enchantments": {"sharpness": 7}},
-        {"cost": 2, "enchantments": {"sharpness": 10, "knockback": 1,}},
+        {"cost": 2, "enchantments": {"sharpness": 12, "knockback": 1,}},
         {
             "cost": 2,
             "enchantments": {"sharpness": 15, "knockback": 1, "fire_aspect": 1},
@@ -16,19 +16,19 @@ items = {
         },
         {
             "cost": 10,
-            "enchantments": {"sharpness": 25, "knockback": 1, "fire_aspect": 1, "looting": 1, "unbreaking": 1},
+            "enchantments": {"sharpness": 30, "knockback": 1, "fire_aspect": 1, "looting": 1, "unbreaking": 1},
             "keep": True,
             "display": """display:{Lore:['[{"text":"This item will not be lost on death","italic":false,"color":"dark_purple"}]']}""",
         },
         {
             "cost": 25,
-            "enchantments": {"sharpness": 40, "knockback": 1, "fire_aspect": 1, "looting": 1, "sweeping": 1, "unbreaking": 2},
+            "enchantments": {"sharpness": 50, "knockback": 1, "fire_aspect": 1, "looting": 1, "sweeping": 1, "unbreaking": 2},
             "keep": True,
             "display": """display:{Lore:['[{"text":"This item will not be lost on death","italic":false,"color":"dark_purple"}]']}""",
         },
         {
             "cost": 40,
-            "enchantments": {"sharpness": 65, "knockback": 2, "fire_aspect": 2, "looting": 2, "sweeping": 2, "unbreaking": 3},
+            "enchantments": {"sharpness": 75, "knockback": 2, "fire_aspect": 2, "looting": 2, "sweeping": 2, "unbreaking": 3},
             "keep": True,
             "display": """display:{Lore:['[{"text":"This item will not be lost on death","italic":false,"color":"dark_purple"}]']}""",
         },
