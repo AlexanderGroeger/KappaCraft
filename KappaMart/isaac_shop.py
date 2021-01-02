@@ -77,10 +77,10 @@ shopDeals = {
             {"text": "Flint & Steel"},
         ],
         "Custom": {
-            "$": 2500,
+            "$": 4500,
             "p": "29999886 205 29999861",
             "cmds": [
-                """give @s flint_and_steel 1""",
+                """give @s flint_and_steel{RepairCost:999999,display:{Name:'[{"text":"Hot Sauce","italic":false,"color":"dark_red","bold":true}]',Lore:['[{"text":"Ooo hot!","italic":false,"color":"dark_purple"}]']},Enchantments:[{id:fire_aspect,lvl:10},{id:knockback,lvl:2},{id:sharpness,lvl:5},{id:unbreaking,lvl:10}],AttributeModifiers:[{AttributeName:"generic.movement_speed",Amount:0.25,Operation:1,UUID:[I;-1201117,144,165241,-288],Slot:offhand,Name:"generic.movement_speed"}]} 1""",
             ]
         }
     },
@@ -91,10 +91,10 @@ shopDeals = {
             {"text": "Crossbow"},
         ],
         "Custom": {
-            "$": 1500,
+            "$": 2000,
             "p": "29999886 205 29999862",
             "cmds": [
-                """give @s crossbow 1""",
+                """give @s crossbow{display:{Name:'[{"text":"Shooting Knife","italic":false,"bold":true,"color":"white"}]',Lore:['[{"text":"Stop laying on the floor","italic":false,"color":"dark_purple"}]','[{"text":"This thing is enchantable","italic":false,"color":"dark_purple"}]']},Enchantments:[{id:sharpness,lvl:10},{id:unbreaking,lvl:4}],AttributeModifiers:[{AttributeName:"generic.movement_speed",Amount:0.05,Operation:1,UUID:[I;-1201117,3698,165843,-7396],Slot:mainhand,Name:"generic.movement_speed"}]} 1""",
             ]
         }
     },
@@ -119,10 +119,10 @@ shopDeals = {
             {"text": "Helmet"},
         ],
         "Custom": {
-            "$": 7500,
+            "$": 12500,
             "p": "29999886 205 29999864",
             "cmds": [
-                """give @s diamond_helmet{RepairCost:999999,display:{Name:'[{"text":"Crown","italic":false,"bold":true,"color":"yellow"}]',Lore:['[{"text":"","italic":false}]','[{"text":"Handed down by a ranger,","italic":false}]','[{"text":"Some strange marking appear on the","italic":false}]','[{"text":"sides of the crown. Many have tried","italic":false}]','[{"text":"to decode the mystery, but only one","italic":false}]','[{"text":"elf was able to. The text reads,","italic":false}]','[{"text":"The glory of a king is his kingdom","italic":false,"color":"yellow"}]','[{"text":"fully alive","italic":false,"color":"yellow"}]']},Enchantments:[{id:unbreaking,lvl:4}],AttributeModifiers:[{AttributeName:"generic.armor",Amount:0.35,Operation:1,UUID:[I;-1201117,29534,134333,-59068],Slot:head,Name:"generic.armor"},{AttributeName:"generic.attack_damage",Amount:0.25,Operation:1,UUID:[I;-1201117,29534,134333,-59068],Slot:head,Name:"generic.attack_damage"},{AttributeName:"generic.attack_speed",Amount:0.1,Operation:1,UUID:[I;-1201117,29534,134333,-59068],Slot:head,Name:"generic.attack_speed"},{AttributeName:"generic.knockback_resistance",Amount:1,Operation:1,UUID:[I;-1201117,29534,134333,-59068],Slot:head,Name:"generic.knockback_resistance"},{AttributeName:"generic.max_health",Amount:2,Operation:0,UUID:[I;-1201117,29534,134333,-59068],Slot:head,Name:"generic.max_health"}]} 1""",
+                """give @s diamond_helmet{display:{Name:'[{"text":"Crown","italic":false,"bold":true,"color":"yellow"}]',Lore:['[{"text":"Handed down by a ranger,","italic":false}]','[{"text":"this crown has some strange","italic":false}]','[{"text":"markings. After many failed","italic":false}]','[{"text":"translations an elf king","italic":false}]','[{"text":"finally put the mystery to rest.","italic":false}]','[{"text":"The text reads: ","italic":false},{"text":"The glory of a","italic":false,"color":"yellow"}]','[{"text":"king is his kingdom fully alive","italic":false,"color":"yellow"}]']},RepairCost:999999,Enchantments:[{id:unbreaking,lvl:4}],AttributeModifiers:[{AttributeName:"generic.armor",Amount:0.6,Operation:1,UUID:[I;-12102,26234,162848,-52468],Slot:head,Name:"generic.armor"},{AttributeName:"generic.armor_toughness",Amount:0.35,Operation:1,UUID:[I;-12102,26234,162848,-52468],Slot:head,Name:"generic.armor_toughness"},{AttributeName:"generic.attack_damage",Amount:0.25,Operation:1,UUID:[I;-12102,26234,162848,-52468],Slot:head,Name:"generic.attack_damage"},{AttributeName:"generic.attack_speed",Amount:0.25,Operation:1,UUID:[I;-12102,26234,162848,-52468],Slot:head,Name:"generic.attack_speed"},{AttributeName:"generic.movement_speed",Amount:0.25,Operation:1,UUID:[I;-12102,26234,162848,-52468],Slot:head,Name:"generic.movement_speed"},{AttributeName:"generic.max_health",Amount:0.25,Operation:1,UUID:[I;-12102,26234,162848,-52468],Slot:head,Name:"generic.max_health"}]} 1""",
             ]
         }
     },
@@ -136,7 +136,7 @@ shopDeals = {
             "$": 500,
             "p": "29999886 205 29999865",
             "cmds": [
-                """give @s lingering_potion{Potion:"minecraft:water",CustomPotionEffects:[{Id:5,Duration:600},{Id:6,Amplifier:1},{Id:10,Amplifier:2,Duration:600},{Id:11,Amplifier:1,Duration:600},{Id:12,Duration:600},{Id:16,Duration:600},{Id:23}],display:{Name:"\"Save Me Juice\""}}""",
+                """give @s lingering_potion{Potion:"minecraft:water",CustomPotionEffects:[{Id:5,Duration:300},{Id:6,Amplifier:1},{Id:10,Amplifier:2,Duration:300},{Id:11,Amplifier:1,Duration:300},{Id:12,Duration:300},{Id:16,Duration:300},{Id:23}],display:{Name:"\"Save Me Juice\""}}""",
             ]
         }
     },
@@ -147,10 +147,10 @@ shopDeals = {
 			{"text": "Crossbow"},
         ],
         "Custom": {
-            "$": 6000,
+            "$": 6500,
             "p": "29999884 205 29999865",
             "cmds": [
-                """give @s crossbow 1""",
+                """give @s crossbow{RepairCost:99999,display:{Name:'[{"text":"Gas","italic":false,"bold":true,"color":"dark_green"}]',Lore:['[{"text":"Oh that stinks","italic":false}]']},Enchantments:[{id:multishot,lvl:1},{id:unbreaking,lvl:4}],AttributeModifiers:[{AttributeName:"generic.movement_speed",Amount:0.45,Operation:1,UUID:[I;-12102,19482,164228,-38964],Slot:offhand,Name:"generic.movement_speed"}]} 1""",
             ]
         }
     },
@@ -161,11 +161,10 @@ shopDeals = {
 			{"text": "Sword"},
         ],
         "Custom": {
-            "$": 1250,
+            "$": 1000,
             "p": "29999884 205 29999864",
             "cmds": [
-                # """give @s stone_sword{display:{Name:"[{\"text\":\"Chainsaw\",\"italic\":false,\"bold\":true,\"color\":\"dark_red\"}]",Lore:["[{\"text\":\"VRRRRR!\",\"italic\":false,\"bold\":true,\"color\":\"dark_purple\"}]","[{\"text\":\"Warning, somewhat fragile.\",\"italic\":false,\"bold\":true,\"color\":\"dark_purple\"}]"]},RepairCost:99999,Enchantments:[{id:"bane_of_arthropods",lvl:5},{id:smite,lvl:5},{id:sweeping,lvl:10}],AttributeModifiers:[{AttributeName:generic.attackSpeed,Amount:100,Operation:0,UUIDLeast:138550200,UUIDMost:99,Slot:mainhand,Name:generic.attackSpeed},{AttributeName:generic.movementSpeed,Amount:0.1,Operation:2,UUIDLeast:138550300,UUIDMost:99,Slot:mainhand,Name:generic.movementSpeed},{AttributeName:generic.attackDamage,Amount:6,Operation:0,UUIDLeast:138550400,UUIDMost:99,Slot:mainhand,Name:generic.attackDamage}]} 1""",
-                """give @s stone_sword 1"""
+                """give @s stone_sword{RepairCost:99999,display:{Name:'[{"text":"Chainsaw","italic":false,"color":"dark_red","bold":true}]',Lore:['[{"text":"VRRRRR","italic":false}]']},Enchantments:[{id:sharpness,lvl:5},{id:smite,lvl:3},{id:sweeping,lvl:3}],AttributeModifiers:[{AttributeName:"generic.attack_speed",Amount:1337,Operation:0,UUID:[I;-12102,9631,163736,-19262],Slot:mainhand,Name:"generic.attack_speed"}]} 1""",
             ]
         }
     },
@@ -179,7 +178,7 @@ shopDeals = {
             "$": 2500,
             "p": "29999884 205 29999863",
             "cmds": [
-                """give @s stone_pickaxe 1""",
+                """give @s stone_pickaxe{Unbreakable:1,RepairCost:99999,display:{Name:'[{"text":"Old Reliable","italic":false,"color":"gray","bold":true}]',Lore:['[{"text":"This thing can last through","italic":false}]','[{"text":"an atomic bomb!","italic":false}]']},Enchantments:[{id:efficiency,lvl:5},{id:fortune,lvl:2}],AttributeModifiers:[{AttributeName:"generic.movement_speed",Amount:0.05,Operation:1,UUID:[I;-12102,29397,164657,-58794],Slot:mainhand,Name:"generic.movement_speed"}]} 1""",
             ]
         }
     },
@@ -190,10 +189,10 @@ shopDeals = {
 			{"text": "PRO WEAPON"},
         ],
         "Custom": {
-            "$": 5500,
+            "$": 17500,
             "p": "29999884 205 29999862",
             "cmds": [
-                """give @s shears 1""",
+                """give @s shears{RepairCost:9999999,display:{Name:'[{"text":" ","italic":false},{"text":"Cataclysm","color":"yellow","bold":true}]',Lore:['[{"text":"My favorite mythic","italic":false,"color":"dark_purple"}]']},Enchantments:[{id:unbreaking,lvl:5}],AttributeModifiers:[{AttributeName:"generic.attack_damage",Amount:50,Operation:0,UUID:[I;-1201117,1304,164549,-2608],Slot:mainhand,Name:"generic.attack_damage"},{AttributeName:"generic.attack_speed",Amount:1337,Operation:0,UUID:[I;-1201117,1304,164549,-2608],Slot:mainhand,Name:"generic.attack_speed"},{AttributeName:"generic.movement_speed",Amount:0.1,Operation:1,UUID:[I;-1201117,1304,164549,-2608],Slot:mainhand,Name:"generic.movement_speed"},{AttributeName:"generic.max_health",Amount:-0.5,Operation:1,UUID:[I;-1201117,1304,164549,-2608],Slot:mainhand,Name:"generic.max_health"},{AttributeName:"generic.armor",Amount:-9.001,Operation:1,UUID:[I;-1201117,1304,164549,-2608],Slot:mainhand,Name:"generic.armor"}]} 1""",
             ]
         }
     },
