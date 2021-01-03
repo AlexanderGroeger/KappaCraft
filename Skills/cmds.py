@@ -19,7 +19,7 @@ targetExpOldLvl = "scores={___scoreExp=___exp..,___levelName=___oldLvl}"
 targetOldLvl = "scores={___levelName=___oldLvl}"
 targetNewLvl = "scores={___levelName=___newLvl}"
 
-branchCmd = executeIf + "function serverfunctions:___system_levels/___system_lvl____oldLvl"
+branchCmd = executeIf + "function skills:___system_levels/___system_lvl____oldLvl"
 
 heartNotificationCmd = tellraw + """["",{"text":"You got an extra heart!","bold":true,"color":"red"}]"""
 heartScoreboardCmd = Format(scoreboard, score_mode = "add", scoreboard = "hlevel", score_value = "1")
