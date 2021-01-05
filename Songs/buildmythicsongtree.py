@@ -202,10 +202,10 @@ def NBSToFunctions(songPath):
                     highmid = lowmid + 1
                 highmidTick = ticks[highmid]
 
-                adjustedStartTick = AdjustWithTempo(startTick,songTempo)
-                adjustedEndTick = AdjustWithTempo(endTick,songTempo)
-                adjustedLowmidTick = AdjustWithTempo(lowmidTick,songTempo)
-                adjustedHighmidTick = AdjustWithTempo(highmidTick,songTempo)
+                adjustedStartTick = AdjustWithTempo(startTick,songTempo) + 1
+                adjustedEndTick = AdjustWithTempo(endTick,songTempo) + 1
+                adjustedLowmidTick = AdjustWithTempo(lowmidTick,songTempo) + 1
+                adjustedHighmidTick = AdjustWithTempo(highmidTick,songTempo) + 1
 
                 with open(os.path.join(outputSongTreePath,songName,"branch_{}-{}.mcfunction".format(adjustedStartTick,adjustedEndTick)),"w") as func:
                     if lowmid == start:
