@@ -2,7 +2,7 @@ import os
 from cmds import *
 
 def WriteSprintFunctions():
-    sprintSpeedAttributeCmd = Format(attribute, attribute = "minecraft:generic.movement_speed", attrivalue = "___newMCSpeed")
+    sprintSpeedAttributeCmd = Format(attribute, attribute = "generic.movement_speed", attrivalue = "___newMCSpeed")
     levelName = "slevel"
     expName = "sprint"
     num_levels = 50
@@ -24,7 +24,7 @@ def WriteSprintFunctions():
         lines.append(
             Format(
                 sprintSpeedAttributeCmd,
-                target = Format(targetOldLvl, levelName = "mlevel", newLvl = oldLvl),
+                target = Format(targetOldLvl, levelName = "slevel", newLvl = oldLvl),
                 newMCSpeed = "{:.4f}".format(oldMCSpeed),
                 oldLvl = oldLvl,
             )
