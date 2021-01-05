@@ -216,7 +216,7 @@ def NBSToFunctions(songPath):
                                 elif len(note) == 3:
                                     layer, instrument, key = note
                                     volume = 1
-                                func.write(playFunction.format(_scoreboard = timerScoreboard,_tickTimer=adjustedLowmidTick,_noteInstrument=instruments[instrument],_noteVolume = volume * 1.5, _notePitch=KeyToPitch(key)))
+                                func.write(playFunction.format(_scoreboard = timerScoreboard,_tickTimer=adjustedLowmidTick,_noteInstrument=instruments[instrument],_noteVolume = volume * 0.015, _notePitch=KeyToPitch(key)))
                     else:
                         func.write(branchFunction.format(
                             _scoreboard = timerScoreboard,
@@ -233,7 +233,7 @@ def NBSToFunctions(songPath):
                                 elif len(note) == 3:
                                     layer, instrument, key = note
                                     volume = 1
-                                func.write(playFunction.format(_scoreboard = timerScoreboard,_tickTimer=adjustedHighmidTick,_noteInstrument=instruments[instrument],_noteVolume = volume * 1.5,_notePitch=KeyToPitch(key)))
+                                func.write(playFunction.format(_scoreboard = timerScoreboard,_tickTimer=adjustedHighmidTick,_noteInstrument=instruments[instrument],_noteVolume = volume * 0.015,_notePitch=KeyToPitch(key)))
                     else:
                         func.write(branchFunction.format(
                             _scoreboard = timerScoreboard,
