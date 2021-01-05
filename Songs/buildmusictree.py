@@ -151,9 +151,11 @@ def NBSToFunctions(songPath):
                     volume = ReadInt(8)
                     pan = ReadInt(8)
                     pitch = ReadInt(16)
-
-                if instrument in range(vanillaInstrumentCount) and key in range(33,58):
-                    notes.append((tick,layer,instrument,key))
+                    if instrument in range(vanillaInstrumentCount) and key in range(33,58):
+                        notes.append((tick,layer,instrument,key,volume))
+                else:
+                    if instrument in range(vanillaInstrumentCount) and key in range(33,58):
+                        notes.append((tick,layer,instrument,key))
 
         f.close()
         return notes, songLength, songName, songTempo, musicId
@@ -161,9 +163,9 @@ def NBSToFunctions(songPath):
     def OutputFunction(noteList):
 
         timerAddFunction = "execute at @a[scores={{MusicID={_musicId}}}] run scoreboard players add @p timer 1\n"
-        playFunction = "execute at @a[scores={{MusicID={_musicId},timer={_tickTimer}}}] run playsound minecraft:block.note_block.{_noteInstrument} record @p ~ ~ ~ 1 {_notePitch:.4f}\n"
+        playFunction = "execute at @a[scores={{MusicID={_musicId},timer={_tickTimer}}}] run playsound minecraft:block.note_block.{_noteInstrument} record @p ~ ~ ~ {_noteVolume:.2f} {_notePitch:.4f}\n"
         repeatFunction = "execute at @a[scores={{MusicID={_musicId},timer={_endTimer}..}}] run scoreboard players set @p timer -1\n"
-        branchFunction = "execute at @a[scores={{MusicID={_musicId},timer={_startTick}..{_endTick}}},limit=1] run function "+namespace+":trees/{_songName}/{_function}\n"
+        branchFunction = "execute at @a[scores={{MusicID={_musicId},timer={_startTick}..{_endTick}}},limit=1] run function songs:trees/{_songName}/{_function}\n"
 
         def OutputFunctionTree():
 
@@ -214,8 +216,12 @@ def NBSToFunctions(songPath):
                     if lowmid == start:
                         for ns in notesPerTick[startTick]:
                             for note in ns:
-                                layer, instrument, key = note
-                                func.write(playFunction.format(_musicId=musicId,_tickTimer=adjustedLowmidTick,_noteInstrument=instruments[instrument],_notePitch=KeyToPitch(key)))
+                                if len(note) == 4:
+                                    layer, instrument, key, volume = note
+                                elif len(note) == 3:
+                                    layer, instrument, key = note
+                                    volume = 1
+                                func.write(playFunction.format(_musicId=musicId,_tickTimer=adjustedLowmidTick,_noteInstrument=instruments[instrument],_noteVolume = volume/100., _notePitch=KeyToPitch(key)))
                     else:
                         func.write(branchFunction.format(
                             _musicId= musicId,
@@ -227,8 +233,12 @@ def NBSToFunctions(songPath):
                     if highmid == end:
                         for ns in notesPerTick[endTick]:
                             for note in ns:
-                                layer, instrument, key = note
-                                func.write(playFunction.format(_musicId=musicId,_tickTimer=adjustedHighmidTick,_noteInstrument=instruments[instrument],_notePitch=KeyToPitch(key)))
+                                if len(note) == 4:
+                                    layer, instrument, key, volume = note
+                                elif len(note) == 3:
+                                    layer, instrument, key = note
+                                    volume = 1
+                                func.write(playFunction.format(_musicId=musicId,_tickTimer=adjustedHighmidTick,_noteInstrument=instruments[instrument],_noteVolume = volume/100.,_notePitch=KeyToPitch(key)))
                     else:
                         func.write(branchFunction.format(
                             _musicId = musicId,
