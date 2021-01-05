@@ -180,10 +180,10 @@ def NBSToFunctions(songPath):
             with open(os.path.join(outputSongPath,"{}_{}.mcfunction".format(musicId,songName)),"w") as func:
                 func.write(branchFunction.format(
                     _scoreboard = timerScoreboard,
-                    _startTick = AdjustWithTempo(ticks[0],songTempo),
-                    _endTick = AdjustWithTempo(ticks[-1],songTempo),
+                    _startTick = 1 + AdjustWithTempo(ticks[0],songTempo),
+                    _endTick = 1 + AdjustWithTempo(ticks[-1],songTempo),
                     _songName = songName,
-                    _function = "branch_{}-{}".format(AdjustWithTempo(ticks[0],songTempo),AdjustWithTempo(ticks[-1],songTempo)),)
+                    _function = "branch_{}-{}".format(1 + AdjustWithTempo(ticks[0],songTempo),1 + AdjustWithTempo(ticks[-1],songTempo)),)
                 )
 
             def writeBranch(start, end):
