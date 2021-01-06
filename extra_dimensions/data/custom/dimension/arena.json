@@ -3,20 +3,14 @@
     "settings": {
       "lakes": false,
       "features": false,
-      "biome": "minecraft:plains",
+      "biome": "mobless:plains",
       "structures": {
         "stronghold": {
           "distance": 32,
           "spread": 3,
           "count": 128
         },
-        "structures": {
-          "minecraft:village": {
-            "spacing": 32,
-            "separation": 8,
-            "salt": 10387312
-          }
-        }
+        "structures": {}
       },
       "layers": [
         {

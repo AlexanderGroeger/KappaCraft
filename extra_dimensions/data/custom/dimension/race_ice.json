@@ -35,7 +35,7 @@
       },
      "biomes": [
         {
-         "biome":"minecraft:ice_spikes",
+         "biome":"mobless:ice_spikes",
          "parameters": {
            "altitude": 0.065,
            "weirdness": 0.167,
@@ -45,11 +45,11 @@
           }
         },
         {
-         "biome":"minecraft:frozen_river",
+         "biome":"mobless:snowy_mountains",
          "parameters": {
            "altitude": 0.041,
            "weirdness": 0.183,
-           "offset": 0.006,
+           "offset": 0.01,
            "temperature": 0.125,
            "humidity": 0.218
           }
