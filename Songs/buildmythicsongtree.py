@@ -10,17 +10,6 @@ if not os.path.isdir(outputSongTreePath):
     print("Output song tree path in config.py is not specified or is missing in the file system!")
     exit(0)
 
-def firstGap(ls):
-    if len(ls) == 0:
-        return 1
-    elif len(ls) == 1:
-        return 1 + int(ls[0] == 1)
-    ls.sort()
-    for i in range(1,len(ls)):
-        if int(ls[i]) - int(ls[i-1]) > 1:
-            return int(ls[i-1])+1
-    return len(ls) + 1
-
 def NBSToFunctions(songPath):
 
     if not songPath.endswith(".nbs"):
@@ -74,32 +63,6 @@ def NBSToFunctions(songPath):
 
         # songName
         _ = ReadString()
-
-        musicId = None
-        songIds = []
-        for filename in os.listdir(outputSongPath):
-            if filename.endswith(".mcfunction"):
-                filename = filename.replace(".mcfunction","")
-
-                try:
-                    splitIndex = filename.index('_')
-                except:
-                    continue
-
-                try:
-                    id = int(filename[:splitIndex])
-                except:
-                    continue
-                name = filename[splitIndex+1:]
-
-                if name == songName:
-                    musicId = int(id)
-                    break
-                else:
-                    songIds.append(int(id))
-
-        if musicId is None:
-            musicId = firstGap(songIds)
 
         print("songName",songName)
         songAuthor = ReadString()
@@ -158,7 +121,7 @@ def NBSToFunctions(songPath):
                         notes.append((tick,layer,instrument,key))
 
         f.close()
-        return notes, songLength, songName, songTempo, musicId
+        return notes, songLength, songName, songTempo
 
     def OutputFunction(noteList):
 
@@ -177,7 +140,7 @@ def NBSToFunctions(songPath):
             for tick in ticks:
                 notesPerTick[tick] = [notes for (tickPos, notes) in noteList if tickPos == tick]
 
-            with open(os.path.join(outputSongPath,"{}_{}.mcfunction".format(musicId,songName)),"w") as func:
+            with open(os.path.join(outputSongPath,"sfx_{}.mcfunction".format(songName)),"w") as func:
                 func.write(branchFunction.format(
                     _scoreboard = timerScoreboard,
                     _startTick = 1 + AdjustWithTempo(ticks[0],songTempo),
@@ -242,8 +205,6 @@ def NBSToFunctions(songPath):
                             _songName = songName,
                             _function = "branch_{}-{}".format(adjustedHighmidTick,adjustedEndTick),)
                         )
-                    # if endTick == songLength and startTick == ticks[-2]:
-                    #     func.write(repeatFunction.format(_musicId=musicId,_endTimer=ceil(songLength*20./songTempo)))
 
                 if lowmid != start:
                     writeBranch(start,lowmid)
@@ -255,15 +216,13 @@ def NBSToFunctions(songPath):
 
         OutputFunctionTree()
 
-        print(musicId)
-
     try:
         f = open(songPath,"rb")
         print("file loaded")
     except:
         sys.exit("Failed to open",songPath)
 
-    notes, songLength, songName, songTempo, musicId = ReadNBSFile()
+    notes, songLength, songName, songTempo = ReadNBSFile()
     notes = [(pos,[note[1:] for note in noteList]) for (pos,noteList) in groupby(notes,key=lambda n: n[0])]
 
     OutputFunction(notes)
