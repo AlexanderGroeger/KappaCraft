@@ -1,0 +1,31 @@
+{
+  "generator": {
+    "settings": {
+      "lakes": false,
+      "features": false,
+      "biome": "minecraft:plains",
+      "structures": {
+        "stronghold": {
+          "distance": 32,
+          "spread": 3,
+          "count": 128
+        },
+        "structures": {
+          "minecraft:village": {
+            "spacing": 32,
+            "separation": 8,
+            "salt": 10387312
+          }
+        }
+      },
+      "layers": [
+        {
+          "height": 1,
+          "block": "minecraft:air"
+        }
+      ]
+    },
+    "type": "minecraft:flat"
+  },
+  "type": "minecraft:overworld"
+}

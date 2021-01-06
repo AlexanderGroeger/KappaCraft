@@ -1,0 +1,62 @@
+{
+ "generator": {
+   "type":"minecraft:noise",
+   "seed": 255158002,
+   "biome_source": {
+     "seed": 255158002,
+     "type":"minecraft:multi_noise",
+     "temperature_noise": {
+       "firstOctave": -7,
+       "amplitudes": [
+          1,
+          1
+        ]
+      },
+     "humidity_noise": {
+       "firstOctave": -7,
+       "amplitudes": [
+          1,
+          1
+        ]
+      },
+     "altitude_noise": {
+       "firstOctave": -7,
+       "amplitudes": [
+          1,
+          1
+        ]
+      },
+     "weirdness_noise": {
+       "firstOctave": -7,
+       "amplitudes": [
+          1,
+          1
+        ]
+      },
+     "biomes": [
+        {
+         "biome":"minecraft:ice_spikes",
+         "parameters": {
+           "altitude": 0.065,
+           "weirdness": 0.167,
+           "offset": 0.025,
+           "temperature": 0.012,
+           "humidity": 0.075
+          }
+        },
+        {
+         "biome":"minecraft:frozen_river",
+         "parameters": {
+           "altitude": 0.041,
+           "weirdness": 0.183,
+           "offset": 0.006,
+           "temperature": 0.125,
+           "humidity": 0.218
+          }
+        }
+      ]
+    },
+   "settings":"minecraft:overworld"
+  },
+ "type":"minecraft:overworld"
+}
