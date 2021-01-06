@@ -125,7 +125,7 @@ def NBSToFunctions(songPath):
 
     def OutputFunction(noteList):
 
-        playFunction = "execute at @a[scores={{{_scoreboard}={_tickTimer}}}] run playsound minecraft:block.note_block.{_noteInstrument} record @a[distance=..40] ~ ~ ~ {_noteVolume} {_notePitch:.4f}\n"
+        playFunction = "execute at @a[scores={{{_scoreboard}={_tickTimer}}}] run playsound minecraft:block.note_block.{_noteInstrument} player @a[distance=..40] ~ ~ ~ {_noteVolume} {_notePitch:.4f}\n"
         branchFunction = "execute at @a[scores={{{_scoreboard}={_startTick}..{_endTick}}},limit=1] run function songs:trees/{_songName}/{_function}\n"
 
         def OutputFunctionTree():
