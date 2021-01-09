@@ -22,22 +22,16 @@ def Build(system):
 systems = ["melee", "sprint", "luck", "health"]
 try:
     system = sys.argv[1]
-    if not (system == "all" or system == "clean" or system in systems):
-        raise Exception
 except:
-    print("Please specify a system to create.\nPick from {}. To build all, specify all. To remove system files, specify clean.".format(", ".join(systems)))
-    exit(0)
-
-if system == "all":
     for system in systems:
         Build(system)
-elif system == "clean":
+
+if system == "clean":
     for system in systems:
         try:
             remove(system+"_level_system.mcfunction")
             rmtree(system+"_levels")
         except:
             pass
-
-else:
+elif system in systems:
     Build(system)
