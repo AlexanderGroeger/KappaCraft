@@ -66,7 +66,7 @@ shopDeals = {
             "$": 5500,
             "p": "32 126 33",
             "cmds": [
-                """give @s golden_leggings{RepairCost:999999,display:{Name:'[{"text":"Solid Gold","italic":false,"color":"yellow","bold":true}]',Lore:['[{"text":"Not buggin you about it.","italic":false,"color":"dark_purple"}]']},Enchantments:[{id:unbreaking,lvl:4}],AttributeModifiers:[{AttributeName:"generic.luck",Amount:0.1,Operation:2,UUID:[I;-1201114,10637,151346,-21274],Slot:legs,Name:"generic.luck"},{AttributeName:"generic.attack_speed",Amount:0.35,Operation:2,UUID:[I;-1201114,10637,151346,-21274],Slot:legs,Name:"generic.attack_speed"}.{{AttributeName:"generic.movement_speed",Amount:0.5,Operation:1,UUID:[I;-120618,19183,13521,-38366],Slot:legs,Name:"generic.movement_speed"}]} 1""",
+                """give @s golden_leggings{RepairCost:999999,display:{Name:'[{"text":"Solid Gold","italic":false,"color":"yellow","bold":true}]',Lore:['[{"text":"Not buggin you about it.","italic":false,"color":"dark_purple"}]']},Enchantments:[{id:unbreaking,lvl:4}],AttributeModifiers:[{AttributeName:"generic.luck",Amount:0.1,Operation:2,UUID:[I;-1201114,10637,151346,-21274],Slot:legs,Name:"generic.luck"},{AttributeName:"generic.attack_speed",Amount:0.35,Operation:2,UUID:[I;-1201114,10637,151346,-21274],Slot:legs,Name:"generic.attack_speed"},{AttributeName:"generic.movement_speed",Amount:0.5,Operation:1,UUID:[I;-120618,19183,13521,-38366],Slot:legs,Name:"generic.movement_speed"}]} 1""",
             ]
         }
     },
