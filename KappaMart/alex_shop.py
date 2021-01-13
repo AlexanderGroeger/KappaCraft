@@ -6,7 +6,7 @@ shopDeals = {
     },
     "milk_bucket": {
         "Name": ["Moomoo Milk","Moomoo Milk"],
-        "Buy": {"n": 1, "$": 5, "p": "36 113 42"},
+        "Buy": {"n": 1, "$": 2, "p": "36 113 42"},
     },
     "ice": {
         "Name": ["Ice Cube","Ice Cubes"],
