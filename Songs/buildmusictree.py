@@ -51,6 +51,7 @@ def NBSToFunctions(songPath):
         return "".join([chr(ReadInt(8)) for i in range(strlen)])
 
     def ReadNBSFile():
+        global musicId
 
         songLength = ReadInt(16)
 
@@ -75,28 +76,28 @@ def NBSToFunctions(songPath):
         # songName
         _ = ReadString()
 
-        musicId = None
-        songIds = []
-        for filename in os.listdir(outputSongPath):
-            if filename.endswith(".mcfunction"):
-                filename = filename.replace(".mcfunction","")
+        if not musicId:
+            songIds = []
+            for filename in os.listdir(outputSongPath):
+                if filename.endswith(".mcfunction"):
+                    filename = filename.replace(".mcfunction","")
 
-                try:
-                    splitIndex = filename.index('_')
-                except:
-                    continue
+                    try:
+                        splitIndex = filename.index('_')
+                    except:
+                        continue
 
-                try:
-                    id = int(filename[:splitIndex])
-                except:
-                    continue
-                name = filename[splitIndex+1:]
+                    try:
+                        id = int(filename[:splitIndex])
+                    except:
+                        continue
+                    name = filename[splitIndex+1:]
 
-                if name == songName:
-                    musicId = int(id)
-                    break
-                else:
-                    songIds.append(int(id))
+                    if name == songName:
+                        musicId = int(id)
+                        break
+                    else:
+                        songIds.append(int(id))
 
         if musicId is None:
             musicId = firstGap(songIds)
@@ -158,7 +159,7 @@ def NBSToFunctions(songPath):
                         notes.append((tick,layer,instrument,key))
 
         f.close()
-        return notes, songLength, songName, songTempo, musicId
+        return notes, songLength, songName, songTempo
 
     def OutputFunction(noteList):
 
@@ -268,7 +269,7 @@ def NBSToFunctions(songPath):
     except:
         sys.exit("Failed to open",songPath)
 
-    notes, songLength, songName, songTempo, musicId = ReadNBSFile()
+    notes, songLength, songName, songTempo = ReadNBSFile()
     notes = [(pos,[note[1:] for note in noteList]) for (pos,noteList) in groupby(notes,key=lambda n: n[0])]
 
     OutputFunction(notes)
@@ -276,4 +277,10 @@ def NBSToFunctions(songPath):
 
 import sys
 
+try:
+    musicId = int(sys.argv[2])
+    if musicId == 0:
+        raise Exception
+except:
+    musicId = None
 NBSToFunctions(sys.argv[1])
