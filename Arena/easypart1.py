@@ -1,19 +1,12 @@
 rounds = [
     # Round 1
     {
-        # Gives player $3 for completing round
         "bonus": 3,
-        # Loot table of all mobs unless otherwise overwritten
         "loot": "loot:arena/tier1mob",
-        # Time in seconds that players must complete the round
         "time": 300,
-
         "waves": [
             {
-                # Time delay before this wave spawns
                 "delay": 0,
-                # Loot Table
-                "loot": "loot:arena/tier1chest"
                 "mobs": [
                     {
                         "type": "zombie",
@@ -26,7 +19,6 @@ rounds = [
                     {
                         "type": "skeleton",
                         "count": 5,
-                        "loot": "loot:arena/tier1chest",
                         "armor": {
                             "head": "iron_helmet"
                         },
@@ -40,7 +32,6 @@ rounds = [
         "bonus": 3,
         "loot": "loot:arena/tier1mob",
         "time": 300,
-        # Needs mobs
         "waves": [
 			{
                 "delay": 0,
@@ -79,7 +70,6 @@ rounds = [
         "bonus": 3,
         "loot": "loot:arena/tier1mob",
         "time": 300,
-        # Needs mobs
         "waves": [
 			{
                 "delay": 0,
@@ -93,12 +83,7 @@ rounds = [
 						"weapons": {
 							"mainhand": "stone_axe",
 						},
-                    }
-                ],
-            },
-			{
-                "delay": 0,
-                "mobs": [
+                    },
                     {
                         "type": "spider",
 						"count": 5,
@@ -127,7 +112,6 @@ rounds = [
         "bonus": 3,
         "loot": "loot:arena/tier1mob",
         "time": 300,
-        # Needs mobs
         "waves": [
 			{
                 "delay": 0,
@@ -151,7 +135,6 @@ rounds = [
         "bonus": 3,
         "loot": "loot:arena/tier1mob",
         "time": 300,
-        # Needs mobs
         "waves": [
 			{
                 "delay": 0,
@@ -160,7 +143,8 @@ rounds = [
                         "type": "silverfish",
 						"count": 15,
                         "attributes": [
-							("generic.movement_speed", 0.9)
+							("generic.movement_speed", 0.3)
+                        ]
                     }
                 ],
             },
@@ -186,7 +170,6 @@ rounds = [
         "bonus": 3,
         "loot": "loot:arena/tier1mob",
         "time": 300,
-        # Needs mobs
         "waves": [
 			{
                 "delay": 0,
@@ -195,7 +178,8 @@ rounds = [
                         "type": "zombie",
 						"count": 10,
                         "attributes": [
-							("generic.movement_speed", 0.9)
+							("generic.movement_speed", 0.3)
+                        ]
                     }
                 ],
             },
@@ -224,7 +208,6 @@ rounds = [
         "bonus": 3,
         "loot": "loot:arena/tier1mob",
         "time": 300,
-        # Needs mobs
         "waves": [
 			{
                 "delay": 0,
@@ -242,8 +225,8 @@ rounds = [
 							"mainhand": "stone_sword",
 						},
                         "attributes": [
-							("generic.movement_speed", 0.6)
-							
+							("generic.movement_speed", 0.15)
+						]
                     }
                 ],
             },
@@ -254,7 +237,6 @@ rounds = [
         "bonus": 3,
         "loot": "loot:arena/tier1mob",
         "time": 300,
-        # Needs mobs
         "waves": [
 			{
                 "delay": 0,
@@ -270,8 +252,8 @@ rounds = [
 							"mainhand": "iron_sword",
 						},
                         "attributes": [
-							("generic.attack_knockback", 0.9)
-							
+							("generic.attack_knockback", 5)
+                        ]
                     }
                 ],
             },
@@ -282,8 +264,8 @@ rounds = [
                         "type": "spider",
 						"count": 10,
                         "attributes": [
-							("generic.attack_knockback", 0.9)
-							
+							("generic.attack_knockback", 5)
+                        ]
                     }
                 ],
             },
@@ -304,18 +286,17 @@ rounds = [
                                     ("punch", 2),
 								]
 							}
-						},							
+						},
                     }
                 ],
             },
 		]
     },
-		# Round 9
+	# Round 9
     {
         "bonus": 3,
         "loot": "loot:arena/tier1mob",
         "time": 300,
-        # Needs mobs
         "waves": [
 			{
                 "delay": 0,
@@ -332,7 +313,7 @@ rounds = [
 						},
                         "attributes": [
 							("generic.attack_knockback", 0.0)
-							
+                        ]
                     }
                 ],
             },
@@ -351,7 +332,7 @@ rounds = [
 						},
                         "attributes": [
 							("generic.attack_knockback", 0.0)
-							
+                        ]
                     }
                 ],
             },
@@ -370,7 +351,7 @@ rounds = [
 						},
                         "attributes": [
 							("generic.attack_knockback", 0.0)
-							
+                        ]
                     }
                 ],
             },
