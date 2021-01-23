@@ -32,6 +32,41 @@ uuids = {
     # }
 }
 
+effectIds = {
+    "speed": 1,
+    "slowness": 2,
+    "haste": 3,
+    "mining_fatigue": 4,
+    "strength": 5,
+    "instant_health": 6,
+    "instant_damage": 7,
+    "jump_boost": 8,
+    "nausea": 9,
+    "regeneration": 10,
+    "resistance": 11,
+    "fire_resistance": 12,
+    "water_breathing": 13,
+    "invisibility": 14,
+    "blindness": 15,
+    "night_vision": 16,
+    "hunger": 17,
+    "weakness": 18,
+    "posion": 19,
+    "wither": 20,
+    "heath_boost": 21,
+    "absorbtion": 22,
+    "saturation": 23,
+    "glowing": 24,
+    "levitation": 25,
+    "luck": 26,
+    "unluck": 27,
+    "slow_falling": 28,
+    "conduit_power": 29,
+    "dolphins_grace": 30,
+    "bad_omen": 31,
+    "hero_of_the_village": 32,
+}
+
 handDrops = "HandDropChances:[0F,0F]"
 armorDrops = "ArmorDropChances:[0F,0F,0F,0F]"
 nbtTags = "___handitems___,___handdrops___,"
@@ -93,7 +128,7 @@ def BuildRounds(difficulty,rounds):
         for waveNum, wave in enumerate(round["waves"]):
             maxMobCount = max([mob["count"] if mob.get("count") else 1 for mob in wave["mobs"]]) + 1
             waveNum += startingRound
-            timer = totalTime - wave["timer"] * 20
+            timer = totalTime - wave["delay"] * 20
             cmds.append(Format(timeMatchCmd, time = timer, func = Format(setSpawnCountCmd, count = maxMobCount)))
             cmds.append(Format(timeMatchCmd, time = timer, func = Format(repeatCmd, roundNum = roundNum, waveNum = waveNum)))
             SpawnWave()
@@ -130,15 +165,18 @@ def Attributes(data, slot = None):
 
     def Single(entry):
         attributeName, level = entry
-        if slot:
+        if slot is not None:
             return Format("{AttributeName:\"___name___\",Amount:___level___,Operation:0,___uuid___,Slot:___slot___,Name:\"___attributeName___\"}", name = attributeName, level = level, uuid = uuids[attributeName], slot = slot)
         else:
             return Format("{Name:\"___name___\",Base:___base___F}", name = attributeName, base = level)
 
+    entries = [("generic.follow_range",400)]
     if type(data) is tuple:
-        return Format(modifiers, Single(data))
+        entries.append(data)
+        # return Format(modifiers, Single(data))
     elif type(data) is list:
-        return Format(modifiers, attributes = ",".join([Single(entry) for entry in data]))
+        entries += data
+    return Format(modifiers, attributes = ",".join([Single(entry) for entry in entries]))
 
 
 def Enchants(data):
@@ -153,6 +191,23 @@ def Enchants(data):
         return Format(enchantments, Single(data))
     elif type(data) is list:
         return Format(enchantments, enchants = ",".join([Single(entry) for entry in data]))
+
+def Effects(data):
+
+    effects = "ActiveEffects:[___effects___]"
+
+    def Single(entry):
+        name, amplifier = entry[:2]
+        if len(entry) == 3:
+            duration = entry[2]
+        else:
+            duration = 100000
+        return Format("{Id:___effectId___,Amplifier:___amplifier___,Duration:___duration___,Ambient:1}", id = effectIds[name], amplifier = amplifier, duration = duration)
+
+    if type(data) is tuple:
+        return Format(effects, Single(data))
+    elif type(data) is list:
+        return Format(effects, effects = ",".join([Single(entry) for entry in data]))
 
 
 def Item(data, slot = None):
@@ -194,6 +249,8 @@ def Summon(mob, mobLoot):
         nbtTags.append(Armor(mob["armor"]))
     if mob.get("weapons"):
         nbtTags.append(Weapons(mob["weapons"]))
+    if mob.get("effects"):
+        nbtTags.append(Effects(mob["effects"]))
     if necessaryTags.get(mobType) is not None:
         nbtTags.append(necessaryTags[mobType])
     return Format(summonCmd, mob = mobType, nbt = NBT(nbtTags))
