@@ -1,21 +1,25 @@
-from easy import rounds
 from cmds import *
 import sys
 from importlib import import_module
 
 try:
-    difficulty = sys.argv[1].replace(".py","")
+    filename = sys.argv[1].replace(".py","")
 except:
     print("Please provide an arena round file.")
     exit(0)
 
-mod = import_module(difficulty)
+try:
+    startingRound = int(sys.argv[2])
+except:
+    print("Please provide the first round number for this file. Examples: 1, 26, 51, 76")
+    exit(0)
+    
+mod = import_module(filename)
 
 try:
-
     rounds = mod.rounds
 except:
     print("Could not import 'rounds' from module.")
     exit(0)
 
-BuildRounds(difficulty,rounds)
+BuildRounds(filename,startingRound,rounds)

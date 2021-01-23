@@ -89,10 +89,7 @@ summonCmd = "execute at @e[tag=spawn,limit=1,sort=random] run summon minecraft:_
 defaultTime = 600*20 + 1
 path = "rounds"
 
-def BuildRounds(difficulty,rounds):
-
-    startingRoundPerDifficulty = {"easy": 1, "normal": 26, "hard": 51, "impossible": 76}
-    startingRound = startingRoundPerDifficulty[difficulty]
+def BuildRounds(filename, startingRound, rounds):
 
     def SpawnRound():
         nonlocal roundNum, round
@@ -153,10 +150,8 @@ def BuildRounds(difficulty,rounds):
     # cmds.append(Format(timeMatchCmd, time = "1..", func = decrementTimerCmd))
     # cmds.append(Format(startMatchCmd, func = Format(resetStartCmd)))
 
-    with open(os.path.join(path,difficulty+"_rounds.mcfunction"),"w") as f:
+    with open(os.path.join(path,filename+"_rounds.mcfunction"),"w") as f:
         f.write("\n".join(cmds))
-
-
 
 
 def Attributes(data, slot = None):
@@ -215,8 +210,8 @@ def Item(data, slot = None):
         return Format("{id:___item___,Count:1}", item = data)
     elif type(data) is dict:
         tags = []
-        if data.get("attribute") is not None:
-            tags.append(Attributes(data["attribute"], slot))
+        # if data.get("attribute") is not None:
+        #     tags.append(Attributes(data["attribute"], slot))
         if data.get("enchant") is not None:
             tags.append(Enchants(data["enchant"]))
         if len(tags) > 0:
