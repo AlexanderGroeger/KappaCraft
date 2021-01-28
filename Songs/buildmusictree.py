@@ -165,7 +165,7 @@ def NBSToFunctions(songPath):
 
         timerAddFunction = "execute at @a[scores={{MusicID={_musicId}}}] run scoreboard players add @p timer 1\n"
         playFunction = "execute at @a[scores={{MusicID={_musicId},timer={_tickTimer}}}] run playsound minecraft:block.note_block.{_noteInstrument} record @p ~ ~ ~ {_noteVolume:.2f} {_notePitch:.4f}\n"
-        repeatFunction = "execute at @a[scores={{MusicID={_musicId},timer={_endTimer}..}}] run scoreboard players set @p timer -1\n"
+        repeatFunction = "execute at @a[scores={{MusicID={_musicId},timer={_endTimer}..}}] run scoreboard players set @p timer 0\n"
         branchFunction = "execute at @a[scores={{MusicID={_musicId},timer={_startTick}..{_endTick}}},limit=1] run function songs:trees/{_songName}/{_function}\n"
 
         def OutputFunctionTree():
@@ -181,7 +181,6 @@ def NBSToFunctions(songPath):
                 notesPerTick[tick] = [notes for (tickPos, notes) in noteList if tickPos == tick]
 
             with open(os.path.join(outputSongPath,"{}_{}.mcfunction".format(musicId,songName)),"w") as func:
-                func.write(timerAddFunction.format(_musicId = musicId))
                 func.write(branchFunction.format(
                     _musicId = musicId,
                     _startTick = AdjustWithTempo(ticks[0],songTempo),
@@ -190,6 +189,7 @@ def NBSToFunctions(songPath):
                     _function = "branch_{}-{}".format(AdjustWithTempo(ticks[0],songTempo),AdjustWithTempo(ticks[-1],songTempo)),)
                 )
                 func.write(repeatFunction.format(_musicId=musicId,_endTimer=ceil(songLength*20./songTempo)))
+                func.write(timerAddFunction.format(_musicId = musicId))
 
 
             def writeBranch(start, end):
