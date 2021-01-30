@@ -7,8 +7,8 @@ def WriteMeleeFunctions():
     num_levels = 50
     max_attack_speed_boost = .4
     max_attack_boost = 10
-    base_exp = 1000
-    exp_gain_percent = 9
+    base_exp = 5000
+    exp_gain_percent = 5
 
     lines = []
     totalExp = 0
@@ -18,8 +18,8 @@ def WriteMeleeFunctions():
 
         newLvl = oldLvl + 1
 
-        oldAttack = round(int(oldLvl/5)*5/num_levels*max_attack_boost - 3, 3)
-        newAttack = round(int(newLvl/5)*5/num_levels*max_attack_boost - 3, 1)
+        oldAttack = round(int(oldLvl/5)*5/num_levels*max_attack_boost - 2, 3)
+        newAttack = round(int(newLvl/5)*5/num_levels*max_attack_boost - 2, 1)
         oldMCAttack = oldAttack
         newMCAttack = newAttack
 
