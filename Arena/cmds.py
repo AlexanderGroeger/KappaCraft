@@ -11,25 +11,8 @@ def Format(s,**kwargs):
     return s
 
 necessaryTags = {
-    "All": "PersistenceRequired:1,Tags:[\"arena\"]",
+    "All": "PersistenceRequired:1,Tags:[\"arena\"],Team:Mob",
     "zombie": "DrownedConversionTime:99999999,InWaterTime:-999999"
-}
-
-uuids = {
-    "generic.attack_damage": "UUID:CB3F55D3-645C-4F38-A497-9C13A33DB5CF",
-    "generic.attack_speed": "UUID:[I;-121015,10957,222854,-21914]",
-    # "generic.armor": {
-    #     "head": "UUID:2AD3F246-FEE1-4E67-B886-69FD380BB150",
-    #     "body": "UUID:9F3D476D-C118-4544-8365-64846904B48E",
-    #     "legs": "UUID:D8499B04-0E66-4726-AB29-64469D734E0D",
-    #     "boots": "UUID:845DB27C-C624-495F-8C9F-6020A9A58B6B",
-    # }, #"UUID:[I;-121015,10957,222854,-21914]",
-    # "generic.armor_toughness": {
-    #     "head": "UUID:2AD3F246-FEE1-4E67-B886-69FD380BB150",
-    #     "body": "UUID:9F3D476D-C118-4544-8365-64846904B48E",
-    #     "legs": "UUID:D8499B04-0E66-4726-AB29-64469D734E0D",
-    #     "boots": "UUID:845DB27C-C624-495F-8C9F-6020A9A58B6B",
-    # }
 }
 
 effectIds = {
@@ -154,16 +137,17 @@ def BuildRounds(filename, startingRound, rounds):
         f.write("\n".join(cmds))
 
 
-def Attributes(data, slot = None):
+def Attributes(data):
 
-    modifiers = "AttributeModifiers:[___attributes___]" if slot else "Attributes:[___attributes___]"
+    modifiers = "Attributes:[___attributes___]"
+    tags = []
 
     def Single(entry):
         attributeName, level = entry
-        if slot is not None:
-            return Format("{AttributeName:\"___name___\",Amount:___level___,Operation:0,___uuid___,Slot:___slot___,Name:\"___attributeName___\"}", name = attributeName, level = level, uuid = uuids[attributeName], slot = slot)
-        else:
-            return Format("{Name:\"___name___\",Base:___base___F}", name = attributeName, base = level)
+        if attributeName == "generic.max_health":
+            nonlocal tags
+            tags.append("Health:{}f".format(level))
+        return Format("{Name:\"___name___\",Base:___base___F}", name = attributeName, base = level)
 
     entries = [("generic.follow_range",400)]
     if type(data) is tuple:
@@ -171,7 +155,9 @@ def Attributes(data, slot = None):
         # return Format(modifiers, Single(data))
     elif type(data) is list:
         entries += data
-    return Format(modifiers, attributes = ",".join([Single(entry) for entry in entries]))
+
+    tags.append(Format(modifiers, attributes = ",".join([Single(entry) for entry in entries])))
+    return ",".join(tags)
 
 
 def Enchants(data):
@@ -183,7 +169,7 @@ def Enchants(data):
         return Format("{id:___name___,lvl:___level___}", name = name, level = level)
 
     if type(data) is tuple:
-        return Format(enchantments, Single(data))
+        return Format(enchantments, enchants = Single(data))
     elif type(data) is list:
         return Format(enchantments, enchants = ",".join([Single(entry) for entry in data]))
 
@@ -200,7 +186,7 @@ def Effects(data):
         return Format("{Id:___effectId___,Amplifier:___amplifier___,Duration:___duration___,Ambient:1}", id = effectIds[name], amplifier = amplifier, duration = duration)
 
     if type(data) is tuple:
-        return Format(effects, Single(data))
+        return Format(effects, effects = Single(data))
     elif type(data) is list:
         return Format(effects, effects = ",".join([Single(entry) for entry in data]))
 
@@ -229,7 +215,10 @@ def Armor(data):
     return Format("ArmorItems:[___armor___]", armor = ",".join(armor.values()))
 
 def Weapons(data):
-    return Format("HandItems:[___weapons___]", weapons = ",".join([Item(item, slot) for slot, item in data.items()]))
+    if type(data) is str:
+        return Format("HandItems:[___weapons___]", weapons = Item(data, "mainhand"))
+    elif type(data) is dict:
+        return Format("HandItems:[___weapons___]", weapons = ",".join([Item(item, slot) for slot, item in data.items()]))
 
 def NBT(tags):
     return Format("{___tags___}", tags = ",".join(tags))
@@ -239,6 +228,7 @@ def Summon(mob, mobLoot):
     mobType = mob["type"]
     mobCount = mob["count"] if mob.get("count") else 1
     mobLoot = mob["loot"] if mob.get("loot") else mobLoot
+    mobNBT = mob.get("nbt")
     nbtTags = [handDrops,armorDrops,necessaryTags["All"],Format("DeathLootTable:\"___loot___\"", loot = mobLoot)]
     if mob.get("armor"):
         nbtTags.append(Armor(mob["armor"]))
@@ -246,6 +236,13 @@ def Summon(mob, mobLoot):
         nbtTags.append(Weapons(mob["weapons"]))
     if mob.get("effects"):
         nbtTags.append(Effects(mob["effects"]))
+    if mob.get("attributes"):
+        nbtTags.append(Attributes(mob["attributes"]))
     if necessaryTags.get(mobType) is not None:
         nbtTags.append(necessaryTags[mobType])
+    if mobNBT:
+        for nbt, value in mobNBT.items():
+            nbtTags.append("{}:{}".format(nbt,value))
+        if mobType == "zombie" and mobNBT.get("IsBaby") is None:
+            nbtTags.append("IsBaby:0")
     return Format(summonCmd, mob = mobType, nbt = NBT(nbtTags))
