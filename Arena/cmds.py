@@ -68,7 +68,6 @@ setTimerCmd = "scoreboard players set #arena timer ___time___"
 repeatCmd = "function arena:rounds/round___roundNum___/wave___waveNum___"
 roundCmd = "function arena:rounds/round___roundNum___/waves"
 summonCmd = "execute at @e[tag=spawn,limit=1,sort=random] run summon minecraft:___mob___ ~ ~-109.9 ~ ___nbt___"
-
 defaultTime = 600*20 + 1
 path = "rounds"
 
@@ -223,7 +222,13 @@ def Weapons(data):
 def NBT(tags):
     return Format("{___tags___}", tags = ",".join(tags))
 
-def Summon(mob, mobLoot):
+def Passengers(mobs, mobLoot):
+    if type(mobs) is dict:
+        return Format("Passengers:[___p___]", p = Summon(mobs,mobLoot,passenger = True))
+    elif type(mobs) is list:
+        return Format("Passengers:[___p___]", p = ",".join([Summon(mob,mobLoot,passenger = True) for mob in mobs]))
+
+def Summon(mob, mobLoot, passenger = False):
 
     mobType = mob["type"]
     mobCount = mob["count"] if mob.get("count") else 1
@@ -245,4 +250,10 @@ def Summon(mob, mobLoot):
             nbtTags.append("{}:{}".format(nbt,value))
         if mobType == "zombie" and mobNBT.get("IsBaby") is None:
             nbtTags.append("IsBaby:0")
-    return Format(summonCmd, mob = mobType, nbt = NBT(nbtTags))
+    if mob.get("passengers"):
+        nbtTags.append(Passengers(mob["passengers"], mobLoot))
+    if passenger:
+        nbtTags.append(Format("id:\"minecraft:___mob___\"",mob=mobType))
+        return NBT(nbtTags)
+    else:
+        return Format(summonCmd, mob = mobType, nbt = NBT(nbtTags))
