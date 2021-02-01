@@ -17,7 +17,7 @@ rounds = [
                             "legs": "leather_leggings",
                             "feet": "leather_boots",
                         },
-                        "weapons": "iron_sword",
+                        "weapons": "wooden_sword",
                     },
                     {
                         "type": "skeleton",
@@ -47,7 +47,7 @@ rounds = [
                             "legs": "leather_leggings",
                             "feet": "leather_boots",
                         },
-                        "weapons": "iron_sword",
+                        "weapons": "wooden_sword",
                     }
                 ]
             }
@@ -73,7 +73,7 @@ rounds = [
                         },
                         "weapons": {
                             "mainhand": {
-                                "type": "stone_sword",
+                                "type": "golden_shovel",
                                 "enchant": ("knockback", 2)
                             }
                         }
@@ -183,7 +183,7 @@ rounds = [
                             "legs": "chainmail_leggings",
                             "feet": "chainmail_boots"
                         },
-                        "weapons": "iron_shovel",
+                        "weapons": "wooden_shovel",
                     }
                 ]
             },
@@ -333,7 +333,7 @@ rounds = [
                         "type": "skeleton",
                         "count": 5,
                         "armor": {
-                            "head": "leather_helmet"
+                            "head": "golden_helmet"
                         },
                         "weapons": "bow",
                         "effects": ("invisibility", 1)
@@ -344,7 +344,7 @@ rounds = [
                         "armor": {
                             "head": "golden_helmet"
                         },
-                        "weapons": "iron_sword",
+                        "weapons": "wooden_sword",
                         "attributes": ("generic.movement_speed", .15)
                     },
                 ]
@@ -458,7 +458,7 @@ rounds = [
                         "weapons": {
                             "mainhand": {
                                 "type": "bow",
-                                "enchant": ("power", 2)
+                                "enchant": ("power", 1)
                             },
                         }
                     },
