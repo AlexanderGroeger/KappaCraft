@@ -106,7 +106,6 @@ def BuildRounds(filename, startingRound, rounds):
 
         for waveNum, wave in enumerate(round["waves"]):
             maxMobCount = max([mob["count"] if mob.get("count") else 1 for mob in wave["mobs"]]) + 1
-            waveNum += startingRound
             timer = totalTime - wave["delay"] * 20
             cmds.append(Format(timeMatchCmd, time = timer, func = Format(setSpawnCountCmd, count = maxMobCount)))
             cmds.append(Format(timeMatchCmd, time = timer, func = Format(repeatCmd, roundNum = roundNum, waveNum = waveNum)))
@@ -270,8 +269,7 @@ def Summon(mob, mobLoot, passenger = False):
     if mob.get("passengers"):
         nbtTags.append(Passengers(mob["passengers"], mobLoot))
 
-    if mob.get("tags"):
-        nbtTags.append(Tags(mob["tags"]))
+    nbtTags.append(Tags(mob.get("tags")))
 
     if passenger:
         nbtTags.append(Format("id:\"minecraft:___mob___\"",mob=mobType))
