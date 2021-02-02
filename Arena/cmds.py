@@ -11,7 +11,7 @@ def Format(s,**kwargs):
     return s
 
 necessaryTags = {
-    "All": "PersistenceRequired:1,Tags:[\"arena\"],Team:Mob",
+    "All": "PersistenceRequired:1,Team:Mob",
     "zombie": "DrownedConversionTime:99999999,InWaterTime:-999999"
 }
 
@@ -182,7 +182,7 @@ def Effects(data):
             duration = entry[2]
         else:
             duration = 100000
-        return Format("{Id:___effectId___,Amplifier:___amplifier___,Duration:___duration___,Ambient:1}", id = effectIds[name], amplifier = amplifier, duration = duration)
+        return Format("{Id:___id___,Amplifier:___amplifier___,Duration:___duration___,Ambient:1}", id = effectIds[name], amplifier = amplifier, duration = duration)
 
     if type(data) is tuple:
         return Format(effects, effects = Single(data))
@@ -228,30 +228,51 @@ def Passengers(mobs, mobLoot):
     elif type(mobs) is list:
         return Format("Passengers:[___p___]", p = ",".join([Summon(mob,mobLoot,passenger = True) for mob in mobs]))
 
+def Tags(tags):
+    mobTags = ["\"arena\""]
+    if type(tags) is str:
+        mobTags.append("\"{}\"".format(tags))
+    elif type(tags) is list:
+        mobTags+=["\"{}\"".format(tag) for tag in tags]
+    return Format("Tags:[___tags___]", tags = ",".join(mobTags))
+
 def Summon(mob, mobLoot, passenger = False):
 
     mobType = mob["type"]
     mobCount = mob["count"] if mob.get("count") else 1
-    mobLoot = mob["loot"] if mob.get("loot") else mobLoot
+    if mob.get("loot"):
+        mobLoot = mob["loot"]
+    elif mobLoot is None:
+        mobLoot = "minecraft:empty"
     mobNBT = mob.get("nbt")
     nbtTags = [handDrops,armorDrops,necessaryTags["All"],Format("DeathLootTable:\"___loot___\"", loot = mobLoot)]
     if mob.get("armor"):
         nbtTags.append(Armor(mob["armor"]))
+
     if mob.get("weapons"):
         nbtTags.append(Weapons(mob["weapons"]))
+
     if mob.get("effects"):
         nbtTags.append(Effects(mob["effects"]))
+
     if mob.get("attributes"):
         nbtTags.append(Attributes(mob["attributes"]))
+
     if necessaryTags.get(mobType) is not None:
         nbtTags.append(necessaryTags[mobType])
+
     if mobNBT:
         for nbt, value in mobNBT.items():
             nbtTags.append("{}:{}".format(nbt,value))
         if mobType == "zombie" and mobNBT.get("IsBaby") is None:
             nbtTags.append("IsBaby:0")
+
     if mob.get("passengers"):
         nbtTags.append(Passengers(mob["passengers"], mobLoot))
+
+    if mob.get("tags"):
+        nbtTags.append(Tags(mob["tags"]))
+
     if passenger:
         nbtTags.append(Format("id:\"minecraft:___mob___\"",mob=mobType))
         return NBT(nbtTags)
