@@ -14,10 +14,8 @@ rounds = [
                         "armor": {
                             "head": "leather_helmet",
                             "body": "leather_chestplate",
-                            "legs": "leather_leggings",
-                            "feet": "leather_boots",
                         },
-                        "weapons": "wooden_sword",
+                        "weapons": "wooden_shovel",
                     },
                     {
                         "type": "skeleton",
@@ -26,26 +24,19 @@ rounds = [
                             "head": "chainmail_helmet",
                             "body": "chainmail_chestplate",
                         },
-                        "weapons": {
-                            "mainhand": {
-                                "type": "bow",
-                                "enchant": ("power", 1)
-                            }
-                        }
+                        "weapons": "bow",
                     }
                 ],
             },
             {
-                "delay": 10,
+                "delay": 20,
                 "mobs": [
                     {
                         "type": "zombie",
-                        "count": 6,
+                        "count": 5,
                         "armor": {
                             "head": "leather_helmet",
                             "body": "leather_chestplate",
-                            "legs": "leather_leggings",
-                            "feet": "leather_boots",
                         },
                         "weapons": "wooden_sword",
                     }
@@ -64,16 +55,14 @@ rounds = [
                 "mobs": [
                     {
                         "type": "zombie",
-                        "count": 10,
+                        "count": 7,
                         "armor": {
-                            "head": "chainmail_helmet",
                             "body": "leather_chestplate",
                             "legs": "leather_leggings",
-                            "feet": "chainmail_boots",
                         },
                         "weapons": {
                             "mainhand": {
-                                "type": "golden_shovel",
+                                "type": "golden_hoe",
                                 "enchant": ("knockback", 2)
                             }
                         }
@@ -103,6 +92,7 @@ rounds = [
                         "attributes": ("generic.movement_speed",.3),
                         "nbt": {
                             "Fuse": 15,
+                            "ExplosionRadius": 2,
                         }
                     },
                 ],
@@ -120,7 +110,7 @@ rounds = [
                 "mobs": [
                     {
                         "type": "zombie",
-                        "count": 8,
+                        "count": 5,
                     }
                 ]
             },
@@ -129,7 +119,7 @@ rounds = [
                 "mobs": [
                     {
                         "type": "zombie",
-                        "count": 7,
+                        "count": 5,
                         "armor": {
                             "head": "lether_helmet",
                             "body": "leather_chestplate",
@@ -142,7 +132,7 @@ rounds = [
                 "mobs": [
                     {
                         "type": "zombie",
-                        "count": 6,
+                        "count": 5,
                         "armor": {
                             "head": "chainmail_helmet",
                             "body": "chainmail_chestplate",
@@ -150,19 +140,6 @@ rounds = [
                     }
                 ]
             },
-            {
-                "delay": 30,
-                "mobs": [
-                    {
-                        "type": "zombie",
-                        "count": 5,
-                        "armor": {
-                            "head": "iron_helmet",
-                            "body": "iron_chestplate",
-                        },
-                    }
-                ]
-            }
         ]
     },
     # Round 14
@@ -176,12 +153,10 @@ rounds = [
                 "mobs": [
                     {
                         "type": "zombie",
-                        "count": 10,
+                        "count": 7,
                         "armor": {
                             "head": "chainmail_helmet",
                             "body": "chainmail_chestplate",
-                            "legs": "chainmail_leggings",
-                            "feet": "chainmail_boots"
                         },
                         "weapons": "wooden_shovel",
                     }
@@ -192,12 +167,10 @@ rounds = [
                 "mobs": [
                     {
                         "type": "zombie",
-                        "count": 5,
+                        "count": 4,
                         "armor": {
                             "head": "chainmail_helmet",
                             "body": "chainmail_chestplate",
-                            "legs": "chainmail_leggings",
-                            "feet": "chainmail_boots"
                         },
                         "weapons": "wooden_sword",
                     },
@@ -207,8 +180,6 @@ rounds = [
                         "armor": {
                             "head": "golden_helmet",
                             "body": "golden_chestplate",
-                            "legs": "golden_leggings",
-                            "feet": "golden_boots"
                         },
                         "weapons": "golden_sword",
                     }
@@ -219,7 +190,7 @@ rounds = [
                 "mobs": [
                     {
                         "type": "skeleton",
-                        "count": 7,
+                        "count": 3,
                         "weapons": "bow"
                     }
                 ]
@@ -243,12 +214,12 @@ rounds = [
                             "body": "iron_chestplate"
                         },
                         "weapons": {
-                            "mainhand": "wooden_sword"
+                            "mainhand": "wooden_shovel"
                         }
                     },
                     {
                         "type": "skeleton",
-                        "count": 4,
+                        "count": 3,
                         "effects": ("invisibility", 1),
                         "armor": {
                             "body": "iron_chestplate"
@@ -268,12 +239,10 @@ rounds = [
                 "mobs": [
                     {
                         "type": "zombie",
-                        "count": 8,
+                        "count": 6,
                         "armor": {
                             "head": "golden_helmet",
                             "body": "golden_chestplate",
-                            "legs": "golden_leggings",
-                            "feet": "golden_boots"
                         },
                         "attributes": ("generic.movement_speed", .3)
                     },
@@ -283,8 +252,6 @@ rounds = [
                         "armor": {
                             "head": "iron_helmet",
                             "body": "golden_chestplate",
-                            "legs": "iron_leggings",
-                            "feet": "iron_boots"
                         },
                         "weapons": {
                             "mainhand": "wooden_sword"
@@ -292,7 +259,7 @@ rounds = [
                     },
                     {
                         "type": "cave_spider",
-                        "count": 3
+                        "count": 2
                     },
                 ]
             }
@@ -306,15 +273,6 @@ rounds = [
         "waves": [
             {
                 "delay": 0,
-                "mobs": [
-                    {
-                        "type": "blaze",
-                        "count": 1,
-                    },
-                ]
-            },
-            {
-                "delay": 10,
                 "mobs": [
                     {
                         "type": "zombie",
@@ -331,9 +289,9 @@ rounds = [
                 "mobs": [
                     {
                         "type": "skeleton",
-                        "count": 5,
+                        "count": 4,
                         "armor": {
-                            "head": "golden_helmet"
+                            "head": "golden_chestplate"
                         },
                         "weapons": "bow",
                         "effects": ("invisibility", 1)
@@ -344,8 +302,12 @@ rounds = [
                         "armor": {
                             "head": "golden_helmet"
                         },
-                        "weapons": "wooden_sword",
+                        "weapons": "wooden_axe",
                         "attributes": ("generic.movement_speed", .15)
+                    },
+                    {
+                        "type": "blaze",
+                        "count": 1,
                     },
                 ]
             },
@@ -377,7 +339,7 @@ rounds = [
                 "mobs": [
                     {
                         "type": "zombie",
-                        "count": 10,
+                        "count": 4,
                         "armor": {
                             "head": "golden_helmet",
                             "body": "golden_chestplate",
@@ -392,7 +354,7 @@ rounds = [
                 "mobs": [
                     {
                         "type": "skeleton",
-                        "count": 6,
+                        "count": 3,
                         "armor": {
                             "head": "chainmail_helmet",
                             "body": "chainmail_chestplate",
@@ -407,12 +369,10 @@ rounds = [
                 "mobs": [
                     {
                         "type": "zombie",
-                        "count": 4,
+                        "count": 2,
                         "armor": {
                             "head": "iron_helmet",
                             "body": "chainmail_chestplate",
-                            "legs": "chainmail_leggings",
-                            "feet": "iron_boots"
                         },
                         "nbt": {
                             "IsBaby": 1
@@ -433,8 +393,8 @@ rounds = [
                 "mobs": [
                     {
                         "type": "zombie",
-                        "count": 8,
-                        "weapons": "stone_sword",
+                        "count": 5,
+                        "weapons": "wooden_sword",
                     }
                 ]
             },
@@ -447,20 +407,15 @@ rounds = [
                         "weapons": {
                             "mainhand": {
                                 "type": "shield",
-                                "enchant": ("thorns", 2)
+                                "enchant": ("thorns", 1)
                             },
                             "offhand": "shield"
                         }
                     },
                     {
                         "type": "skeleton",
-                        "count": 2,
-                        "weapons": {
-                            "mainhand": {
-                                "type": "bow",
-                                "enchant": ("power", 1)
-                            },
-                        }
+                        "count": 3,
+                        "weapons": "bow",
                     },
                 ]
             }
@@ -477,31 +432,32 @@ rounds = [
                 "mobs": [
                     {
                         "type": "zombie",
-                        "count": 12,
+                        "count": 7,
                     }
                 ]
             },
             {
-                "delay": 10,
+                "delay": 15,
                 "mobs": [
                     {
                         "type": "zombie",
-                        "count": 10,
+                        "count": 3,
                         "armor": {
                             "head": "iron_helmet",
                             "body": "iron_chestplate",
                             "legs": "iron_leggings",
                             "feet": "iron_boots"
-                        }
+                        },
+                        "attributes": ("generic.movement_speed", .3),
                     }
                 ]
             },
             {
-                "delay": 20,
+                "delay": 30,
                 "mobs": [
                     {
                         "type": "zombie",
-                        "count": 10,
+                        "count": 7,
                         "armor": {
                             "head": "golden_helmet",
                             "body": "golden_chestplate",
@@ -509,7 +465,7 @@ rounds = [
                             "feet": "golden_boots"
                         },
                         "weapons": "golden_sword",
-                        "attributes": ("generic.max_health", 50)
+                        "attributes": ("generic.movement_speed", .18),
                     }
                 ]
             }
